@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
 import { useCustomMutation } from "@/hooks/useCustomMutation";
 import { AUTH_QUERY_KEYS } from "@/features/auth/consts/queryKeys";
-import { authService } from "@/features/auth/services/authService";
+import { login } from "@/features/auth/services/login";
 import { AuthResponse, LoginCredentials } from "@/features/auth/@types/auth";
 
 export function useLogin() {
@@ -12,8 +12,7 @@ export function useLogin() {
   const queryClient = useQueryClient();
 
   const mutation = useCustomMutation<AuthResponse, LoginCredentials>({
-    mutationFn: (credentials: LoginCredentials) =>
-      authService.login(credentials),
+    mutationFn: (credentials: LoginCredentials) => login(credentials),
     disableDefaultErrorToast: true,
     onSuccess: (data) => {
       queryClient.setQueryData(AUTH_QUERY_KEYS.me, data.user);

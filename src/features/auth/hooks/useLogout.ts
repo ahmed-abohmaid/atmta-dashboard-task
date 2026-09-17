@@ -3,14 +3,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
 import { useCustomMutation } from "@/hooks/useCustomMutation";
 import { AUTH_QUERY_KEYS } from "@/features/auth/consts/queryKeys";
-import { authService } from "@/features/auth/services/authService";
+import { logout } from "@/features/auth/services/logout";
 
 export function useLogout() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const mutation = useCustomMutation<boolean, void>({
-    mutationFn: () => authService.logout(),
+  const mutation = useCustomMutation<void, void>({
+    mutationFn: () => logout(),
     onSuccess: () => {
       queryClient.setQueryData(AUTH_QUERY_KEYS.me, null);
       sileo.info({

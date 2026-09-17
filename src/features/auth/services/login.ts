@@ -1,0 +1,33 @@
+import { AuthResponse, LoginCredentials, SessionPayload } from "@/features/auth/@types/auth";
+import { setSessionCookie } from "@/features/auth/utils/sessionCookie";
+import { useMockStore } from "@/mock/store";
+import { delay } from "@/utils/delay";
+
+export async function login(credentials: LoginCredentials): Promise<AuthResponse> {
+  await delay(300);
+
+  const users = useMockStore.getState().users;
+  const normalizedEmail = credentials.email.trim().toLowerCase();
+
+  const user = users.find(
+    (u) => u.email.trim().toLowerCase() === normalizedEmail
+  );
+
+  if (!user || user.password !== credentials.password) {
+    throw new Error("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+  }
+
+  if (user.status === "inactive") {
+    throw new Error("هذا الحساب معطل حالياً. يرجى التواصل مع مسؤول النظام");
+  }
+
+  const session: SessionPayload = {
+    userId: user.id,
+    token: `mock_jwt_${user.id}_${Date.now()}`,
+    createdAt: new Date().toISOString(),
+  };
+
+  setSessionCookie(session);
+
+  return { user, session };
+}
