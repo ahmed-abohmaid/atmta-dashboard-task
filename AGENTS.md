@@ -60,9 +60,13 @@ export const VENDORS_QUERY_KEYS = {
 - Extract hooks into separate hook files when they grow or are reusable.
 - Follow DRY without over-engineering — check if something already exists before creating it.
 - **No trivial comments.** No JSX inline comments describing what the code obviously does. Only add comments when explicitly asked.
+- **Naming convention**: Prefer camelCase for component and layout file names (e.g. `appHeader.tsx`, `appSidebar.tsx`, `appShell.tsx`).
+- **No non-working/demo UI**: Never render placeholder or non-functional elements (e.g. fake search bars, fake notification bells). Every element must be real, functional, and purposeful.
+- **No `React.` namespace**: Never use `React.` (no `React.useState`, `React.useEffect`, `React.ReactNode`, `React.ComponentProps`). Always import hooks and types directly from `'react'` (e.g. `import { useState, type ReactNode, type ComponentProps } from 'react'`).
 
 ## Styling
 - TailwindCSS v4 only. Use logical properties (`ms-`, `me-`, `ps-`, `pe-`) for RTL support — never `ml-`/`mr-`/`pl-`/`pr-`.
 - Dark mode uses `.dark` class strategy — always use theme tokens, never hardcode light/dark colors.
 - RTL (`dir="rtl"`) is the default. Every component must be RTL-compatible from the start.
 - **Responsiveness is mandatory** — every component and layout must work across mobile, tablet, and desktop. Use Tailwind responsive prefixes (`sm:`, `md:`, `lg:`) from the start, not as an afterthought.
+- **No hover shadows or borders**: Never use `hover:shadow-*` or `hover:border-*`. Keep hover states flat and subtle (use subtle background/text shift only, e.g. `hover:bg-*`).
