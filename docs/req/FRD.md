@@ -104,7 +104,7 @@ Small **Modular Admin Dashboard**, frontend-only, demonstrating: Next.js dev, co
   - [ ] 1 user without the Vendors module
   - [ ] Credentials for all four documented in run steps (these are what ATMTA will test with).
 - [ ] Loading, empty, validation-error, and forbidden states handled explicitly in the UI for every screen.
-- [ ] Arabic-first UI, working RTL layout (full i18n/translation not required).
+- [x] Arabic-first UI, working RTL layout (full i18n/translation not required).
 - [ ] Docker delivery preferred, not mandatory — reproducible run steps are what's mandatory.
 
 ## 12. Explicit Non-Goals (per task notes)
@@ -115,4 +115,8 @@ Small **Modular Admin Dashboard**, frontend-only, demonstrating: Next.js dev, co
 
 ## 13. Assumptions Log (fill in as you build)
 > Task instruction: if something's unclear and it doesn't block you, note your assumption and continue rather than stalling. Track them here so they can be recited in the video.
-- [ ] (assumption placeholder)
+- [x] **Theme & Identity**: Default dark theme matching official ATMTA Ventures palette (mint `#6abfa1`, gunmetal `#18282c`, night `#0b1113`) using Cairo font for all Arabic/Latin typography with WCAG AAA contrast.
+- [x] **State Persistence**: Mock database state persisted in `localStorage` via Zustand with an in-header "Restore Default Data" action (`resetToSeed()`) for testing ease.
+- [x] **Navigation & Layout**: Native RTL layout (`dir="rtl"`) with right-side collapsible sidebar (`side="right"`) using Shadcn UI primitives and Lucide panel indicators.
+- [x] **No Placeholder UI**: Excluded unlinked/fake UI controls (search/notification bells) in favor of real, purposeful controls.
+
