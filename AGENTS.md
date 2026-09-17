@@ -20,6 +20,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Feature-based structure**: every feature lives under `src/features/<feature>/` with its own `hooks/`, `components/`, `@types/`, `utils/`, `consts/`.
 - Global shared code lives in `src/hooks/`, `src/utils/`, `src/@types/`, `src/consts/`.
 - Feature components stay under `src/features/<feature>/components/`. Shared/layout components under `src/components/`.
+- **No barrel exports**: Never create or use `index.ts` files to aggregate/re-export sibling files (no `export * from "./..."`). Always import directly from the exact file containing the definition (e.g. `import { User } from "@/@types/user"`).
+
 
 ## Data Fetching
 - **Never use `useQuery` directly.** Always use the `useCustomQuery` hook from `src/hooks/useCustomQuery.ts`.
