@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Cairo } from "next/font/google";
+import { AppProviders } from "@/providers/AppProviders";
 import "./globals.css";
 
 const cairo = Cairo({
@@ -27,7 +28,7 @@ export default function RootLayout({
       className={`dark ${cairo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
