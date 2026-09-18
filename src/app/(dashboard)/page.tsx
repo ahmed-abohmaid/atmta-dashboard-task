@@ -1,102 +1,86 @@
-import Link from "next/link";
-import {
-  UsersIcon,
-  ShieldCheckIcon,
-  FolderTreeIcon,
-  Building2Icon,
-  ArrowUpLeftIcon,
-  LayersIcon,
-} from "lucide-react";
+"use client";
+
+import { UserIcon, MailIcon, PhoneIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { HomeSkeleton } from "@/components/dashboard/HomeSkeleton";
+import { useMe } from "@/features/auth/hooks/useMe";
 
 export default function HomePage() {
-  const modules = [
-    {
-      title: "المستخدمون",
-      count: "4",
-      description: "إدارة الحسابات وتحديد مستويات الوصول",
-      href: "/users",
-      icon: UsersIcon,
-    },
-    {
-      title: "الأدوار والصلاحيات",
-      count: "4",
-      description: "تحديد الأدوار وقواعد الصلاحيات",
-      href: "/roles",
-      icon: ShieldCheckIcon,
-    },
-    {
-      title: "التصنيفات",
-      count: "8",
-      description: "شجرة التصنيفات الهندسية والمعمارية",
-      href: "/categories",
-      icon: FolderTreeIcon,
-    },
-    {
-      title: "الموردون",
-      count: "12",
-      description: "قائمة المقاولين والموردين المعتمدين",
-      href: "/vendors",
-      icon: Building2Icon,
-    },
-  ];
+  const { user, isLoading } = useMe();
+
+  if (isLoading) {
+    return <HomeSkeleton />;
+  }
 
   return (
     <div className="flex flex-col gap-6">
-      <section className="relative overflow-hidden rounded-xl border border-border/80 bg-card p-5 sm:p-6 shadow-xs">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3.5">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/20">
-              <LayersIcon className="size-5" />
-            </div>
-            <div className="flex flex-col">
-              <h2 className="text-base font-medium text-foreground">
-                لوحة التحكم
-              </h2>
-              <p className="text-xs font-normal text-muted-foreground mt-0.5">
-                نظرة سريعة على أقسام النظام والمستخدمين والبيانات المتاحة
-              </p>
-            </div>
-          </div>
+      <section className="relative overflow-hidden rounded-2xl border border-border/70 bg-linear-to-br from-card via-card to-secondary/20 p-6 sm:p-8 shadow-xs">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+            أهلاً بك، {user?.name}
+          </h1>
 
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center rounded-md bg-secondary/80 px-2.5 py-1 text-xs font-normal text-secondary-foreground border border-border/50">
-              بيانات تجريبية
-            </span>
-          </div>
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
+            مرحباً بك في لوحة تحكم منصة أتمتة. يمكنك الوصول إلى الأقسام
+            والعمليات المتاحة لحسابك عبر القائمة الجانبية وفق الصلاحيات الممنوحة
+            لك.
+          </p>
         </div>
       </section>
 
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {modules.map((mod) => (
-          <Link
-            key={mod.title}
-            href={mod.href}
-            className="group flex flex-col justify-between rounded-xl border border-border/70 bg-card p-5 shadow-xs transition-colors hover:bg-muted/40"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-normal text-muted-foreground">
-                {mod.title}
-              </span>
-              <div className="flex size-8 items-center justify-center rounded-md bg-secondary/70 text-primary border border-border/40">
-                <mod.icon className="size-4" />
-              </div>
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="flex items-center gap-3.5 rounded-xl border border-border/60 bg-card p-4 shadow-2xs">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary border border-border/40">
+            <UserIcon className="size-5" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[11px] text-muted-foreground font-normal">
+              حالة الحساب
+            </span>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <Badge
+                variant={user?.status === "active" ? "default" : "secondary"}
+                className="text-[11px] h-5"
+              >
+                {user?.status === "active" ? "نشط" : "معطل"}
+              </Badge>
             </div>
+          </div>
+        </div>
 
-            <div className="mt-4 flex items-baseline justify-between">
-              <span className="text-2xl font-medium tracking-tight text-foreground">
-                {mod.count}
-              </span>
-              <span className="flex items-center gap-1 text-xs font-normal text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                <span>عرض</span>
-                <ArrowUpLeftIcon className="size-3" />
-              </span>
-            </div>
+        <div className="flex items-center gap-3.5 rounded-xl border border-border/60 bg-card p-4 shadow-2xs">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary border border-border/40">
+            <MailIcon className="size-5" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[11px] text-muted-foreground font-normal">
+              البريد الإلكتروني
+            </span>
+            <span
+              className="truncate text-xs font-medium text-foreground mt-0.5"
+              dir="ltr"
+            >
+              {user?.email}
+            </span>
+          </div>
+        </div>
 
-            <p className="mt-2 text-xs font-normal text-muted-foreground/80 line-clamp-1">
-              {mod.description}
-            </p>
-          </Link>
-        ))}
+        <div className="flex items-center gap-3.5 rounded-xl border border-border/60 bg-card p-4 shadow-2xs">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary border border-border/40">
+            <PhoneIcon className="size-5" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[11px] text-muted-foreground font-normal">
+              رقم الهاتف
+            </span>
+            <span
+              className="truncate text-xs font-medium text-foreground mt-0.5"
+              dir="ltr"
+            >
+              {user?.phone}
+            </span>
+          </div>
+        </div>
       </section>
     </div>
   );

@@ -1,3 +1,5 @@
+import { Permission } from "@/@types/permission";
+import { Role } from "@/@types/role";
 import { User } from "@/@types/user";
 
 export interface LoginCredentials {
@@ -13,5 +15,7 @@ export interface SessionPayload {
 
 export interface AuthResponse {
   user: User;
+  roles: Role[];
+  permissions: Permission[];
   session: SessionPayload;
 }

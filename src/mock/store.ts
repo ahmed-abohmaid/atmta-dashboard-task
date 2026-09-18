@@ -21,34 +21,22 @@ export interface MockDatabaseState {
 }
 
 export interface MockDatabaseStore extends MockDatabaseState {
-  setModules: (modules: Module[]) => void;
-  setRoles: (roles: Role[]) => void;
-  setUsers: (users: User[]) => void;
-  setCategories: (categories: Category[]) => void;
-  setVendors: (vendors: Vendor[]) => void;
   resetToSeed: () => void;
 }
 
-export function getInitialSeedData(): MockDatabaseState {
-  return {
-    modules: JSON.parse(JSON.stringify(SEED_MODULES)),
-    roles: JSON.parse(JSON.stringify(SEED_ROLES)),
-    users: JSON.parse(JSON.stringify(SEED_USERS)),
-    categories: JSON.parse(JSON.stringify(SEED_CATEGORIES)),
-    vendors: JSON.parse(JSON.stringify(SEED_VENDORS)),
-  };
-}
+const getSeedData = (): MockDatabaseState => ({
+  modules: SEED_MODULES,
+  roles: SEED_ROLES,
+  users: SEED_USERS,
+  categories: SEED_CATEGORIES,
+  vendors: SEED_VENDORS,
+});
 
 export const useMockStore = create<MockDatabaseStore>()(
   persist(
     (set) => ({
-      ...getInitialSeedData(),
-      setModules: (modules) => set({ modules }),
-      setRoles: (roles) => set({ roles }),
-      setUsers: (users) => set({ users }),
-      setCategories: (categories) => set({ categories }),
-      setVendors: (vendors) => set({ vendors }),
-      resetToSeed: () => set(getInitialSeedData()),
+      ...getSeedData(),
+      resetToSeed: () => set(getSeedData()),
     }),
     {
       name: STORAGE_KEYS.DB,

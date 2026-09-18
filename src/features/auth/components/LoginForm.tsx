@@ -15,9 +15,7 @@ import { LoginCredentials } from "@/features/auth/@types/auth";
 
 const loginSchema = z.object({
   email: z.email("البريد الإلكتروني غير صالح"),
-  password: z
-    .string()
-    .min(6, "كلمة المرور يجب أن لا تقل عن 6 أحرف"),
+  password: z.string().min(6, "كلمة المرور يجب أن لا تقل عن 6 أحرف"),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -44,8 +42,8 @@ export function LoginForm() {
   };
 
   const handleSelectAccount = (email: string, password: string) => {
-    setValue("email", email, { shouldValidate: true });
-    setValue("password", password, { shouldValidate: true });
+    setValue("email", email);
+    setValue("password", password);
   };
 
   return (

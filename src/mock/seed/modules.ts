@@ -7,6 +7,7 @@ export const SEED_MODULES: Module[] = [
       ar: "المستخدمين",
       en: "Users",
     },
+    icon: "users",
     description: {
       ar: "إدارة مستخدمي النظام والصلاحيات",
       en: "Manage system users and access permissions",
@@ -24,6 +25,7 @@ export const SEED_MODULES: Module[] = [
       ar: "الأدوار",
       en: "Roles",
     },
+    icon: "shield-check",
     description: {
       ar: "إدارة الأدوار ومجموعات الصلاحيات",
       en: "Manage system roles and permission sets",
@@ -41,6 +43,7 @@ export const SEED_MODULES: Module[] = [
       ar: "التصنيفات",
       en: "Categories",
     },
+    icon: "folder-tree",
     description: {
       ar: "إدارة شجرة التصنيفات الهندسية والمعمارية",
       en: "Manage architectural & MEP categories",
@@ -58,6 +61,7 @@ export const SEED_MODULES: Module[] = [
       ar: "الموردين",
       en: "Vendors",
     },
+    icon: "building-2",
     description: {
       ar: "إدارة المقاولين وموردي الأعمال الكهروميكانيكية والمعمارية",
       en: "Manage architectural & MEP contractors and suppliers",

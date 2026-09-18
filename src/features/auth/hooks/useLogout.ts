@@ -2,17 +2,18 @@ import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
 import { useCustomMutation } from "@/hooks/useCustomMutation";
-import { AUTH_QUERY_KEYS } from "@/features/auth/consts/queryKeys";
 import { logout } from "@/features/auth/services/logout";
+import { removeSessionCookie } from "@/features/auth/utils/sessionCookie";
 
 export function useLogout() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const mutation = useCustomMutation<void, void>({
+  const mutation = useCustomMutation({
     mutationFn: () => logout(),
     onSuccess: () => {
-      queryClient.setQueryData(AUTH_QUERY_KEYS.me, null);
+      removeSessionCookie();
+      queryClient.clear();
       sileo.info({
         title: "تسجيل الخروج",
         description: "تم تسجيل الخروج بنجاح",
