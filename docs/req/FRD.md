@@ -27,17 +27,23 @@ Small **Modular Admin Dashboard**, frontend-only, demonstrating: Next.js dev, co
 - **Vendor**: name_ar, name_en, about (text), logo (uploaded photo), cr_number, mobile, category (ref), status (active/inactive), createdBy, updatedBy, createdAt, updatedAt, deletedAt (soft delete).
 
 ## 3. Auth & Session
-- [ ] Login / logout against mock data (no real backend, no real hashing).
-- [ ] Session survives a page refresh (persisted client-side).
-- [ ] Protected routes redirect to login when there's no session.
+- [x] Login / logout against mock data (no real backend, no real hashing).
+- [x] Session survives a page refresh (persisted client-side).
+- [x] Protected routes redirect to login when there's no session.
+- [ ] User deactivation supported without deleting the record (active/inactive state toggle).
 
 ## 4. Modules System
-- [ ] Modules defined as data (config/seed), consumed generically by nav + permission engine.
-- [ ] Each module declares its supported actions (CRUD minimum + ≥1 custom action).
-- [ ] Adding a new module = adding data only, no changes to permission logic or navigation rendering code.
+- [x] Modules defined as data (config/seed), consumed generically by nav + permission engine.
+- [x] Each module declares its supported actions (CRUD minimum + ≥1 custom action).
+- [x] Adding a new module = adding data only, no changes to permission logic or navigation rendering code.
+- [ ] Modules directory & management page (`/modules`): UI to view registered modules, their declared actions, and demonstrate dynamic addition of new modules without touching code.
 
 ## 5. Roles & Permissions
-- [ ] Role CRUD (create/edit/list roles: Super Admin, Manager, Employee, Viewer as examples, not a fixed list).
+- [x] Permission check logic lives in **one place** (single hook/util/guard `usePermission` / CASL) and is reused everywhere — never re-implemented ad hoc per component.
+- [x] Navigation filtering: a module the user lacks must not appear in navigation at all.
+- [x] Route-level protection: `ModuleRouteGuard` rendering explicit `ForbiddenState` on direct URL access.
+- [x] In-page element gating: `PermissionGate` (hiding or rendering disabled with tooltip).
+- [ ] Role CRUD (create/edit/list roles: Super Admin, Manager, Employee, Viewer as examples, not a fixed list) on `/roles` with dynamic permission matrix.
 - [ ] Per-module permissions, minimum set: Manage Users (CRUD), Manage Roles (CRUD), Manage Categories (CRUD), Manage Vendors (CRUD), Export Vendors.
 - [ ] A user can hold ≥1 roles, plus permissions granted/revoked directly on the user, layered on top of role permissions.
 - [ ] **Super Admin user-creation flow** (must be implemented as a guided flow, not just a form):
@@ -46,11 +52,10 @@ Small **Modular Admin Dashboard**, frontend-only, demonstrating: Next.js dev, co
   3. Per selected module, choose specific permissions (CRUD + custom actions) — two users can have the same module with different permission sets.
   4. Super Admin can edit a user's modules/permissions later from the same flow.
 - [ ] **Hard rules (must hold, testable):**
-  - [ ] Permissions enforced across the *whole* UI: buttons/links hidden or disabled without access; direct URL access to a forbidden page shows a clear forbidden state (not a silent redirect or crash).
-  - [ ] A module the user lacks must not appear in navigation at all, and all its routes must be closed to that user.
+  - [x] Permissions enforced across the *whole* UI: buttons/links hidden or disabled without access; direct URL access to a forbidden page shows a clear forbidden state (not a silent redirect or crash).
+  - [x] A module the user lacks must not appear in navigation at all, and all its routes must be closed to that user.
   - [ ] A user cannot grant a permission they don't themselves hold.
   - [ ] The last remaining Super Admin cannot be deleted, demoted, or deactivated.
-  - [ ] The permission check logic lives in **one place** (single hook/util/guard) and is reused everywhere — never re-implemented ad hoc per component.
 
 ## 6. Categories Module
 - [ ] Entity fields: name_ar, name_en, parent (nullable).
@@ -104,18 +109,21 @@ Small **Modular Admin Dashboard**, frontend-only, demonstrating: Next.js dev, co
   - [ ] 1 user without the Vendors module
   - [ ] Credentials for all four documented in run steps (these are what ATMTA will test with).
 - [ ] Loading, empty, validation-error, and forbidden states handled explicitly in the UI for every screen.
-- [x] Arabic-first UI, working RTL layout (full i18n/translation not required).
+- [x] Arabic-only UI with native RTL layout (no translation or language switcher overhead; purely Arabic interface).
+- [x] Fixed dark theme only (no theme toggler / switcher needed).
 - [ ] Docker delivery preferred, not mandatory — reproducible run steps are what's mandatory.
 
 ## 12. Explicit Non-Goals (per task notes)
 - No real backend/database.
 - No real password hashing.
-- No full translation system required.
+- No translation or i18n switcher (purely Arabic-only UI).
+- No theme toggling or light mode (permanent dark theme matching ATMTA palette).
 - AI tool use is allowed, but every line must be explainable/defensible in the code-walkthrough video.
 
 ## 13. Assumptions Log (fill in as you build)
 > Task instruction: if something's unclear and it doesn't block you, note your assumption and continue rather than stalling. Track them here so they can be recited in the video.
-- [x] **Theme & Identity**: Default dark theme matching official ATMTA Ventures palette (mint `#6abfa1`, gunmetal `#18282c`, night `#0b1113`) using Cairo font for all Arabic/Latin typography with WCAG AAA contrast.
+- [x] **Theme & Identity**: Fixed dark theme matching official ATMTA Ventures palette (mint `#6abfa1`, gunmetal `#18282c`, night `#0b1113`) using Cairo font with WCAG AAA contrast. No theme switcher.
+- [x] **Language**: Pure Arabic interface (`dir="rtl"`, `lang="ar"`). No translation toggles.
 - [x] **State Persistence**: Mock database state persisted in `localStorage` via Zustand with an in-header "Restore Default Data" action (`resetToSeed()`) for testing ease.
 - [x] **Navigation & Layout**: Native RTL layout (`dir="rtl"`) with right-side collapsible sidebar (`side="right"`) using Shadcn UI primitives and Lucide panel indicators.
 - [x] **No Placeholder UI**: Excluded unlinked/fake UI controls (search/notification bells) in favor of real, purposeful controls.
