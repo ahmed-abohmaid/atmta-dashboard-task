@@ -42,6 +42,7 @@ export function InputField({
           disabled={disabled}
           aria-invalid={!!error}
           className={cn(
+            "text-xs sm:text-sm placeholder:text-xs placeholder:text-muted-foreground/50",
             prefix && "ps-9",
             suffix && "pe-9",
             className
