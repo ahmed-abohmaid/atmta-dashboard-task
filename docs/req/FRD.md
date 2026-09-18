@@ -36,7 +36,7 @@ Small **Modular Admin Dashboard**, frontend-only, demonstrating: Next.js dev, co
 - [x] Modules defined as data (config/seed), consumed generically by nav + permission engine.
 - [x] Each module declares its supported actions (CRUD minimum + ≥1 custom action).
 - [x] Adding a new module = adding data only, no changes to permission logic or navigation rendering code.
-- [ ] Modules directory & management page (`/modules`): UI to view registered modules, their declared actions, and demonstrate dynamic addition of new modules without touching code.
+- [x] Modules directory & management page (`/modules`): UI to view registered modules, their declared actions, and demonstrate dynamic addition of new modules without touching code.
 
 ## 5. Roles & Permissions
 - [x] Permission check logic lives in **one place** (single hook/util/guard `usePermission` / CASL) and is reused everywhere — never re-implemented ad hoc per component.

@@ -20,6 +20,7 @@ export const SEED_ROLES: Role[] = [
     permissions: [
       { action: "read", subject: "users" },
       { action: "read", subject: "roles" },
+      { action: "read", subject: "modules" },
       { action: "manage", subject: "categories" },
       { action: "manage", subject: "vendors" },
     ],

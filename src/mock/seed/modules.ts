@@ -17,6 +17,7 @@ export const SEED_MODULES: Module[] = [
       { id: "create", label: { ar: "إضافة", en: "Create" } },
       { id: "update", label: { ar: "تعديل", en: "Edit" } },
       { id: "delete", label: { ar: "حذف", en: "Delete" } },
+      { id: "invite", label: { ar: "دعوة مستخدم", en: "Invite User" }, isCustom: true },
     ],
   },
   {
@@ -35,6 +36,7 @@ export const SEED_MODULES: Module[] = [
       { id: "create", label: { ar: "إضافة", en: "Create" } },
       { id: "update", label: { ar: "تعديل", en: "Edit" } },
       { id: "delete", label: { ar: "حذف", en: "Delete" } },
+      { id: "duplicate", label: { ar: "نسخ دور", en: "Duplicate Role" }, isCustom: true },
     ],
   },
   {
@@ -53,6 +55,7 @@ export const SEED_MODULES: Module[] = [
       { id: "create", label: { ar: "إضافة", en: "Create" } },
       { id: "update", label: { ar: "تعديل", en: "Edit" } },
       { id: "delete", label: { ar: "حذف", en: "Delete" } },
+      { id: "reorder", label: { ar: "إعادة ترتيب", en: "Reorder Tree" }, isCustom: true },
     ],
   },
   {
