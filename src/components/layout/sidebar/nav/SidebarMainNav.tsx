@@ -1,6 +1,6 @@
 "use client";
 
-import { HomeIcon, LayoutGridIcon, type LucideIcon } from "lucide-react";
+import { HomeIcon, LayoutGridIcon, ShieldCheckIcon, type LucideIcon } from "lucide-react";
 import type { AppAction, AppSubject } from "@/@types/permission";
 import {
   SidebarGroup,
@@ -22,6 +22,7 @@ interface StaticNavItem {
 const STATIC_NAV_ITEMS: StaticNavItem[] = [
   { href: "/", label: "الرئيسية", icon: HomeIcon },
   { href: "/modules", label: "الوحدات", icon: LayoutGridIcon, module: "modules" },
+  { href: "/roles", label: "الأدوار", icon: ShieldCheckIcon, module: "roles" },
 ];
 
 interface SidebarMainNavProps {
