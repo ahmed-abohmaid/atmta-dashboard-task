@@ -39,22 +39,22 @@ export function ModuleCard({ module }: ModuleCardProps) {
 
   return (
     <>
-      <div className="group relative flex flex-col justify-between rounded-xl border border-border/70 bg-card p-4.5 transition-colors duration-150 hover:bg-secondary/15">
+      <div className="group relative flex flex-col justify-between rounded-xl border border-border/70 bg-card p-5 transition-colors duration-150 hover:bg-secondary/15">
         <div className="flex flex-col gap-3">
           <div className="flex items-start justify-between gap-3">
             <Link
               href={`/modules/${module.id}`}
               className="group/title flex items-center gap-3 min-w-0 cursor-pointer"
             >
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-secondary/80 text-primary border border-border/40 group-hover/title:bg-primary/15 transition-colors duration-150">
+              <div className="flex size-9.5 shrink-0 items-center justify-center rounded-lg bg-secondary/80 text-primary border border-border/40 group-hover/title:bg-primary/15 transition-colors duration-150">
                 <DynamicIcon
                   name={(module.icon as IconName) ?? "layout-grid"}
-                  className="size-4.5"
+                  className="size-5"
                 />
               </div>
 
               <div className="flex flex-col min-w-0 text-start">
-                <h3 className="text-sm font-semibold text-foreground group-hover/title:text-primary transition-colors duration-150 truncate">
+                <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover/title:text-primary transition-colors duration-150 truncate">
                   {module.label.ar}
                 </h3>
               </div>
@@ -102,28 +102,28 @@ export function ModuleCard({ module }: ModuleCardProps) {
           </div>
 
           {module.description?.ar && (
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p className="text-xs text-muted-foreground/90 leading-relaxed line-clamp-2 min-h-[2.25rem]">
               {module.description.ar}
             </p>
           )}
         </div>
 
-        <div className="mt-3.5 pt-3 border-t border-border/40 flex flex-col gap-2">
-          <div className="flex items-center justify-between text-[11px]">
-            <span className="font-normal text-muted-foreground">
+        <div className="mt-4 pt-3.5 border-t border-border/50 flex flex-col gap-2">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-medium text-muted-foreground">
               الإجراءات المعلنة
             </span>
-            <span className="text-[10px] font-mono text-muted-foreground/70">
+            <span className="text-[11px] font-mono text-muted-foreground/70">
               {module.actions.length} إجراء
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {standardActions.map((act) => (
               <Badge
                 key={act.id}
                 variant="secondary"
-                className="text-[10px] font-normal h-5 px-1.5 rounded bg-secondary/50 text-muted-foreground border-transparent"
+                className="text-xs font-normal h-6.5 px-2 rounded-md bg-secondary/60 text-muted-foreground border-transparent"
               >
                 {act.label.ar}
               </Badge>
@@ -133,7 +133,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
               <Badge
                 key={act.id}
                 variant="outline"
-                className="text-[10px] font-medium h-5 px-2 rounded border-primary/30 bg-primary/10 text-primary"
+                className="text-xs font-medium h-6.5 px-2.5 rounded-md border-primary/30 bg-primary/10 text-primary"
               >
                 {act.label.ar}
               </Badge>

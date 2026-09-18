@@ -1,24 +1,17 @@
 "use client";
 
 import { useMemo } from "react";
-import { useQueryState, parseAsString, debounce } from "nuqs";
-import { SearchIcon } from "lucide-react";
+import { useQueryState, parseAsString } from "nuqs";
 import { Module } from "@/@types/module";
 import { ModuleCard } from "@/features/modules/components/ModuleCard";
-import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/SearchInput";
 
 interface ModulesListProps {
   modules: Module[];
 }
 
 export function ModulesList({ modules }: ModulesListProps) {
-  const [search, setSearch] = useQueryState(
-    "search",
-    parseAsString.withDefault("").withOptions({
-      shallow: true, // Prevents full page reloads on query change
-      limitUrlUpdates: debounce(300),
-    }),
-  );
+  const [search] = useQueryState("search", parseAsString.withDefault(""));
 
   const filteredModules = useMemo(() => {
     const trimmed = search.trim().toLowerCase();
@@ -34,22 +27,20 @@ export function ModulesList({ modules }: ModulesListProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
-        <div className="relative w-full max-w-xs">
-          <SearchIcon className="absolute inset-y-0 inset-s-0 my-auto ms-2.5 size-3.5 text-muted-foreground pointer-events-none" />
-          <Input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="البحث في الوحدات..."
-            className="h-8 ps-8 text-xs bg-card/60 placeholder:text-xs placeholder:text-muted-foreground/50"
-          />
-        </div>
-        <span className="text-[11px] text-muted-foreground shrink-0 font-mono">
+        <SearchInput
+          placeholder="البحث في الوحدات..."
+          syncUrl={true}
+          paramKey="search"
+          debounceMs={300}
+          containerClassName="max-w-xs"
+        />
+        <span className="text-xs text-foreground/80 shrink-0 font-medium">
           {filteredModules.length} من {modules.length} وحدة
         </span>
       </div>
 
       {filteredModules.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-border/80 p-8 text-center bg-card/30">
+        <div className="rounded-xl border border-dashed border-border/80 p-8 text-center bg-card/40">
           <p className="text-xs text-muted-foreground">
             لا توجد وحدة مطابقة لبحثك &quot;{search}&quot;
           </p>
