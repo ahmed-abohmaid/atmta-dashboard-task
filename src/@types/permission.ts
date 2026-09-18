@@ -20,12 +20,8 @@ export type AppSubject =
 export type AppAbility = MongoAbility<[AppAction, AppSubject]>;
 export type AppRule = RawRuleOf<AppAbility>;
 
-/**
- * CASL-compatible permission rule
- * Matches CASL's { action, subject, inverted } structure
- */
 export interface Permission {
   action: AppAction;
   subject: AppSubject;
-  inverted?: boolean; // true for cannot (revokes)
+  inverted?: boolean;
 }

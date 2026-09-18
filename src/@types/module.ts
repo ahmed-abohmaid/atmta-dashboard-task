@@ -13,6 +13,7 @@ export interface Module {
     ar: string;
     en: string;
   };
+  icon?: string;
   description?: {
     ar: string;
     en: string;
