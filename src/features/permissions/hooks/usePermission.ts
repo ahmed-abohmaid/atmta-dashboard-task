@@ -19,7 +19,6 @@ export function usePermission() {
   } = useCustomQuery<Role[]>({
     queryKey: PERMISSIONS_QUERY_KEYS.roles,
     queryFn: () => getRoles(),
-    enabled: !isAuthLoading,
     staleTime: Infinity,
   });
 

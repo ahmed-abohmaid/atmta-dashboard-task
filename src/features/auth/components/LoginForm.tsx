@@ -42,8 +42,8 @@ export function LoginForm() {
   };
 
   const handleSelectAccount = (email: string, password: string) => {
-    setValue("email", email);
-    setValue("password", password);
+    setValue("email", email, { shouldValidate: true });
+    setValue("password", password, { shouldValidate: true });
   };
 
   return (
@@ -58,7 +58,7 @@ export function LoginForm() {
           label="البريد الإلكتروني"
           type="email"
           placeholder="name@atmta.test"
-          className="h-9"
+          className="h-10"
           disabled={loginMutation.isPending}
           error={errors.email?.message}
           {...register("email")}
@@ -69,7 +69,7 @@ export function LoginForm() {
           label="كلمة المرور"
           type={showPassword ? "text" : "password"}
           placeholder="••••••••"
-          className="h-9"
+          className="h-10"
           disabled={loginMutation.isPending}
           error={errors.password?.message}
           suffix={
@@ -94,7 +94,7 @@ export function LoginForm() {
           type="submit"
           size="lg"
           isLoading={loginMutation.isPending}
-          className="mt-2 w-full h-9 font-medium"
+          className="mt-2 w-full h-10 text-sm font-medium"
         >
           <LogInIcon className="size-4" />
           <span>تسجيل الدخول</span>

@@ -47,13 +47,14 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 
 ---
 
-### Phase 4 — Dynamic Modules System & Directory (PDF §2.2)
+### Phase 4 — Dynamic Modules System & Directory (PDF §2.2) ✅
 - **Data-Driven Architecture ✅**: Modules stored strictly as data in mock store (`SEED_MODULES`), never hardcoded in navigation or permission checks.
 - **Dynamic Navigation ✅**: Sidebar and route guards strictly resolve from `getModules()` query.
-- **Declared Actions ✅**: CRUD minimum (`create`, `read`, `update`, `delete`) + custom module actions (`vendors.export`).
-- **Modules Management Page (`/modules`) ⏳**:
+- **Declared Actions ✅**: CRUD minimum (`create`, `read`, `update`, `delete`) + custom module actions (`vendors.export`, etc.).
+- **Modules Management Page (`/modules`) ✅**:
   - Overview screen displaying all registered modules and their declared actions (standard vs custom).
   - Capability to add a new dynamic module via mock store to prove live that navigation and permissions adapt with zero code changes.
+  - Dynamic fallback route `/[moduleKey]` demonstrating immediate zero-code access, route guard, and permission inspection.
 
 ---
 

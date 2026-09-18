@@ -26,7 +26,7 @@ export function ModuleRouteGuard({
   const isAllowed = can(action, module);
 
   if (!isAllowed) {
-    return <ForbiddenState module={module} action={action} />;
+    return <ForbiddenState module={module} />;
   }
 
   return <>{children}</>;

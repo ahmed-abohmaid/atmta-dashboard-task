@@ -11,7 +11,7 @@ export function TestAccountsPicker({
   disabled = false,
 }: TestAccountsPickerProps) {
   return (
-    <div className="flex flex-col gap-3 pt-4 border-t border-border/60">
+    <div className="flex flex-col gap-3.5 pt-5 border-t border-border/60">
       <div className="flex flex-col gap-1 text-center">
         <span className="text-xs font-medium text-foreground">
           حسابات تجريبية للاختبار السريع
@@ -21,18 +21,18 @@ export function TestAccountsPicker({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
         {SEED_USERS.map((user) => (
           <button
             key={user.id}
             type="button"
             disabled={disabled}
             onClick={() => onSelectAccount(user.email, user.password)}
-            className="flex flex-col items-start gap-1 rounded-lg border border-border/50 bg-secondary/30 p-2.5 text-start transition-colors hover:bg-secondary/70 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer overflow-hidden"
+            className="group flex flex-col items-start gap-1 rounded-xl border border-border/50 bg-secondary/25 p-3 text-start transition-colors duration-150 hover:bg-secondary/60 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer overflow-hidden"
           >
             <TruncatedText
               text={user.name}
-              className="text-xs font-medium text-foreground w-full"
+              className="text-xs font-medium text-foreground group-hover:text-primary transition-colors w-full"
               side="top"
             />
             <TruncatedText

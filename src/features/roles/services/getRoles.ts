@@ -3,7 +3,7 @@ import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
 
 export async function getRoles(): Promise<Role[]> {
-  await delay(200);
+  await delay(100);
   const roles = useMockStore.getState().roles;
   return JSON.parse(JSON.stringify(roles)) as Role[];
 }
