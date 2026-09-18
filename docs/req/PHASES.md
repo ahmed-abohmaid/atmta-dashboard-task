@@ -58,18 +58,22 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 
 ---
 
-### Phase 5 — Roles Module & Role CRUD (PDF §2.3) ⏳
-- **Roles List Page (`/roles`)**:
+### Phase 5 — Roles Module & Role CRUD (PDF §2.3) ✅
+- **Roles List Page (`/roles`) ✅**:
   - List of system and custom roles with description, user count, and assigned permissions.
-- **Role Create & Edit Dialog**:
-  - Role name and description fields.
+  - Responsive search with `nuqs` synced to URL query parameters.
+- **Role Create & Edit Dialog ✅**:
+  - Role name and description fields with Zod validation.
   - Granular dynamic permission-picker matrix (rows = modules from `getModules()`, columns = declared actions).
   - System role safeguards (prevent deleting/modifying core system role flags like `isSystem`).
-- Extract the permission-picker matrix into a shared component reusable in the User creation/edit flow.
+- **Reusable Dynamic Permission Matrix ✅**:
+  - Extracted to `src/features/permissions/components/PermissionMatrix.tsx` for immediate reuse in User creation/edit flow (Phase 8).
+  - Enforces hard rule: cannot grant what session user lacks.
+  - Popover with `ScrollArea` for `+N` overflow modules preview on cards.
 
 ---
 
-### Phase 5 — Categories Module (PDF §2.4)
+### Phase 6 — Categories Module (PDF §2.4)
 - Entity: `Category` (`name_ar`, `name_en`, `parent`).
 - Infinite nesting depth hierarchy (`category → subcategory → sub-subcategory → ...`).
 - Full CRUD operations.
@@ -78,7 +82,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 
 ---
 
-### Phase 6 — Vendors Module & Vendor Details (PDF §2.5)
+### Phase 7 — Vendors Module & Vendor Details (PDF §2.5)
 - Entity: `Vendor` (`name_ar`, `name_en`, `about`, `logo`, `cr_number`, `mobile`, `category`, `status`, `createdBy`, `updatedBy`, `createdAt`, `updatedAt`, `deletedAt`).
 - Belongs to one category, assignable from UI.
 - Full CRUD operations with soft delete (remains in store, disappears from active lists).
@@ -93,7 +97,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 
 ---
 
-### Phase 7 — Vendors List Page & Advanced Filters (PDF §2.6)
+### Phase 8 — Vendors List Page & Advanced Filters (PDF §2.6)
 - Paginated vendors table: name (Arabic/English), category, CR number, status.
 - Composite filters synced to URL search parameters (shareable/refreshable):
   1. Text search by name or CR number.
@@ -104,7 +108,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 
 ---
 
-### Phase 8 — Users Module: List & Profile Pages (PDF §2.7 & §2.8)
+### Phase 9 — Users Module: List & Profile Pages (PDF §2.7 & §2.8)
 - **Users List Page (`/users`)**:
   - Table: name, email, phone, roles, status.
   - Search by name or email.
@@ -122,14 +126,14 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 
 ---
 
-### Phase 9 — Cross-Cutting States & Polish
+### Phase 10 — Cross-Cutting States & Polish
 - Sweep every screen for loading (`Skeleton`), empty (`EmptyState`), error (`ErrorState`), and forbidden (`ForbiddenState`) states.
 - Verify consistent Arabic typography and RTL alignment across all modules.
 - Ensure strict compliance with non-functional rules (no console errors, zero ESLint warnings, responsive design).
 
 ---
 
-### Phase 10 — Delivery & Documentation
+### Phase 11 — Delivery & Documentation
 - Comprehensive `README.md` with:
   - Reproduction and run steps.
   - Seed credentials for all 4 test accounts.

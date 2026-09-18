@@ -4,7 +4,7 @@ export const SEED_ROLES: Role[] = [
   {
     id: "role_super_admin",
     name: "Super Admin",
-    description: "Full access to all modules and system actions",
+    description: "صلاحية كاملة لإدارة كافة وحدات وإجراءات النظام",
     isSystem: true,
     permissions: [
       { action: "manage", subject: "all" },
@@ -15,14 +15,21 @@ export const SEED_ROLES: Role[] = [
   {
     id: "role_manager",
     name: "Manager",
-    description: "Manage vendors, categories and export data with read access to users and roles",
+    description: "إدارة الموردين والتصنيفات وتصدير البيانات مع صلاحية عرض المستخدمين والأدوار",
     isSystem: false,
     permissions: [
       { action: "read", subject: "users" },
       { action: "read", subject: "roles" },
       { action: "read", subject: "modules" },
-      { action: "manage", subject: "categories" },
-      { action: "manage", subject: "vendors" },
+      { action: "create", subject: "categories" },
+      { action: "read", subject: "categories" },
+      { action: "update", subject: "categories" },
+      { action: "delete", subject: "categories" },
+      { action: "create", subject: "vendors" },
+      { action: "read", subject: "vendors" },
+      { action: "update", subject: "vendors" },
+      { action: "delete", subject: "vendors" },
+      { action: "export", subject: "vendors" },
     ],
     createdAt: "2026-01-01T00:00:00.000Z",
     updatedAt: "2026-01-01T00:00:00.000Z",
@@ -30,7 +37,7 @@ export const SEED_ROLES: Role[] = [
   {
     id: "role_employee",
     name: "Employee",
-    description: "Operational access for vendors CRUD and category reading",
+    description: "صلاحيات تشغيلية لإدارة الموردين وعرض التصنيفات",
     isSystem: false,
     permissions: [
       { action: "read", subject: "categories" },
@@ -45,7 +52,7 @@ export const SEED_ROLES: Role[] = [
   {
     id: "role_viewer",
     name: "Viewer",
-    description: "Read-only access across users, categories, and vendors",
+    description: "صلاحية قراءة وعرض فقط للمستخدمين والتصنيفات والموردين",
     isSystem: false,
     permissions: [
       { action: "read", subject: "users" },
