@@ -2,13 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboardIcon,
-  UsersIcon,
-  ShieldCheckIcon,
-  FolderTreeIcon,
-  Building2Icon,
-} from "lucide-react";
+import { LayoutDashboardIcon } from "lucide-react";
+import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 
 import {
   SidebarContent,
@@ -19,37 +14,18 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-const NAV_ITEMS = [
-  {
-    title: "الرئيسية",
-    href: "/",
-    icon: LayoutDashboardIcon,
-  },
-  {
-    title: "المستخدمون",
-    href: "/users",
-    icon: UsersIcon,
-  },
-  {
-    title: "الأدوار والصلاحيات",
-    href: "/roles",
-    icon: ShieldCheckIcon,
-  },
-  {
-    title: "التصنيفات",
-    href: "/categories",
-    icon: FolderTreeIcon,
-  },
-  {
-    title: "الموردون",
-    href: "/vendors",
-    icon: Building2Icon,
-  },
-];
+import { Skeleton } from "@/components/ui/skeleton";
+import { useModules } from "@/features/modules/hooks/useModules";
+import { usePermission } from "@/features/permissions/hooks/usePermission";
 
 export function SidebarNav() {
   const pathname = usePathname();
+  const { modules, isLoading: isModulesLoading } = useModules();
+  const { can, isLoading: isPermLoading } = usePermission();
+
+  const isHomeActive = pathname === "/";
+  const isLoading = isModulesLoading || isPermLoading;
+  const accessibleModules = modules.filter((mod) => can("read", mod.id));
 
   return (
     <SidebarContent>
@@ -59,26 +35,47 @@ export function SidebarNav() {
         </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu className="gap-1.5">
-            {NAV_ITEMS.map((item) => {
-              const isActive =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                render={<Link href="/" />}
+                isActive={isHomeActive}
+                tooltip="الرئيسية"
+                className="h-9 gap-3 px-3 rounded-lg text-xs font-normal transition-colors duration-150 hover:bg-sidebar-accent/50 hover:text-foreground data-active:bg-sidebar-accent data-active:text-primary data-active:font-medium data-active:hover:bg-sidebar-accent data-active:hover:text-primary"
+              >
+                <LayoutDashboardIcon className="size-4 shrink-0" />
+                <span>الرئيسية</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
 
-              return (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    render={<Link href={item.href} />}
-                    isActive={isActive}
-                    tooltip={item.title}
-                    className="h-9 gap-3 px-3 rounded-lg text-xs font-normal transition-colors duration-150 hover:bg-sidebar-accent/50 hover:text-foreground data-active:bg-sidebar-accent data-active:text-primary data-active:font-medium data-active:hover:bg-sidebar-accent data-active:hover:text-primary"
-                  >
-                    <item.icon className="size-4 shrink-0" />
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            })}
+            {isLoading ? (
+              <div className="flex flex-col gap-2 p-2">
+                <Skeleton className="h-8 w-full rounded-md" />
+                <Skeleton className="h-8 w-full rounded-md" />
+                <Skeleton className="h-8 w-full rounded-md" />
+              </div>
+            ) : (
+              accessibleModules.map((mod) => {
+                const href = `/${mod.id}`;
+                const isActive = pathname.startsWith(href);
+
+                return (
+                  <SidebarMenuItem key={mod.id}>
+                    <SidebarMenuButton
+                      render={<Link href={href} />}
+                      isActive={isActive}
+                      tooltip={mod.label.ar}
+                      className="h-9 gap-3 px-3 rounded-lg text-xs font-normal transition-colors duration-150 hover:bg-sidebar-accent/50 hover:text-foreground data-active:bg-sidebar-accent data-active:text-primary data-active:font-medium data-active:hover:bg-sidebar-accent data-active:hover:text-primary"
+                    >
+                      <DynamicIcon
+                        name={(mod.icon as IconName) ?? "layers"}
+                        className="size-4 shrink-0"
+                      />
+                      <span>{mod.label.ar}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })
+            )}
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>

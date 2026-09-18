@@ -13,12 +13,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TruncatedText } from "@/components/ui/truncatedText";
-import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useMe } from "@/features/auth/hooks/useMe";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { getInitials } from "@/utils/getInitials";
 
 export function SidebarUser() {
-  const { user } = useAuth();
+  const { user } = useMe();
   const logoutMutation = useLogout();
   const initials = getInitials(user?.name ?? "مستخدم");
 

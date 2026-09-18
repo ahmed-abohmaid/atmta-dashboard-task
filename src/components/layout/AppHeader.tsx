@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { useSidebar } from "@/components/ui/sidebar";
 import {
   RotateCcwIcon,
@@ -9,7 +10,9 @@ import {
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { useMockStore } from "@/mock/store";
+import { useCustomMutation } from "@/hooks/useCustomMutation";
+import { resetToSeed } from "@/mock/services/resetToSeed";
+import { removeSessionCookie } from "@/features/auth/utils/sessionCookie";
 
 interface AppHeaderProps {
   title?: string;
@@ -23,14 +26,17 @@ export function AppHeader({
   isLoading = false,
 }: AppHeaderProps) {
   const { toggleSidebar, open } = useSidebar();
-  const [isResetting, setIsResetting] = useState(false);
-  const resetToSeed = useMockStore((state) => state.resetToSeed);
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
-  const handleReset = () => {
-    setIsResetting(true);
-    resetToSeed();
-    setTimeout(() => setIsResetting(false), 800);
-  };
+  const resetMutation = useCustomMutation<void, void>({
+    mutationFn: resetToSeed,
+    onSuccess: () => {
+      removeSessionCookie();
+      queryClient.clear();
+      router.replace("/login");
+    },
+  });
 
   return (
     <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border/70 bg-background/90 px-4 backdrop-blur-xs sm:px-6">
@@ -73,8 +79,8 @@ export function AppHeader({
         <Button
           variant="outline"
           size="sm"
-          isLoading={isResetting}
-          onClick={handleReset}
+          isLoading={resetMutation.isPending}
+          onClick={() => resetMutation.mutate()}
           className="h-8 gap-1.5 px-2.5 text-xs font-normal border-border/60 text-muted-foreground hover:text-foreground hover:bg-secondary/60"
         >
           <RotateCcwIcon className="size-3.5" />

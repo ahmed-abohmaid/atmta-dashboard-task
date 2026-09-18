@@ -22,9 +22,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Feature components stay under `src/features/<feature>/components/`. Shared/layout components under `src/components/`.
 - **No barrel exports**: Never create or use `index.ts` files to aggregate/re-export sibling files (no `export * from "./..."`). Always import directly from the exact file containing the definition (e.g. `import { User } from "@/@types/user"`).
 
+## Mock Data & Modules System
+- **Modules and Entities are dynamic data**: per task requirements, modules, roles, users, categories, and vendors are data stored in the mock backend layer (`useMockStore` / `localStorage`), NEVER static constants.
+- **Never create or import static module constants**: adding a new module must only require adding data in the mock store/backend. Navigation, permission resolution, and route guards must strictly consume modules dynamically from queries/service layer.
+- **Mock service layer**: keep mock data behind an async service layer with simulated delay. UI must be written as if consuming a real backend API.
+- **No direct `useMockStore` in UI or hooks**: `useMockStore` simulates the raw backend database. Only async service files (`src/features/*/services/`) are permitted to read from or mutate `useMockStore`. All UI components and hooks must strictly call async service functions via `useCustomQuery` or mutations.
+
 
 ## Data Fetching
 - **Never use `useQuery` directly.** Always use the `useCustomQuery` hook from `src/hooks/useCustomQuery.ts`.
+- **No data mapping inside `queryFn`**: `queryFn` must strictly fetch and return raw data from the mock/API service layer. Any data transformations, mappers (e.g. `defineAbilityForUser(user, roles)`), or derived structures must be handled outside `queryFn` using `select` or `useMemo` on the query result.
 - Each feature has a `consts/queryKeys.ts` exporting a single `UPPERCASE` const object with all query keys for that feature.
 - Global query keys go in `src/consts/queryKeys.ts` following the same pattern.
 
