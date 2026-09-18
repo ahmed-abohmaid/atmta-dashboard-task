@@ -9,3 +9,17 @@ export interface Role {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface RoleWithUserCount extends Role {
+  userCount: number;
+}
+
+export interface CreateRoleInput {
+  name: string;
+  description?: string;
+  permissions: Permission[];
+}
+
+export interface UpdateRoleInput extends CreateRoleInput {
+  id: string;
+}

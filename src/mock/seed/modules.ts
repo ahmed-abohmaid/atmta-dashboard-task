@@ -21,25 +21,6 @@ export const SEED_MODULES: Module[] = [
     ],
   },
   {
-    id: "roles",
-    label: {
-      ar: "الأدوار",
-      en: "Roles",
-    },
-    icon: "shield-check",
-    description: {
-      ar: "إدارة الأدوار ومجموعات الصلاحيات",
-      en: "Manage system roles and permission sets",
-    },
-    actions: [
-      { id: "read", label: { ar: "عرض", en: "View" } },
-      { id: "create", label: { ar: "إضافة", en: "Create" } },
-      { id: "update", label: { ar: "تعديل", en: "Edit" } },
-      { id: "delete", label: { ar: "حذف", en: "Delete" } },
-      { id: "duplicate", label: { ar: "نسخ دور", en: "Duplicate Role" }, isCustom: true },
-    ],
-  },
-  {
     id: "categories",
     label: {
       ar: "التصنيفات",

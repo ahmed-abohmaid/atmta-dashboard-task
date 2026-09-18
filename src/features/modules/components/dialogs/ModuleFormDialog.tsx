@@ -117,11 +117,11 @@ export function ModuleFormDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto p-6">
-        <DialogHeader className="gap-1 mb-2">
-          <DialogTitle className="text-base font-semibold text-foreground">
+        <DialogHeader className="gap-1.5 mb-1">
+          <DialogTitle className="text-lg font-bold tracking-tight text-foreground">
             {isEdit ? "تعديل الوحدة" : "إضافة وحدة جديدة"}
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground">
+          <DialogDescription className="text-xs text-muted-foreground leading-relaxed">
             {isEdit
               ? "تحديث بيانات ومسميات وإجراءات الوحدة في النظام."
               : "تسجيل وحدة جديدة وإجراءاتها المخصصة وحفظها في قاعدة البيانات الحية."}
@@ -220,17 +220,23 @@ export function ModuleFormDialog({
             </div>
           </div>
 
-          <DialogFooter className="mt-2 pt-2">
+          <DialogFooter className="mt-4 pt-3 border-t border-border/50 flex flex-row items-center justify-end gap-3">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => onOpenChange(false)}
               disabled={isPending}
+              className="text-xs h-9 px-4 cursor-pointer"
             >
               إلغاء
             </Button>
-            <Button type="submit" size="sm" isLoading={isPending}>
+            <Button
+              type="submit"
+              size="sm"
+              isLoading={isPending}
+              className="text-xs h-9 px-5 cursor-pointer font-medium"
+            >
               {isEdit ? "حفظ التعديلات" : "إضافة الوحدة"}
             </Button>
           </DialogFooter>

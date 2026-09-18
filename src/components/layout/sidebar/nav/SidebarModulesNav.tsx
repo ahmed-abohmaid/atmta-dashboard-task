@@ -17,6 +17,17 @@ interface SidebarModulesNavProps {
   isPermLoading: boolean;
 }
 
+const CORE_ROUTES: Record<string, string> = {
+  users: "/users",
+  roles: "/roles",
+  categories: "/categories",
+  vendors: "/vendors",
+};
+
+function getModuleHref(moduleId: string): string {
+  return CORE_ROUTES[moduleId] ?? `/modules/${moduleId}`;
+}
+
 export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps) {
   const { modules, isLoading: isModulesLoading } = useModules();
 
@@ -26,7 +37,7 @@ export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps
   return (
     <SidebarGroup className="mt-1">
       <SidebarGroupLabel className="text-[11px] font-normal text-muted-foreground/60 mb-2 px-3">
-        أقسام النظام
+        وحدات النظام
       </SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu className="gap-1.5">
@@ -40,7 +51,7 @@ export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps
             accessibleModules.map((mod) => (
               <SidebarLink
                 key={mod.id}
-                href={`/modules/${mod.id}`}
+                href={getModuleHref(mod.id)}
                 label={mod.label.ar}
                 icon={
                   <DynamicIcon
