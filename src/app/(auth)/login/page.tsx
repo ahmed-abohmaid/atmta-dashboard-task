@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { AuthCard } from "@/features/auth/components/AuthCard";
+import { AuthSkeleton } from "@/features/auth/components/AuthSkeleton";
 
 export const metadata: Metadata = {
   title: "تسجيل الدخول | منصة أتمتة",
@@ -7,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  return <AuthCard />;
+  return (
+    <Suspense fallback={<AuthSkeleton />}>
+      <AuthCard />
+    </Suspense>
+  );
 }

@@ -1,5 +1,4 @@
 import { AuthResponse, LoginCredentials, SessionPayload } from "@/features/auth/@types/auth";
-import { setSessionCookie } from "@/features/auth/utils/sessionCookie";
 import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
 
@@ -27,7 +26,14 @@ export async function login(credentials: LoginCredentials): Promise<AuthResponse
     createdAt: new Date().toISOString(),
   };
 
-  setSessionCookie(session);
+  const allRoles = useMockStore.getState().roles;
+  const userRoles = allRoles.filter((r) => user.roles.includes(r.id));
+  const userPermissions = userRoles.flatMap((r) => r.permissions);
 
-  return { user, session };
+  return {
+    user,
+    roles: userRoles,
+    permissions: userPermissions,
+    session,
+  };
 }

@@ -3,11 +3,12 @@ import { AUTH_QUERY_KEYS } from "@/features/auth/consts/queryKeys";
 import { getCurrentSessionUser } from "@/features/auth/services/getCurrentSessionUser";
 import { User } from "@/@types/user";
 
-export function useAuth() {
+export function useMe() {
   const queryResult = useCustomQuery<User | null>({
     queryKey: AUTH_QUERY_KEYS.me,
     queryFn: () => getCurrentSessionUser(),
     staleTime: Infinity,
+    retry: false,
   });
 
   return {
