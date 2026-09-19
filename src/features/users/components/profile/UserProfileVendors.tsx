@@ -52,7 +52,7 @@ export function UserProfileVendors({ vendors }: UserProfileVendorsProps) {
                 key={vendor.id}
                 className="group flex flex-col justify-between gap-3 py-3.5 transition-colors sm:flex-row sm:items-center"
               >
-                <div className="flex items-center gap-3.5 min-w-0">
+                <div className="flex min-w-0 items-center gap-3.5">
                   <Avatar className="border-border/70 size-10 shrink-0 rounded-xl border">
                     <AvatarImage src={vendor.logo} alt={vendor.name_ar} />
                     <AvatarFallback className="bg-secondary text-foreground text-xs font-bold">
@@ -67,7 +67,7 @@ export function UserProfileVendors({ vendors }: UserProfileVendorsProps) {
                         className="text-foreground group-hover:text-primary flex items-center gap-1.5 truncate text-xs font-bold transition-colors"
                       >
                         <span>{vendor.name_ar}</span>
-                        <ExternalLinkIcon className="size-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <ExternalLinkIcon className="size-3 opacity-0 transition-opacity group-hover:opacity-100" />
                       </Link>
 
                       <span className="text-muted-foreground text-[11px]">({vendor.name_en})</span>
@@ -76,25 +76,27 @@ export function UserProfileVendors({ vendors }: UserProfileVendorsProps) {
                         variant="outline"
                         className={
                           vendor.status === "active"
-                            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-[10px] px-1.5 py-0"
-                            : "border-destructive/30 bg-destructive/10 text-destructive text-[10px] px-1.5 py-0"
+                            ? "border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0 text-[10px] text-emerald-300"
+                            : "border-destructive/30 bg-destructive/10 text-destructive px-1.5 py-0 text-[10px]"
                         }
                       >
                         {vendor.status === "active" ? "نشط" : "معطل"}
                       </Badge>
                     </div>
 
-                    <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-[11px]">
-                      <span className="bg-secondary/60 text-secondary-foreground rounded px-1.5 py-0.5 font-mono text-[10px]">
+                    <div className="text-muted-foreground flex flex-col gap-1 text-[11px]">
+                      <span className="bg-secondary/60 text-secondary-foreground w-fit rounded px-1.5 py-0.5 font-mono text-[10px]">
                         سجل: {vendor.cr_number}
                       </span>
 
                       {categoryCrumbs.length > 0 && (
-                        <div className="flex items-center gap-1 text-[11px]">
+                        <div className="flex flex-wrap items-center gap-1 text-[11px]">
                           <span className="text-muted-foreground/70">التصنيف:</span>
                           {categoryCrumbs.map((c, i) => (
-                            <span key={c.id} className="flex items-center gap-1 text-foreground/80">
-                              {i > 0 && <ChevronLeftIcon className="size-3 text-muted-foreground/40" />}
+                            <span key={c.id} className="text-foreground/80 flex items-center gap-1">
+                              {i > 0 && (
+                                <ChevronLeftIcon className="text-muted-foreground/40 size-3" />
+                              )}
                               <span>{c.name_ar}</span>
                             </span>
                           ))}
@@ -104,7 +106,7 @@ export function UserProfileVendors({ vendors }: UserProfileVendorsProps) {
                   </div>
                 </div>
 
-                <span className="text-muted-foreground self-end sm:self-auto text-xs font-mono">
+                <span className="text-muted-foreground self-end font-mono text-xs sm:self-auto">
                   {formattedDate}
                 </span>
               </div>
