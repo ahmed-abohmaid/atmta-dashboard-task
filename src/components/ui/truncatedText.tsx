@@ -15,16 +15,18 @@ export function TruncatedText({ text, className, side = "top", ...props }: Trunc
 
   const checkTruncation = () => {
     if (textRef.current) {
-      const { scrollWidth, clientWidth } = textRef.current;
-      setIsTruncated(scrollWidth > clientWidth);
+      const { scrollWidth, clientWidth, scrollHeight, clientHeight } = textRef.current;
+      setIsTruncated(scrollWidth > clientWidth || scrollHeight > clientHeight);
     }
   };
+
+  const isLineClamped = className?.includes("line-clamp");
 
   const spanElement = (
     <span
       ref={textRef}
       onMouseEnter={checkTruncation}
-      className={cn("block truncate", className)}
+      className={cn("block", !isLineClamped && "truncate", className)}
       {...props}
     >
       {text}
