@@ -49,6 +49,7 @@ export async function createModule(input: CreateModuleInput): Promise<Module> {
       en: input.label.en.trim(),
     },
     icon: input.icon.trim(),
+    path: `/modules/${slug}`,
     description: input.description
       ? {
           ar: input.description.ar.trim(),

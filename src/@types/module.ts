@@ -14,6 +14,7 @@ export interface Module {
     en: string;
   };
   icon?: string;
+  path?: string;
   description?: {
     ar: string;
     en: string;

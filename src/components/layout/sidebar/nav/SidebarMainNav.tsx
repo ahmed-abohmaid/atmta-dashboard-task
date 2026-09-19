@@ -29,11 +29,7 @@ interface StaticNavItem {
 
 const STATIC_NAV_ITEMS: StaticNavItem[] = [
   { href: "/", label: "الرئيسية", icon: HomeIcon },
-  { href: "/modules", label: "الوحدات", icon: LayoutGridIcon, module: "modules" },
-  { href: "/roles", label: "الأدوار", icon: ShieldCheckIcon, module: "roles" },
-  { href: "/categories", label: "التصنيفات", icon: FolderTreeIcon, module: "categories" },
-  { href: "/vendors", label: "الموردين", icon: Building2Icon, module: "vendors" },
-  { href: "/users", label: "المستخدمين", icon: UsersIcon, module: "users" },
+  { href: "/modules", label: "دليل الوحدات", icon: LayoutGridIcon, module: "modules" },
 ];
 
 interface SidebarMainNavProps {

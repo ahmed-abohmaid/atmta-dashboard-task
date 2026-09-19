@@ -1,6 +1,7 @@
 "use client";
 
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
+import { Module } from "@/@types/module";
 import type { AppAction, AppSubject } from "@/@types/permission";
 import {
   SidebarGroup,
@@ -17,30 +18,15 @@ interface SidebarModulesNavProps {
   isPermLoading: boolean;
 }
 
-const CORE_ROUTES: Record<string, string> = {
-  users: "/users",
-  roles: "/roles",
-  categories: "/categories",
-  vendors: "/vendors",
-};
-
-function getModuleHref(moduleId: string): string {
-  return CORE_ROUTES[moduleId] ?? `/modules/${moduleId}`;
+function getModuleHref(mod: Module): string {
+  return mod.path ?? `/modules/${mod.id}`;
 }
-
-const CORE_MODULE_IDS = new Set(["users", "roles", "categories", "vendors"]);
 
 export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps) {
   const { modules, isLoading: isModulesLoading } = useModules();
 
-  const nonCoreModules = modules.filter((mod) => !CORE_MODULE_IDS.has(mod.id));
-
-  if (!isModulesLoading && nonCoreModules.length === 0) {
-    return null;
-  }
-
   const isLoading = isModulesLoading || isPermLoading;
-  const accessibleModules = nonCoreModules.filter((mod) => can("read", mod.id));
+  const accessibleModules = modules.filter((mod) => can("read", mod.id));
 
   if (!isLoading && accessibleModules.length === 0) {
     return null;
@@ -56,12 +42,14 @@ export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps
           {isLoading ? (
             <div className="flex flex-col gap-2 p-2">
               <Skeleton className="h-8 w-full rounded-md" />
+              <Skeleton className="h-8 w-full rounded-md" />
+              <Skeleton className="h-8 w-full rounded-md" />
             </div>
           ) : (
             accessibleModules.map((mod) => (
               <SidebarLink
                 key={mod.id}
-                href={getModuleHref(mod.id)}
+                href={getModuleHref(mod)}
                 label={mod.label.ar}
                 icon={
                   <DynamicIcon
