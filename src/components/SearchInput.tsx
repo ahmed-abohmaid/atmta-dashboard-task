@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useQueryState, parseAsString, debounce } from "nuqs";
+import { useEffect, useRef, useState } from "react";
+import { useQueryState, parseAsString, parseAsInteger } from "nuqs";
 import { SearchIcon, XIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -11,6 +11,7 @@ export interface SearchInputProps {
   onSearch?: (value: string) => void;
   placeholder?: string;
   paramKey?: string;
+  pageParamKey?: string;
   debounceMs?: number;
   className?: string;
   containerClassName?: string;
@@ -22,6 +23,7 @@ export function SearchInput({
   onSearch,
   placeholder = "البحث...",
   paramKey = "search",
+  pageParamKey = "page",
   debounceMs = 300,
   className,
   containerClassName,
@@ -30,27 +32,51 @@ export function SearchInput({
 }: SearchInputProps) {
   const [urlQuery, setUrlQuery] = useQueryState(
     paramKey,
-    parseAsString.withDefault("").withOptions({
-      shallow: true,
-      limitUrlUpdates: debounce(debounceMs),
-    }),
+    parseAsString.withDefault("").withOptions({ shallow: true }),
   );
 
-  const debouncedValue = useDebounce(urlQuery, debounceMs);
+  const [, setPage] = useQueryState(
+    pageParamKey,
+    parseAsInteger.withDefault(1).withOptions({ shallow: true }),
+  );
+
+  const [prevUrlQuery, setPrevUrlQuery] = useState(urlQuery);
+  const [inputValue, setInputValue] = useState(urlQuery);
+  const debouncedValue = useDebounce(inputValue, debounceMs);
+
+  if (urlQuery !== prevUrlQuery) {
+    setPrevUrlQuery(urlQuery);
+    setInputValue(urlQuery);
+  }
+
+  const onSearchRef = useRef(onSearch);
+  useEffect(() => {
+    onSearchRef.current = onSearch;
+  });
 
   useEffect(() => {
-    onSearch?.(debouncedValue);
-  }, [debouncedValue, onSearch]);
+    const nextParam = debouncedValue.trim() || null;
+    if (nextParam !== (urlQuery || null)) {
+      setUrlQuery(nextParam);
+      setPage(1);
+    }
+    onSearchRef.current?.(debouncedValue);
+  }, [debouncedValue, urlQuery, setUrlQuery, setPage]);
+
+  const handleClear = () => {
+    setInputValue("");
+    setUrlQuery(null);
+    setPage(1);
+    onSearchRef.current?.("");
+  };
 
   return (
     <div className={cn("relative w-full", containerClassName)}>
       <SearchIcon className="absolute inset-y-0 inset-s-0 my-auto ms-2.5 size-3.5 text-muted-foreground pointer-events-none" />
 
       <Input
-        value={urlQuery}
-        onChange={(e) =>
-          setUrlQuery(e.target.value.trim() ? e.target.value : null)
-        }
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
         autoFocus={autoFocus}
@@ -60,10 +86,10 @@ export function SearchInput({
         )}
       />
 
-      {urlQuery.length > 0 && !disabled && (
+      {inputValue.length > 0 && !disabled && (
         <button
           type="button"
-          onClick={() => setUrlQuery(null)}
+          onClick={handleClear}
           aria-label="مسح البحث"
           className="absolute inset-y-0 inset-e-0 my-auto me-1.5 flex size-5 items-center justify-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors cursor-pointer"
         >
