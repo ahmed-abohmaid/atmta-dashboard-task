@@ -49,7 +49,7 @@ export function SidebarUser() {
               </button>
             }
           />
-          <TooltipContent side="inline-start">تسجيل الخروج</TooltipContent>
+          <TooltipContent side="left">تسجيل الخروج</TooltipContent>
         </Tooltip>
       </div>
     </SidebarFooter>

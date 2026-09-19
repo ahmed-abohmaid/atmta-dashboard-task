@@ -43,7 +43,7 @@ function TooltipContent({
           {...props}
         >
           {children}
-          <TooltipPrimitive.Arrow className="z-50 size-auto overflow-visible data-[side=bottom]:-top-1.25 data-[side=left]:-right-1.25 data-[side=left]:rotate-90 data-[side=right]:-left-1.25 data-[side=right]:-rotate-90 data-[side=top]:-bottom-1.25 data-[side=top]:rotate-180">
+          <TooltipPrimitive.Arrow className="z-50 size-auto overflow-visible data-[side=bottom]:-top-1.25 data-[side=left]:-right-1.25 data-[side=left]:rotate-90 data-[side=right]:-left-1.25 data-[side=right]:-rotate-90 data-[side=top]:-bottom-1.25 data-[side=top]:rotate-180 data-[side=inline-end]:ltr:-left-1.25 data-[side=inline-end]:ltr:-rotate-90 data-[side=inline-start]:ltr:-right-1.25 data-[side=inline-start]:ltr:rotate-90 data-[side=inline-end]:rtl:-right-1.25 data-[side=inline-end]:rtl:rotate-90 data-[side=inline-start]:rtl:-left-1.25 data-[side=inline-start]:rtl:-rotate-90">
             <svg
               width="10"
               height="5"

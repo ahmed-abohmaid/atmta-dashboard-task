@@ -16,7 +16,11 @@ export function TruncatedText({ text, className, side = "top", ...props }: Trunc
   const checkTruncation = () => {
     if (textRef.current) {
       const { scrollWidth, clientWidth, scrollHeight, clientHeight } = textRef.current;
-      setIsTruncated(scrollWidth > clientWidth || scrollHeight > clientHeight);
+      const isLineClamped = className?.includes("line-clamp");
+      const truncated = isLineClamped
+        ? scrollHeight > clientHeight + 1
+        : scrollWidth > clientWidth + 1;
+      setIsTruncated(truncated);
     }
   };
 
