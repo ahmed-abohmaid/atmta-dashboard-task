@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AlertTriangleIcon } from "lucide-react";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -40,7 +41,7 @@ export function DeleteVendorDialog({
         onSuccess?.();
       },
       onError: (err) => {
-        setErrorMessage(err instanceof Error ? err.message : "حدث خطأ أثناء حذف المورد.");
+        setErrorMessage(getErrorMessage(err, "حدث خطأ أثناء حذف المورد."));
       },
     });
   };

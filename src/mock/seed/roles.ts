@@ -3,7 +3,7 @@ import { Role } from "@/@types/role";
 export const SEED_ROLES: Role[] = [
   {
     id: "role_super_admin",
-    name: "Super Admin",
+    name: "مدير النظام",
     description: "صلاحية كاملة لإدارة كافة وحدات وإجراءات النظام",
     isSystem: true,
     permissions: [{ action: "manage", subject: "all" }],
@@ -12,7 +12,7 @@ export const SEED_ROLES: Role[] = [
   },
   {
     id: "role_manager",
-    name: "Manager",
+    name: "مدير",
     description:
       "إدارة الموردين والتصنيفات وتصدير البيانات مع إنشاء وتعديل الأدوار وفق الصلاحيات الممنوحة",
     isSystem: false,
@@ -37,7 +37,7 @@ export const SEED_ROLES: Role[] = [
   },
   {
     id: "role_employee",
-    name: "Employee",
+    name: "موظف",
     description: "صلاحيات تشغيلية لإدارة الموردين وعرض التصنيفات",
     isSystem: false,
     permissions: [
@@ -52,7 +52,7 @@ export const SEED_ROLES: Role[] = [
   },
   {
     id: "role_viewer",
-    name: "Viewer",
+    name: "مستعرض",
     description: "صلاحية قراءة وعرض فقط للمستخدمين والتصنيفات والموردين",
     isSystem: false,
     permissions: [

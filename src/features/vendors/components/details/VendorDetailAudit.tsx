@@ -48,7 +48,7 @@ export function VendorDetailAudit({ vendor }: VendorDetailAuditProps) {
               <div className="flex min-w-0 flex-col">
                 {entry.user ? (
                   <Link
-                    href="/users"
+                    href={`/users/${entry.user.id}`}
                     className="text-foreground hover:text-primary truncate text-xs font-semibold transition-colors"
                   >
                     {entry.user.name}

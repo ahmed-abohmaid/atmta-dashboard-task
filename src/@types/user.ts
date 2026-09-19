@@ -12,6 +12,7 @@ export interface User {
   status: UserStatus;
   roles: string[]; // Role IDs
   extraGrants?: Permission[];
+  extraRevokes?: Permission[];
   createdAt: string;
   updatedAt: string;
 }

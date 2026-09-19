@@ -1,10 +1,11 @@
-import { isValidPhoneNumber, parsePhoneNumberWithError } from "libphonenumber-js";
+import { parsePhoneNumberWithError } from "libphonenumber-js";
 
 export function isValidSaudiPhone(phone: string): boolean {
   if (!phone || typeof phone !== "string") return false;
   const trimmed = phone.trim();
   try {
-    return isValidPhoneNumber(trimmed, "SA");
+    const parsed = parsePhoneNumberWithError(trimmed, "SA");
+    return parsed.isValid() && parsed.country === "SA";
   } catch {
     return false;
   }
@@ -14,7 +15,7 @@ export function normalizeSaudiPhone(phone: string): string {
   const trimmed = phone.trim();
   try {
     const parsed = parsePhoneNumberWithError(trimmed, "SA");
-    if (parsed && parsed.isValid()) {
+    if (parsed && parsed.isValid() && parsed.country === "SA") {
       return parsed.format("E.164");
     }
   } catch {

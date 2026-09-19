@@ -1,8 +1,7 @@
 "use client";
 
-import { RotateCcwIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { DateRangeFilter } from "@/components/DateRangeFilter";
+import { ResetFiltersButton } from "@/components/ResetFiltersButton";
 import { SearchInput } from "@/components/SearchInput";
 import { SelectFilter } from "@/components/SelectFilter";
 import { useCategoryLookup } from "@/features/categories/hooks/useCategoryLookup";
@@ -99,17 +98,11 @@ export function VendorsToolbar({
         </div>
 
         {hasActiveFilters && (
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            onClick={onResetFilters}
+          <ResetFiltersButton
+            onReset={onResetFilters}
             disabled={disabled}
-            className="text-muted-foreground hover:text-foreground h-9 shrink-0 cursor-pointer gap-1.5 self-end px-3 text-xs lg:self-auto"
-          >
-            <RotateCcwIcon className="size-3.5" />
-            <span>إعادة ضبط</span>
-          </Button>
+            className="self-end lg:self-auto"
+          />
         )}
       </div>
     </div>

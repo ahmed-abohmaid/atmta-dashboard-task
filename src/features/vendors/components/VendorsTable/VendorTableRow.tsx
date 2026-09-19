@@ -11,7 +11,7 @@ import { TruncatedText } from "@/components/ui/truncatedText";
 import { VendorWithRelations } from "@/features/vendors/@types/vendor";
 import { VendorRowActions } from "@/features/vendors/components/VendorsTable/VendorRowActions";
 import { VendorStatusBadge } from "@/features/vendors/components/VendorsTable/VendorStatusBadge";
-import { formatSaudiPhoneDisplay } from "@/features/vendors/utils/phone";
+import { formatSaudiPhoneDisplay } from "@/utils/phone";
 import { formatCategoryPath } from "@/features/vendors/utils/vendorCategory";
 
 interface VendorTableRowProps {

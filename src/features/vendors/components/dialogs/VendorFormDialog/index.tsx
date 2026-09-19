@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, useWatch } from "react-hook-form";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -77,11 +78,10 @@ export function VendorFormDialog({ mode, vendor, open, onOpenChange }: VendorFor
       onSuccess: () => onOpenChange(false),
       onError: (err: unknown) => {
         setServerError(
-          err instanceof Error
-            ? err.message
-            : isEdit
-              ? "حدث خطأ أثناء تعديل بيانات المورد."
-              : "حدث خطأ أثناء إضافة المورد."
+          getErrorMessage(
+            err,
+            isEdit ? "حدث خطأ أثناء تعديل بيانات المورد." : "حدث خطأ أثناء إضافة المورد."
+          )
         );
       },
     };
