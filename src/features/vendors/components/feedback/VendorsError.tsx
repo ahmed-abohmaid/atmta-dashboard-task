@@ -1,4 +1,5 @@
 import { AlertCircleIcon, RotateCcwIcon } from "lucide-react";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 import { Button } from "@/components/ui/button";
 
 interface VendorsErrorProps {
@@ -7,8 +8,7 @@ interface VendorsErrorProps {
 }
 
 export function VendorsError({ error, onRetry }: VendorsErrorProps) {
-  const errorMessage =
-    error instanceof Error ? error.message : "حدث خطأ غير متوقع أثناء تحميل بيانات الموردين.";
+  const errorMessage = getErrorMessage(error, "حدث خطأ غير متوقع أثناء تحميل بيانات الموردين.");
 
   return (
     <div className="border-destructive/30 bg-destructive/5 flex flex-col items-center justify-center gap-3 rounded-xl border p-6 text-center">

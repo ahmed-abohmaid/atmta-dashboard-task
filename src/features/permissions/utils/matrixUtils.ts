@@ -1,6 +1,14 @@
 import { Module } from "@/@types/module";
 import { Permission } from "@/@types/permission";
 
+export function toPermissionKey(p: Pick<Permission, "subject" | "action">): string {
+  return `${p.subject}:${p.action}`;
+}
+
+export function toPermissionSet(permissions: Permission[]): Set<string> {
+  return new Set(permissions.map(toPermissionKey));
+}
+
 export function buildGrantedSet(
   value: Permission[],
   modules: Module[],
@@ -18,7 +26,7 @@ export function buildGrantedSet(
   }
 
   for (const p of value) {
-    set.add(`${p.subject}:${p.action}`);
+    set.add(toPermissionKey(p));
   }
 
   return set;
