@@ -52,8 +52,9 @@ export function VendorDetailInfo({ vendor }: VendorDetailInfoProps) {
             <div className="flex items-center gap-1.5">
               <PhoneIcon className="size-3.5 text-primary" />
               <a
+                dir="ltr"
                 href={`tel:${vendor.mobile}`}
-                className="direction-ltr hover:text-primary transition-colors font-mono"
+                className="hover:text-primary transition-colors font-mono inline-block"
               >
                 {formattedPhone}
               </a>

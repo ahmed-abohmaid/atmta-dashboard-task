@@ -92,7 +92,7 @@ export function VendorTableRow({
       </TableCell>
 
       <TableCell className="py-3.5">
-        <span className="font-mono text-xs text-muted-foreground direction-ltr inline-block">
+        <span dir="ltr" className="font-mono text-xs text-muted-foreground inline-block">
           {formattedPhone}
         </span>
       </TableCell>
