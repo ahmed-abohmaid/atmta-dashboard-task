@@ -1,6 +1,14 @@
 "use client";
 
-import { HomeIcon, LayoutGridIcon, ShieldCheckIcon, FolderTreeIcon, type LucideIcon } from "lucide-react";
+import {
+  HomeIcon,
+  LayoutGridIcon,
+  UsersIcon,
+  ShieldCheckIcon,
+  FolderTreeIcon,
+  Building2Icon,
+  type LucideIcon,
+} from "lucide-react";
 import type { AppAction, AppSubject } from "@/@types/permission";
 import {
   SidebarGroup,
@@ -24,6 +32,8 @@ const STATIC_NAV_ITEMS: StaticNavItem[] = [
   { href: "/modules", label: "الوحدات", icon: LayoutGridIcon, module: "modules" },
   { href: "/roles", label: "الأدوار", icon: ShieldCheckIcon, module: "roles" },
   { href: "/categories", label: "التصنيفات", icon: FolderTreeIcon, module: "categories" },
+  { href: "/vendors", label: "الموردين", icon: Building2Icon, module: "vendors" },
+  { href: "/users", label: "المستخدمين", icon: UsersIcon, module: "users" },
 ];
 
 interface SidebarMainNavProps {

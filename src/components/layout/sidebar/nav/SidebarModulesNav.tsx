@@ -28,13 +28,23 @@ function getModuleHref(moduleId: string): string {
   return CORE_ROUTES[moduleId] ?? `/modules/${moduleId}`;
 }
 
+const CORE_MODULE_IDS = new Set(["users", "roles", "categories", "vendors"]);
+
 export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps) {
   const { modules, isLoading: isModulesLoading } = useModules();
 
+  const nonCoreModules = modules.filter((mod) => !CORE_MODULE_IDS.has(mod.id));
+
+  if (!isModulesLoading && nonCoreModules.length === 0) {
+    return null;
+  }
+
   const isLoading = isModulesLoading || isPermLoading;
-  const accessibleModules = modules.filter(
-    (mod) => can("read", mod.id) && mod.id !== "categories" && mod.id !== "roles"
-  );
+  const accessibleModules = nonCoreModules.filter((mod) => can("read", mod.id));
+
+  if (!isLoading && accessibleModules.length === 0) {
+    return null;
+  }
 
   return (
     <SidebarGroup className="mt-1">
@@ -45,8 +55,6 @@ export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps
         <SidebarMenu className="gap-1.5">
           {isLoading ? (
             <div className="flex flex-col gap-2 p-2">
-              <Skeleton className="h-8 w-full rounded-md" />
-              <Skeleton className="h-8 w-full rounded-md" />
               <Skeleton className="h-8 w-full rounded-md" />
             </div>
           ) : (

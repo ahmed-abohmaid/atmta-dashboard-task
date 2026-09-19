@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CategoryNode } from "@/@types/category";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { InputField } from "@/components/fields/InputField";
-import { CategoryParentSelect } from "@/features/categories/components/dialogs/CategoryFormDialog/CategoryParentSelect";
+import { CategorySelect } from "@/components/fields/CategorySelect";
 import {
   categorySchema,
   CategoryFormValues,
@@ -148,10 +148,22 @@ export function CategoryFormDialog({
               </span>
             </div>
           ) : (
-            <CategoryParentSelect
+            <Controller
               control={control}
-              parentOptions={parentOptions}
-              disabled={isPending}
+              name="parentId"
+              render={({ field }) => (
+                <CategorySelect
+                  id="parentId"
+                  label="التصنيف الأب (اختياري)"
+                  placeholder="اختر التصنيف الأب..."
+                  value={field.value}
+                  onChange={field.onChange}
+                  options={parentOptions}
+                  rootOption={{ label: "بدون تصنيف أب (مستوى رئيسي)" }}
+                  helperText="ترك الحقل فارغاً يجعل التصنيف في المستوى الرئيسي."
+                  disabled={isPending || isLookupLoading}
+                />
+              )}
             />
           )}
 
