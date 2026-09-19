@@ -31,5 +31,11 @@ export function defineAbilityForUser(user: User | null, roles: Role[]): AppAbili
     }
   }
 
+  if (user.extraRevokes && user.extraRevokes.length > 0) {
+    for (const revoke of user.extraRevokes) {
+      cannot(revoke.action, revoke.subject);
+    }
+  }
+
   return build();
 }
