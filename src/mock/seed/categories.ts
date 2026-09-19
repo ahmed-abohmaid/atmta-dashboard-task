@@ -1,7 +1,6 @@
 import { Category } from "@/@types/category";
 
 export const SEED_CATEGORIES: Category[] = [
-  // Level 0 (Roots)
   {
     id: "cat_mep",
     name_ar: "الأعمال الكهروميكانيكية (MEP)",
@@ -26,8 +25,15 @@ export const SEED_CATEGORIES: Category[] = [
     createdAt: "2026-01-01T00:00:00.000Z",
     updatedAt: "2026-01-01T00:00:00.000Z",
   },
+  {
+    id: "cat_landscaping",
+    name_ar: "أعمال تنسيق المواقع والحدائق (Landscaping)",
+    name_en: "Landscaping & Site Development",
+    parentId: null,
+    createdAt: "2026-01-01T00:00:00.000Z",
+    updatedAt: "2026-01-01T00:00:00.000Z",
+  },
 
-  // Level 1
   {
     id: "cat_electrical",
     name_ar: "الأعمال الكهربائية وأنظمة الطاقة",
@@ -60,8 +66,15 @@ export const SEED_CATEGORIES: Category[] = [
     createdAt: "2026-01-01T00:00:00.000Z",
     updatedAt: "2026-01-01T00:00:00.000Z",
   },
+  {
+    id: "cat_insulation",
+    name_ar: "عزل الأسطح والمباني والوقاية الحرارية",
+    name_en: "Thermal & Moisture Protection / Insulation",
+    parentId: "cat_building_materials",
+    createdAt: "2026-01-01T00:00:00.000Z",
+    updatedAt: "2026-01-01T00:00:00.000Z",
+  },
 
-  // Level 2 (Deep nested)
   {
     id: "cat_electrical_panels",
     name_ar: "لوحات التوزيع وتمديدات الجهد المنخفض",
