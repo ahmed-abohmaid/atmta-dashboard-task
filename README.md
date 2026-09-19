@@ -6,7 +6,7 @@ Frontend technical task for ATMTA Ventures.
 
 ## Deliverables
 
-- **Source Code**: 
+- **Demo Link**: https://atmta-dashboard-task.abohmaid.workers.dev/ 
 - **Video Demo (Task Output)**: 
 - **Video Walkthrough (Source Code)**: 
 
