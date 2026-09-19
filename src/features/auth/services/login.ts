@@ -26,7 +26,14 @@ export async function login(credentials: LoginCredentials): Promise<AuthResponse
 
   const allRoles = useMockStore.getState().roles;
   const userRoles = allRoles.filter((r) => user.roles.includes(r.id));
-  const userPermissions = userRoles.flatMap((r) => r.permissions);
+  const userPermissions = [
+    ...userRoles.flatMap((r) => r.permissions),
+    ...(user.extraGrants ?? []),
+    ...(user.extraRevokes ?? []).map((permission) => ({
+      ...permission,
+      inverted: true,
+    })),
+  ];
 
   return {
     user,
