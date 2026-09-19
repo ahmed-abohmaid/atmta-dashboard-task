@@ -5,7 +5,7 @@ export function buildCategoryTree(categories: CategoryWithRelations[]): Category
 
   for (const cat of categories) {
     const parentKey = cat.parentId ?? "root";
-    (childrenByParent[parentKey] ??= []).push(cat);
+    (childrenByParent[parentKey] ??= []).push(cat); // {parentid: categories[]}
   }
 
   function buildBranch(parentId: string | null, depth: number): CategoryNode[] {
