@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateRoleInput, RoleWithUserCount } from "@/@types/role";
+import { Controller, useForm } from "react-hook-form";
 import { Permission } from "@/@types/permission";
+import { CreateRoleInput, RoleWithUserCount } from "@/@types/role";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,13 +15,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { InputField } from "@/components/fields/InputField";
-import {
-  roleSchema,
-  type RoleFormValues,
-} from "@/features/roles/schemas/roleSchema";
+import { PermissionMatrix } from "@/features/permissions/components/PermissionMatrix";
 import { useCreateRole } from "@/features/roles/hooks/useCreateRole";
 import { useUpdateRole } from "@/features/roles/hooks/useUpdateRole";
-import { PermissionMatrix } from "@/features/permissions/components/PermissionMatrix";
+import { roleSchema, type RoleFormValues } from "@/features/roles/schemas/roleSchema";
 
 interface RoleFormDialogProps {
   mode: "create" | "edit";
@@ -30,12 +27,7 @@ interface RoleFormDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function RoleFormDialog({
-  mode,
-  role,
-  open,
-  onOpenChange,
-}: RoleFormDialogProps) {
+export function RoleFormDialog({ mode, role, open, onOpenChange }: RoleFormDialogProps) {
   const isEdit = mode === "edit";
   const isSuperAdminRole = role?.id === "role_super_admin";
 
@@ -84,7 +76,7 @@ export function RoleFormDialog({
         { ...input, id: role.id },
         {
           onSuccess: () => onOpenChange(false),
-        },
+        }
       );
     } else {
       createMutate(input, {
@@ -95,12 +87,12 @@ export function RoleFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] flex flex-col p-0 overflow-hidden border-border/70 bg-card shadow-2xl">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border/50">
-          <DialogTitle className="text-lg font-bold tracking-tight text-foreground">
+      <DialogContent className="border-border/70 bg-card flex max-h-[90vh] flex-col overflow-hidden p-0 shadow-2xl sm:max-w-3xl">
+        <DialogHeader className="border-border/50 border-b px-6 pt-6 pb-4">
+          <DialogTitle className="text-foreground text-lg font-bold tracking-tight">
             {isEdit ? `تعديل الدور: ${role?.name}` : "إضافة دور جديد"}
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground mt-1 leading-relaxed">
+          <DialogDescription className="text-muted-foreground mt-1 text-xs leading-relaxed">
             {isEdit
               ? "تحديث بيانات ومسمى الدور وتعيين صلاحيات وحدات النظام."
               : "تحديد اسم الدور ومصفوفة الصلاحيات الممنوحة له."}
@@ -110,9 +102,9 @@ export function RoleFormDialog({
         <form
           id="role-form"
           onSubmit={handleSubmit(onSubmit)}
-          className="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-5"
+          className="flex flex-1 flex-col gap-5 overflow-y-auto px-6 py-5"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <InputField
               id="role-name"
               label="اسم الدور"
@@ -131,14 +123,12 @@ export function RoleFormDialog({
             />
           </div>
 
-          <div className="flex flex-col gap-2.5 pt-3 border-t border-border/50">
+          <div className="border-border/50 flex flex-col gap-2.5 border-t pt-3">
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-semibold text-foreground">
-                صلاحيات الوحدات
-              </h4>
+              <h4 className="text-foreground text-xs font-semibold">صلاحيات الوحدات</h4>
 
               {errors.permissions && (
-                <span className="text-[11px] font-medium text-destructive">
+                <span className="text-destructive text-[11px] font-medium">
                   {errors.permissions.message}
                 </span>
               )}
@@ -158,14 +148,14 @@ export function RoleFormDialog({
           </div>
         </form>
 
-        <DialogFooter className="m-0 px-6 py-3.5 border-t border-border/50 bg-secondary/20 flex flex-row items-center justify-end gap-3 rounded-b-xl">
+        <DialogFooter className="border-border/50 bg-secondary/20 m-0 flex flex-row items-center justify-end gap-3 rounded-b-xl border-t px-6 py-3.5">
           <Button
             type="button"
             variant="outline"
             size="sm"
             onClick={() => onOpenChange(false)}
             disabled={isPending}
-            className="text-xs h-9 px-4 cursor-pointer"
+            className="h-9 cursor-pointer px-4 text-xs"
           >
             إلغاء
           </Button>
@@ -174,7 +164,7 @@ export function RoleFormDialog({
             form="role-form"
             size="sm"
             isLoading={isPending}
-            className="text-xs h-9 px-5 cursor-pointer font-medium"
+            className="h-9 cursor-pointer px-5 text-xs font-medium"
           >
             {isEdit ? "حفظ التغييرات" : "إنشاء الدور"}
           </Button>

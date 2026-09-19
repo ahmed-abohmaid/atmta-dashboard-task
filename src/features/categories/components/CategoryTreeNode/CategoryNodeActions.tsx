@@ -1,13 +1,9 @@
 "use client";
 
-import { PlusIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import { PencilIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import { CategoryNode } from "@/@types/category";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { PermissionGate } from "@/features/permissions/components/PermissionGate";
 
 interface CategoryNodeActionsProps {
@@ -33,10 +29,7 @@ export function CategoryNodeActions({
         : "";
 
   return (
-    <div
-      className="flex items-center gap-1"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
       <PermissionGate action="create" subject="categories">
         <Button
           type="button"
@@ -44,7 +37,7 @@ export function CategoryNodeActions({
           size="icon-sm"
           onClick={onAddChild}
           title="إضافة تصنيف فرعي"
-          className="size-7 text-muted-foreground hover:text-primary hover:bg-secondary cursor-pointer"
+          className="text-muted-foreground hover:text-primary hover:bg-secondary size-7 cursor-pointer"
         >
           <PlusIcon className="size-3.5" />
         </Button>
@@ -57,7 +50,7 @@ export function CategoryNodeActions({
           size="icon-sm"
           onClick={onEdit}
           title="تعديل التصنيف"
-          className="size-7 text-muted-foreground hover:text-foreground hover:bg-secondary cursor-pointer"
+          className="text-muted-foreground hover:text-foreground hover:bg-secondary size-7 cursor-pointer"
         >
           <PencilIcon className="size-3.5" />
         </Button>
@@ -75,14 +68,14 @@ export function CategoryNodeActions({
                     size="icon-sm"
                     disabled
                     tabIndex={-1}
-                    className="size-7 text-muted-foreground/40 pointer-events-none opacity-50"
+                    className="text-muted-foreground/40 pointer-events-none size-7 opacity-50"
                   >
                     <Trash2Icon className="size-3.5" />
                   </Button>
                 </span>
               }
             />
-            <TooltipContent side="top" className="text-xs max-w-xs">
+            <TooltipContent side="top" className="max-w-xs text-xs">
               {deleteBlockedReason}
             </TooltipContent>
           </Tooltip>
@@ -93,7 +86,7 @@ export function CategoryNodeActions({
             size="icon-sm"
             onClick={onDelete}
             title="حذف التصنيف"
-            className="size-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10 cursor-pointer"
+            className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 size-7 cursor-pointer"
           >
             <Trash2Icon className="size-3.5" />
           </Button>

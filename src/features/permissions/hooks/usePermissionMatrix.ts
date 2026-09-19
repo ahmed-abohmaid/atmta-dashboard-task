@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useCallback } from "react";
-import { Permission } from "@/@types/permission";
+import { useCallback, useMemo } from "react";
 import { Module } from "@/@types/module";
+import { Permission } from "@/@types/permission";
 import { useModules } from "@/features/modules/hooks/useModules";
 import { usePermission } from "@/features/permissions/hooks/usePermission";
 import { buildGrantedSet } from "@/features/permissions/utils/matrixUtils";
@@ -48,7 +48,8 @@ export function usePermissionMatrix({
   }, [isSuperAdminRole, allGrantableActions, grantedSet]);
 
   const isAllSelected =
-    isSuperAdminRole || (allGrantableActions.length > 0 && selectedCount >= allGrantableActions.length);
+    isSuperAdminRole ||
+    (allGrantableActions.length > 0 && selectedCount >= allGrantableActions.length);
 
   const toggleAction = useCallback(
     (subject: string, action: string) => {
@@ -77,11 +78,7 @@ export function usePermissionMatrix({
       if (isRowDisabled) return;
 
       const withoutModule = value.filter((p) => p.subject !== module.id);
-      onChange(
-        selectAll
-          ? [...withoutModule, ...getGrantablePermissions(module)]
-          : withoutModule
-      );
+      onChange(selectAll ? [...withoutModule, ...getGrantablePermissions(module)] : withoutModule);
     },
     [isRowDisabled, value, getGrantablePermissions, onChange]
   );

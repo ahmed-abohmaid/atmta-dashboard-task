@@ -3,9 +3,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
 import { CreateModuleInput, Module } from "@/@types/module";
+import { useCustomMutation } from "@/hooks/useCustomMutation";
 import { MODULES_QUERY_KEYS } from "@/features/modules/consts/queryKeys";
 import { createModule } from "@/features/modules/services/createModule";
-import { useCustomMutation } from "@/hooks/useCustomMutation";
 
 export function useCreateModule() {
   const queryClient = useQueryClient();
@@ -14,7 +14,7 @@ export function useCreateModule() {
     mutationFn: (data: CreateModuleInput) => createModule(data),
     onSuccess: (newModule) => {
       queryClient.setQueryData<Module[]>(MODULES_QUERY_KEYS.list(), (old) =>
-        old ? [...old, newModule] : [newModule],
+        old ? [...old, newModule] : [newModule]
       );
 
       sileo.success({

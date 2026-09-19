@@ -1,9 +1,8 @@
 "use client";
 
-
 import { useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,18 +13,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { InputField } from "@/components/fields/InputField";
-import { CategorySelect } from "@/components/fields/CategorySelect";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { CategorySelect } from "@/components/fields/CategorySelect";
+import { InputField } from "@/components/fields/InputField";
 import { VendorWithRelations } from "@/features/vendors/@types/vendor";
-import {
-  vendorSchema,
-  VendorFormValues,
-} from "@/features/vendors/schemas/vendorSchema";
 import { useCreateVendor } from "@/features/vendors/hooks/useCreateVendor";
 import { useUpdateVendor } from "@/features/vendors/hooks/useUpdateVendor";
+import { VendorFormValues, vendorSchema } from "@/features/vendors/schemas/vendorSchema";
 
 interface VendorFormDialogProps {
   mode: "create" | "edit";
@@ -34,12 +30,7 @@ interface VendorFormDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function VendorFormDialog({
-  mode,
-  vendor,
-  open,
-  onOpenChange,
-}: VendorFormDialogProps) {
+export function VendorFormDialog({ mode, vendor, open, onOpenChange }: VendorFormDialogProps) {
   const isEdit = mode === "edit";
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -89,8 +80,8 @@ export function VendorFormDialog({
           err instanceof Error
             ? err.message
             : isEdit
-            ? "حدث خطأ أثناء تعديل بيانات المورد."
-            : "حدث خطأ أثناء إضافة المورد."
+              ? "حدث خطأ أثناء تعديل بيانات المورد."
+              : "حدث خطأ أثناء إضافة المورد."
         );
       },
     };
@@ -104,12 +95,12 @@ export function VendorFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] flex flex-col p-0 border-border/70 bg-card shadow-2xl">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border/50 shrink-0">
-          <DialogTitle className="text-lg font-bold tracking-tight text-foreground">
+      <DialogContent className="border-border/70 bg-card flex max-h-[90vh] flex-col p-0 shadow-2xl sm:max-w-3xl">
+        <DialogHeader className="border-border/50 shrink-0 border-b px-6 pt-6 pb-4">
+          <DialogTitle className="text-foreground text-lg font-bold tracking-tight">
             {isEdit ? "تعديل بيانات المورد" : "إضافة مورد جديد"}
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground mt-1">
+          <DialogDescription className="text-muted-foreground mt-1 text-xs">
             {isEdit
               ? "قم بتحديث بيانات المورد والسجل التجاري والتصنيف المرتبط."
               : "أدخل بيانات المقاول أو المورد الهندسي والسجل التجاري ورقم التواصل."}
@@ -118,16 +109,16 @@ export function VendorFormDialog({
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col flex-1 min-h-0 overflow-hidden"
+          className="flex min-h-0 flex-1 flex-col overflow-hidden"
         >
-          <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4.5">
+          <div className="flex flex-1 flex-col gap-4.5 overflow-y-auto p-6">
             {serverError && (
-              <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs text-destructive">
+              <div className="border-destructive/30 bg-destructive/10 text-destructive rounded-lg border p-3 text-xs">
                 {serverError}
               </div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <InputField
                 id="name_ar"
                 label="اسم المورد بالعربية *"
@@ -147,7 +138,7 @@ export function VendorFormDialog({
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <InputField
                 id="cr_number"
                 label="رقم السجل التجاري (10 أرقام) *"
@@ -186,7 +177,7 @@ export function VendorFormDialog({
             />
 
             <div className="flex items-start gap-3">
-              <div className="flex-1 min-w-0">
+              <div className="min-w-0 flex-1">
                 <InputField
                   id="logo"
                   label="رابط شعار المورد (اختياري)"
@@ -197,12 +188,12 @@ export function VendorFormDialog({
                 />
               </div>
               {watchedLogo && (
-                <div className="flex flex-col items-center gap-1 shrink-0 pt-6">
-                  <Avatar className="size-10 rounded-xl border border-border/80 bg-muted/40">
+                <div className="flex shrink-0 flex-col items-center gap-1 pt-6">
+                  <Avatar className="border-border/80 bg-muted/40 size-10 rounded-xl border">
                     <AvatarImage
                       src={watchedLogo}
                       alt="معاينة الشعار"
-                      className="object-cover rounded-xl"
+                      className="rounded-xl object-cover"
                     />
                     <AvatarFallback className="text-xs">شعار</AvatarFallback>
                   </Avatar>
@@ -211,7 +202,7 @@ export function VendorFormDialog({
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="about" className="text-xs font-medium text-foreground">
+              <Label htmlFor="about" className="text-foreground text-xs font-medium">
                 نبذة عن المورد *
               </Label>
               <Textarea
@@ -223,18 +214,16 @@ export function VendorFormDialog({
                 {...register("about")}
               />
               {errors.about?.message && (
-                <span className="text-[11px] font-normal text-destructive">
+                <span className="text-destructive text-[11px] font-normal">
                   {errors.about.message}
                 </span>
               )}
             </div>
 
-            <div className="flex items-center justify-between rounded-xl border border-border/70 bg-muted/20 p-3.5">
+            <div className="border-border/70 bg-muted/20 flex items-center justify-between rounded-xl border p-3.5">
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs font-semibold text-foreground">
-                  حالة تفعيل المورد
-                </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-foreground text-xs font-semibold">حالة تفعيل المورد</span>
+                <span className="text-muted-foreground text-[11px]">
                   المورد النشط يظهر في المشاريع وقوائم الإسناد المعتمدة
                 </span>
               </div>
@@ -244,9 +233,7 @@ export function VendorFormDialog({
                 render={({ field }) => (
                   <Switch
                     checked={field.value === "active"}
-                    onCheckedChange={(checked) =>
-                      field.onChange(checked ? "active" : "inactive")
-                    }
+                    onCheckedChange={(checked) => field.onChange(checked ? "active" : "inactive")}
                     disabled={isPending}
                   />
                 )}
@@ -254,14 +241,14 @@ export function VendorFormDialog({
             </div>
           </div>
 
-          <DialogFooter className="px-6 py-4 border-t border-border/50 shrink-0 bg-muted/10 -mx-0 -mb-0">
+          <DialogFooter className="border-border/50 bg-muted/10 -mx-0 -mb-0 shrink-0 border-t px-6 py-4">
             <Button
               type="button"
               variant="ghost"
               size="sm"
               onClick={() => onOpenChange(false)}
               disabled={isPending}
-              className="text-xs cursor-pointer"
+              className="cursor-pointer text-xs"
             >
               إلغاء
             </Button>
@@ -270,7 +257,7 @@ export function VendorFormDialog({
               size="sm"
               isLoading={isPending}
               disabled={isPending}
-              className="text-xs cursor-pointer font-medium"
+              className="cursor-pointer text-xs font-medium"
             >
               {isEdit ? "حفظ التعديلات" : "إضافة المورد"}
             </Button>

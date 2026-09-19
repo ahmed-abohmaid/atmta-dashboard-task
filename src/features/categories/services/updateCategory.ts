@@ -1,6 +1,7 @@
 import { Category, UpdateCategoryInput } from "@/@types/category";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
+
 export async function updateCategory(input: UpdateCategoryInput): Promise<Category> {
   await delay(250);
 

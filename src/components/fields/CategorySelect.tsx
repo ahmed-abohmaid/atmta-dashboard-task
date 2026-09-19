@@ -1,8 +1,8 @@
 "use client";
 
 import { useId } from "react";
+import { cn } from "cn";
 import { CategorySelectOption } from "@/@types/category";
-import { useCategoryLookup } from "@/features/categories/hooks/useCategoryLookup";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "cn";
+import { useCategoryLookup } from "@/features/categories/hooks/useCategoryLookup";
 
 export interface CategorySelectProps {
   id?: string;
@@ -59,10 +59,7 @@ export function CategorySelect({
   const options = externalOptions ?? fetchedOptions;
   const isDisabled = disabled || (!externalOptions && isLoading);
 
-  const selectValue =
-    rootOption && (value === null || value === "")
-      ? ROOT_VALUE
-      : value || "";
+  const selectValue = rootOption && (value === null || value === "") ? ROOT_VALUE : value || "";
 
   const handleValueChange = (val: string | null) => {
     if (!val || (rootOption && val === ROOT_VALUE)) {
@@ -75,16 +72,12 @@ export function CategorySelect({
   return (
     <div className={cn("flex flex-col gap-1.5", containerClassName)}>
       {label && (
-        <Label htmlFor={id} className="text-xs font-medium text-foreground">
+        <Label htmlFor={id} className="text-foreground text-xs font-medium">
           {label}
         </Label>
       )}
 
-      <Select
-        value={selectValue}
-        onValueChange={handleValueChange}
-        disabled={isDisabled}
-      >
+      <Select value={selectValue} onValueChange={handleValueChange} disabled={isDisabled}>
         <SelectTrigger id={id} className={cn("w-full text-xs", className)}>
           <SelectValue placeholder={placeholder}>
             {(val: string | null) => {
@@ -101,10 +94,7 @@ export function CategorySelect({
         <SelectContent className="max-h-64" align="start">
           {rootOption && (
             <>
-              <SelectItem
-                value={ROOT_VALUE}
-                className="text-xs font-medium py-2.5"
-              >
+              <SelectItem value={ROOT_VALUE} className="py-2.5 text-xs font-medium">
                 {rootOption.label}
               </SelectItem>
               <SelectSeparator />
@@ -116,7 +106,7 @@ export function CategorySelect({
               key={opt.id}
               value={opt.id}
               disabled={opt.disabled}
-              className="text-xs py-2"
+              className="py-2 text-xs"
               style={{
                 paddingInlineStart: `${14 + opt.depth * 14}px`,
               }}
@@ -127,16 +117,10 @@ export function CategorySelect({
         </SelectContent>
       </Select>
 
-      {error && (
-        <span className="text-[11px] font-normal text-destructive">
-          {error}
-        </span>
-      )}
+      {error && <span className="text-destructive text-[11px] font-normal">{error}</span>}
 
       {!error && helperText && (
-        <span className="text-[11px] font-normal text-muted-foreground">
-          {helperText}
-        </span>
+        <span className="text-muted-foreground text-[11px] font-normal">{helperText}</span>
       )}
     </div>
   );

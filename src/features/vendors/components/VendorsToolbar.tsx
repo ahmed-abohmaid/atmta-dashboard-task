@@ -2,9 +2,9 @@
 
 import { RotateCcwIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DateRangeFilter } from "@/components/DateRangeFilter";
 import { SearchInput } from "@/components/SearchInput";
 import { SelectFilter } from "@/components/SelectFilter";
-import { DateRangeFilter } from "@/components/DateRangeFilter";
 import { useCategoryLookup } from "@/features/categories/hooks/useCategoryLookup";
 
 const STATUS_OPTIONS = [
@@ -49,9 +49,9 @@ export function VendorsToolbar({
   }));
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-border/80 bg-card/60 p-3.5 shadow-xs">
-      <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2.5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 flex-1">
+    <div className="border-border/80 bg-card/60 flex flex-col gap-3 rounded-xl border p-3.5 shadow-xs">
+      <div className="flex flex-col items-stretch gap-2.5 lg:flex-row lg:items-center">
+        <div className="grid flex-1 grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <SearchInput
               placeholder="بحث باسم المورد (عربي/إنجليزي) أو السجل التجاري..."
@@ -105,7 +105,7 @@ export function VendorsToolbar({
             size="sm"
             onClick={onResetFilters}
             disabled={disabled}
-            className="h-9 px-3 text-xs text-muted-foreground hover:text-foreground shrink-0 cursor-pointer gap-1.5 self-end lg:self-auto"
+            className="text-muted-foreground hover:text-foreground h-9 shrink-0 cursor-pointer gap-1.5 self-end px-3 text-xs lg:self-auto"
           >
             <RotateCcwIcon className="size-3.5" />
             <span>إعادة ضبط</span>

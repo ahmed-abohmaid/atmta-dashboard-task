@@ -1,7 +1,7 @@
 "use client";
 
-import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, useWatch } from "react-hook-form";
 import { CreateModuleInput, Module } from "@/@types/module";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,11 +12,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { InputField } from "@/components/fields/InputField";
 import { IconPicker } from "@/components/fields/IconPicker";
-import { moduleSchema, type ModuleFormValues } from "@/features/modules/schemas/moduleSchema";
+import { InputField } from "@/components/fields/InputField";
 import { useCreateModule } from "@/features/modules/hooks/useCreateModule";
 import { useUpdateModule } from "@/features/modules/hooks/useUpdateModule";
+import { moduleSchema, type ModuleFormValues } from "@/features/modules/schemas/moduleSchema";
 
 interface ModuleFormDialogProps {
   mode: "create" | "edit";
@@ -34,12 +34,7 @@ const ACTION_PRESETS = [
   { id: "print", labelAr: "طباعة" },
 ];
 
-export function ModuleFormDialog({
-  mode,
-  module,
-  open,
-  onOpenChange,
-}: ModuleFormDialogProps) {
+export function ModuleFormDialog({ mode, module, open, onOpenChange }: ModuleFormDialogProps) {
   const isEdit = mode === "edit";
 
   const { mutate: createMutate, isPending: isCreatePending } = useCreateModule();
@@ -116,12 +111,12 @@ export function ModuleFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto p-6">
-        <DialogHeader className="gap-1.5 mb-1">
-          <DialogTitle className="text-lg font-bold tracking-tight text-foreground">
+      <DialogContent className="max-h-[90vh] overflow-y-auto p-6 sm:max-w-xl">
+        <DialogHeader className="mb-1 gap-1.5">
+          <DialogTitle className="text-foreground text-lg font-bold tracking-tight">
             {isEdit ? "تعديل الوحدة" : "إضافة وحدة جديدة"}
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground leading-relaxed">
+          <DialogDescription className="text-muted-foreground text-xs leading-relaxed">
             {isEdit
               ? "تحديث بيانات ومسميات وإجراءات الوحدة في النظام."
               : "تسجيل وحدة جديدة وإجراءاتها المخصصة وحفظها في قاعدة البيانات الحية."}
@@ -129,7 +124,7 @@ export function ModuleFormDialog({
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <InputField
               id="labelAr"
               label="الاسم (بالعربية)"
@@ -150,9 +145,7 @@ export function ModuleFormDialog({
 
           <IconPicker
             value={selectedIcon}
-            onChange={(newIcon) =>
-              setValue("icon", newIcon, { shouldValidate: true })
-            }
+            onChange={(newIcon) => setValue("icon", newIcon, { shouldValidate: true })}
             label="أيقونة الوحدة"
             error={errors.icon?.message}
           />
@@ -174,12 +167,10 @@ export function ModuleFormDialog({
             {...register("descriptionEn")}
           />
 
-          <div className="rounded-xl border border-border/70 bg-secondary/15 p-4 flex flex-col gap-3">
+          <div className="border-border/70 bg-secondary/15 flex flex-col gap-3 rounded-xl border p-4">
             <div className="flex flex-col gap-1">
-              <span className="text-xs font-semibold text-foreground">
-                إجراء مخصص
-              </span>
-              <p className="text-[11px] text-muted-foreground">
+              <span className="text-foreground text-xs font-semibold">إجراء مخصص</span>
+              <p className="text-muted-foreground text-[11px]">
                 اختر إجراءً سريعاً أو اكتب إجراءً خاصاً بالوحدة:
               </p>
             </div>
@@ -190,17 +181,17 @@ export function ModuleFormDialog({
                   key={preset.id}
                   type="button"
                   onClick={() => handleApplyPreset(preset)}
-                  className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-card px-2 py-1 text-[11px] text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors cursor-pointer"
+                  className="border-border/60 bg-card text-muted-foreground hover:bg-secondary hover:text-foreground inline-flex cursor-pointer items-center gap-1 rounded-md border px-2 py-1 text-[11px] transition-colors"
                 >
                   <span>{preset.labelAr}</span>
-                  <span className="font-mono text-[9px] text-muted-foreground/70" dir="ltr">
+                  <span className="text-muted-foreground/70 font-mono text-[9px]" dir="ltr">
                     ({preset.id})
                   </span>
                 </button>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+            <div className="mt-1 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <InputField
                 id="customActionId"
                 label="معرف الإجراء (slug)"
@@ -220,14 +211,14 @@ export function ModuleFormDialog({
             </div>
           </div>
 
-          <DialogFooter className="mt-4 pt-3 border-t border-border/50 flex flex-row items-center justify-end gap-3">
+          <DialogFooter className="border-border/50 mt-4 flex flex-row items-center justify-end gap-3 border-t pt-3">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => onOpenChange(false)}
               disabled={isPending}
-              className="text-xs h-9 px-4 cursor-pointer"
+              className="h-9 cursor-pointer px-4 text-xs"
             >
               إلغاء
             </Button>
@@ -235,7 +226,7 @@ export function ModuleFormDialog({
               type="submit"
               size="sm"
               isLoading={isPending}
-              className="text-xs h-9 px-5 cursor-pointer font-medium"
+              className="h-9 cursor-pointer px-5 text-xs font-medium"
             >
               {isEdit ? "حفظ التعديلات" : "إضافة الوحدة"}
             </Button>

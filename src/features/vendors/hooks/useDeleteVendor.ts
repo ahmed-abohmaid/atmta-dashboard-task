@@ -1,8 +1,8 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { VENDORS_QUERY_KEYS } from "@/features/vendors/consts/queryKeys";
 import { CATEGORIES_QUERY_KEYS } from "@/features/categories/consts/queryKeys";
+import { VENDORS_QUERY_KEYS } from "@/features/vendors/consts/queryKeys";
 import { deleteVendor } from "@/features/vendors/services/deleteVendor";
 
 export function useDeleteVendor() {

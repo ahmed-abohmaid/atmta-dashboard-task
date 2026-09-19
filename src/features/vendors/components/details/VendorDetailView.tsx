@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useVendor } from "@/features/vendors/hooks/useVendor";
+import { VendorDetailAudit } from "@/features/vendors/components/details/VendorDetailAudit";
+import { VendorDetailError } from "@/features/vendors/components/details/VendorDetailError";
 import { VendorDetailHeader } from "@/features/vendors/components/details/VendorDetailHeader";
 import { VendorDetailInfo } from "@/features/vendors/components/details/VendorDetailInfo";
-import { VendorDetailAudit } from "@/features/vendors/components/details/VendorDetailAudit";
 import { VendorDetailSkeleton } from "@/features/vendors/components/details/VendorDetailSkeleton";
-import { VendorDetailError } from "@/features/vendors/components/details/VendorDetailError";
-import { VendorFormDialog } from "@/features/vendors/components/dialogs/VendorFormDialog";
 import { DeleteVendorDialog } from "@/features/vendors/components/dialogs/DeleteVendorDialog";
+import { VendorFormDialog } from "@/features/vendors/components/dialogs/VendorFormDialog";
+import { useVendor } from "@/features/vendors/hooks/useVendor";
 
 interface VendorDetailViewProps {
   vendorId: string;
@@ -38,7 +38,7 @@ export function VendorDetailView({ vendorId }: VendorDetailViewProps) {
         onDelete={() => setIsDeleteOpen(true)}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <VendorDetailInfo vendor={vendor} />
         </div>

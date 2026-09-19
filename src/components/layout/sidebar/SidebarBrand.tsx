@@ -9,14 +9,14 @@ export function SidebarBrand() {
   const isCollapsed = state === "collapsed";
 
   return (
-    <SidebarHeader className="border-b border-sidebar-border px-3 py-3 group-data-[collapsible=icon]:p-2">
+    <SidebarHeader className="border-sidebar-border border-b px-3 py-3 group-data-[collapsible=icon]:p-2">
       <Link
         href="/"
-        className="flex items-center justify-center rounded-lg p-1 transition-colors duration-150 hover:bg-sidebar-accent/40 group-data-[collapsible=icon]:p-0"
+        className="hover:bg-sidebar-accent/40 flex items-center justify-center rounded-lg p-1 transition-colors duration-150 group-data-[collapsible=icon]:p-0"
         title="منصة أتمتة"
       >
         {isCollapsed ? (
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-card border border-border/80 p-1 shadow-2xs">
+          <div className="bg-card border-border/80 flex size-8 shrink-0 items-center justify-center rounded-lg border p-1 shadow-2xs">
             <Image
               src="/logo/atmta-logo.png"
               alt="شعار منصة أتمتة"
@@ -28,7 +28,7 @@ export function SidebarBrand() {
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center w-full px-2 py-1">
+          <div className="flex w-full items-center justify-center px-2 py-1">
             <Image
               src="/logo/atmta-logo.png"
               alt="شعار منصة أتمتة"

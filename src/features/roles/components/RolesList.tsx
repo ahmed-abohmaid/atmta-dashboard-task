@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { RoleWithUserCount } from "@/@types/role";
-import { RoleCard } from "@/features/roles/components/RoleCard";
 import { SearchInput } from "@/components/SearchInput";
+import { RoleCard } from "@/features/roles/components/RoleCard";
 
 interface RolesListProps {
   roles: RoleWithUserCount[];
@@ -26,19 +26,19 @@ export function RolesList({ roles }: RolesListProps) {
           placeholder="البحث في الأدوار..."
           containerClassName="max-w-xs"
         />
-        <span className="text-xs text-foreground/80 shrink-0 font-medium">
+        <span className="text-foreground/80 shrink-0 text-xs font-medium">
           {filteredRoles.length} من {roles.length} دور
         </span>
       </div>
 
       {filteredRoles.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-border/80 p-8 text-center bg-card/40">
-          <p className="text-xs text-muted-foreground">
+        <div className="border-border/80 bg-card/40 rounded-xl border border-dashed p-8 text-center">
+          <p className="text-muted-foreground text-xs">
             لا توجد أدوار مطابقة لبحثك &quot;{search}&quot;
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredRoles.map((role) => (
             <RoleCard key={role.id} role={role} />
           ))}

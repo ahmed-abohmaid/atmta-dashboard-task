@@ -1,6 +1,6 @@
+import { delay } from "@/utils/delay";
 import { AuthResponse, LoginCredentials, SessionPayload } from "@/features/auth/@types/auth";
 import { useMockStore } from "@/mock/store";
-import { delay } from "@/utils/delay";
 
 export async function login(credentials: LoginCredentials): Promise<AuthResponse> {
   await delay(300);
@@ -8,9 +8,7 @@ export async function login(credentials: LoginCredentials): Promise<AuthResponse
   const users = useMockStore.getState().users;
   const normalizedEmail = credentials.email.trim().toLowerCase();
 
-  const user = users.find(
-    (u) => u.email.trim().toLowerCase() === normalizedEmail
-  );
+  const user = users.find((u) => u.email.trim().toLowerCase() === normalizedEmail);
 
   if (!user || user.password !== credentials.password) {
     throw new Error("البريد الإلكتروني أو كلمة المرور غير صحيحة");

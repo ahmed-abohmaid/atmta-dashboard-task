@@ -4,9 +4,7 @@ interface ModuleDetailPageProps {
   params: Promise<{ moduleId: string }>;
 }
 
-export default async function ModuleDetailPage({
-  params,
-}: ModuleDetailPageProps) {
+export default async function ModuleDetailPage({ params }: ModuleDetailPageProps) {
   const { moduleId } = await params;
   return <ModuleDetailView moduleId={moduleId} />;
 }

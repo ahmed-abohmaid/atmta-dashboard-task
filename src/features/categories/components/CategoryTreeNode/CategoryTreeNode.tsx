@@ -1,11 +1,7 @@
 "use client";
 
 import { CategoryNode } from "@/@types/category";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionContent,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem } from "@/components/ui/accordion";
 import { CategoryNodeRow } from "@/features/categories/components/CategoryTreeNode/CategoryNodeRow";
 
 interface CategoryTreeNodeProps {
@@ -53,7 +49,7 @@ export function CategoryTreeNode({
 
           {hasChildren && (
             <AccordionContent className="pt-2 pb-0">
-              <div className="ms-2.5 ps-2.5 sm:ms-4 sm:ps-3.5 border-s-2 border-border/40 hover:border-primary/30 transition-colors flex flex-col gap-2">
+              <div className="border-border/40 hover:border-primary/30 ms-2.5 flex flex-col gap-2 border-s-2 ps-2.5 transition-colors sm:ms-4 sm:ps-3.5">
                 {node.children.map((child) => (
                   <CategoryTreeNode
                     key={child.id}

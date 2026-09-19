@@ -1,9 +1,9 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CATEGORIES_QUERY_KEYS } from "@/features/categories/consts/queryKeys";
 import { CreateVendorInput } from "@/features/vendors/@types/vendor";
 import { VENDORS_QUERY_KEYS } from "@/features/vendors/consts/queryKeys";
-import { CATEGORIES_QUERY_KEYS } from "@/features/categories/consts/queryKeys";
 import { createVendor } from "@/features/vendors/services/createVendor";
 
 export function useCreateVendor() {

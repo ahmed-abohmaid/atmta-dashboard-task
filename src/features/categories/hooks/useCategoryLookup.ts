@@ -1,9 +1,9 @@
 "use client";
 
+import { CategorySelectOption } from "@/@types/category";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { CATEGORIES_QUERY_KEYS } from "@/features/categories/consts/queryKeys";
 import { getCategoryLookup } from "@/features/categories/services/getCategoryLookup";
-import { CategorySelectOption } from "@/@types/category";
 
 export function useCategoryLookup(excludeId?: string) {
   return useCustomQuery<CategorySelectOption[]>({

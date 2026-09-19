@@ -2,12 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { MoreHorizontalIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
-import {
-  MoreHorizontalIcon,
-  PencilIcon,
-  Trash2Icon,
-} from "lucide-react";
 import { Module } from "@/@types/module";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,8 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ModuleFormDialog } from "@/features/modules/components/dialogs/ModuleFormDialog";
 import { DeleteModuleDialog } from "@/features/modules/components/dialogs/DeleteModuleDialog";
+import { ModuleFormDialog } from "@/features/modules/components/dialogs/ModuleFormDialog";
 import { usePermission } from "@/features/permissions/hooks/usePermission";
 
 interface ModuleCardProps {
@@ -39,22 +35,19 @@ export function ModuleCard({ module }: ModuleCardProps) {
 
   return (
     <>
-      <div className="group relative flex flex-col justify-between rounded-xl border border-border/70 bg-card p-5 transition-colors duration-150 hover:bg-secondary/15">
+      <div className="group border-border/70 bg-card hover:bg-secondary/15 relative flex flex-col justify-between rounded-xl border p-5 transition-colors duration-150">
         <div className="flex flex-col gap-3">
           <div className="flex items-start justify-between gap-3">
             <Link
               href={`/modules/${module.id}`}
-              className="group/title flex items-center gap-3 min-w-0 cursor-pointer"
+              className="group/title flex min-w-0 cursor-pointer items-center gap-3"
             >
-              <div className="flex size-9.5 shrink-0 items-center justify-center rounded-lg bg-secondary/80 text-primary border border-border/40 group-hover/title:bg-primary/15 transition-colors duration-150">
-                <DynamicIcon
-                  name={(module.icon as IconName) ?? "layout-grid"}
-                  className="size-5"
-                />
+              <div className="bg-secondary/80 text-primary border-border/40 group-hover/title:bg-primary/15 flex size-9.5 shrink-0 items-center justify-center rounded-lg border transition-colors duration-150">
+                <DynamicIcon name={(module.icon as IconName) ?? "layout-grid"} className="size-5" />
               </div>
 
-              <div className="flex flex-col min-w-0 text-start">
-                <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover/title:text-primary transition-colors duration-150 truncate">
+              <div className="flex min-w-0 flex-col text-start">
+                <h3 className="text-foreground group-hover/title:text-primary truncate text-sm font-semibold transition-colors duration-150 sm:text-base">
                   {module.label.ar}
                 </h3>
               </div>
@@ -67,7 +60,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
                     <Button
                       variant="ghost"
                       size="icon-xs"
-                      className="size-7 text-muted-foreground hover:text-foreground shrink-0"
+                      className="text-muted-foreground hover:text-foreground size-7 shrink-0"
                       aria-label="خيارات الوحدة"
                     />
                   }
@@ -78,9 +71,9 @@ export function ModuleCard({ module }: ModuleCardProps) {
                   {canUpdate && (
                     <DropdownMenuItem
                       onClick={() => setIsEditOpen(true)}
-                      className="gap-2 cursor-pointer text-xs"
+                      className="cursor-pointer gap-2 text-xs"
                     >
-                      <PencilIcon className="size-3.5 text-muted-foreground" />
+                      <PencilIcon className="text-muted-foreground size-3.5" />
                       <span>تعديل</span>
                     </DropdownMenuItem>
                   )}
@@ -89,7 +82,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
                       {canUpdate && <DropdownMenuSeparator />}
                       <DropdownMenuItem
                         onClick={() => setIsDeleteOpen(true)}
-                        className="gap-2 cursor-pointer text-destructive focus:text-destructive text-xs"
+                        className="text-destructive focus:text-destructive cursor-pointer gap-2 text-xs"
                       >
                         <Trash2Icon className="size-3.5" />
                         <span>حذف</span>
@@ -102,18 +95,16 @@ export function ModuleCard({ module }: ModuleCardProps) {
           </div>
 
           {module.description?.ar && (
-            <p className="text-xs text-muted-foreground/90 leading-relaxed line-clamp-2 min-h-[2.25rem]">
+            <p className="text-muted-foreground/90 line-clamp-2 min-h-[2.25rem] text-xs leading-relaxed">
               {module.description.ar}
             </p>
           )}
         </div>
 
-        <div className="mt-4 pt-3.5 border-t border-border/50 flex flex-col gap-2">
+        <div className="border-border/50 mt-4 flex flex-col gap-2 border-t pt-3.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-medium text-muted-foreground">
-              الإجراءات المعلنة
-            </span>
-            <span className="text-[11px] font-mono text-muted-foreground/70">
+            <span className="text-muted-foreground font-medium">الإجراءات المعلنة</span>
+            <span className="text-muted-foreground/70 font-mono text-[11px]">
               {module.actions.length} إجراء
             </span>
           </div>
@@ -123,7 +114,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
               <Badge
                 key={act.id}
                 variant="secondary"
-                className="text-xs font-normal h-6.5 px-2 rounded-md bg-secondary/60 text-muted-foreground border-transparent"
+                className="bg-secondary/60 text-muted-foreground h-6.5 rounded-md border-transparent px-2 text-xs font-normal"
               >
                 {act.label.ar}
               </Badge>
@@ -133,7 +124,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
               <Badge
                 key={act.id}
                 variant="outline"
-                className="text-xs font-medium h-6.5 px-2.5 rounded-md border-primary/30 bg-primary/10 text-primary"
+                className="border-primary/30 bg-primary/10 text-primary h-6.5 rounded-md px-2.5 text-xs font-medium"
               >
                 {act.label.ar}
               </Badge>
@@ -152,11 +143,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
       )}
 
       {isDeleteOpen && (
-        <DeleteModuleDialog
-          module={module}
-          open={isDeleteOpen}
-          onOpenChange={setIsDeleteOpen}
-        />
+        <DeleteModuleDialog module={module} open={isDeleteOpen} onOpenChange={setIsDeleteOpen} />
       )}
     </>
   );

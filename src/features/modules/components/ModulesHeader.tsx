@@ -25,7 +25,7 @@ export function ModulesHeader() {
             <Button
               size="sm"
               onClick={() => setIsCreateOpen(true)}
-              className="gap-2 text-xs cursor-pointer"
+              className="cursor-pointer gap-2 text-xs"
             >
               <PlusIcon className="size-4" />
               <span>إضافة وحدة جديدة</span>
@@ -35,11 +35,7 @@ export function ModulesHeader() {
       />
 
       {isCreateOpen && (
-        <ModuleFormDialog
-          mode="create"
-          open={isCreateOpen}
-          onOpenChange={setIsCreateOpen}
-        />
+        <ModuleFormDialog mode="create" open={isCreateOpen} onOpenChange={setIsCreateOpen} />
       )}
     </>
   );

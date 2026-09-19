@@ -7,7 +7,8 @@ export const SEED_USERS: User[] = [
     email: "admin@atmta.test",
     password: "admin123",
     phone: "+966501234567",
-    photo: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=150&auto=format&fit=crop&q=80",
+    photo:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=150&auto=format&fit=crop&q=80",
     status: "active",
     roles: ["role_super_admin"],
     extraGrants: [],
@@ -20,7 +21,8 @@ export const SEED_USERS: User[] = [
     email: "manager@atmta.test",
     password: "manager123",
     phone: "+966505554433",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+    photo:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
     status: "active",
     roles: ["role_manager"],
     extraGrants: [],
@@ -33,12 +35,11 @@ export const SEED_USERS: User[] = [
     email: "vendors@atmta.test",
     password: "vendor123",
     phone: "+966559876543",
-    photo: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=150&auto=format&fit=crop&q=80",
+    photo:
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=150&auto=format&fit=crop&q=80",
     status: "active",
     roles: ["role_employee"],
-    extraGrants: [
-      { action: "export", subject: "vendors" },
-    ],
+    extraGrants: [{ action: "export", subject: "vendors" }],
     createdAt: "2026-01-02T09:30:00.000Z",
     updatedAt: "2026-01-02T09:30:00.000Z",
   },
@@ -48,7 +49,8 @@ export const SEED_USERS: User[] = [
     email: "viewer@atmta.test",
     password: "viewer123",
     phone: "+966543210987",
-    photo: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=150&auto=format&fit=crop&q=80",
+    photo:
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?w=150&auto=format&fit=crop&q=80",
     status: "active",
     roles: ["role_viewer"],
     extraGrants: [],
@@ -61,7 +63,8 @@ export const SEED_USERS: User[] = [
     email: "novendor@atmta.test",
     password: "novendor123",
     phone: "+966561122334",
-    photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&auto=format&fit=crop&q=80",
+    photo:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&auto=format&fit=crop&q=80",
     status: "active",
     roles: [],
     extraGrants: [

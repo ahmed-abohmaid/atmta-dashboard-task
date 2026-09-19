@@ -1,5 +1,5 @@
-import { Permission } from "@/@types/permission";
 import { Module } from "@/@types/module";
+import { Permission } from "@/@types/permission";
 
 export function buildGrantedSet(
   value: Permission[],

@@ -1,12 +1,9 @@
-import { createMongoAbility, AbilityBuilder } from "@casl/ability";
+import { AbilityBuilder, createMongoAbility } from "@casl/ability";
 import { AppAbility } from "@/@types/permission";
 import { Role } from "@/@types/role";
 import { User } from "@/@types/user";
 
-export function defineAbilityForUser(
-  user: User | null,
-  roles: Role[]
-): AppAbility {
+export function defineAbilityForUser(user: User | null, roles: Role[]): AppAbility {
   const { can, cannot, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
 
   if (!user || user.status === "inactive") {

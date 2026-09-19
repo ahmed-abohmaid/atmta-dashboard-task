@@ -22,17 +22,12 @@ export function usePermission() {
     staleTime: Infinity,
   });
 
-  const ability = useMemo(
-    () => defineAbilityForUser(user, roles ?? []),
-    [user, roles]
-  );
+  const ability = useMemo(() => defineAbilityForUser(user, roles ?? []), [user, roles]);
 
   return {
     ability,
-    can: (action: AppAction, subject: AppSubject) =>
-      Boolean(ability?.can(action, subject)),
-    cannot: (action: AppAction, subject: AppSubject) =>
-      Boolean(ability?.cannot(action, subject)),
+    can: (action: AppAction, subject: AppSubject) => Boolean(ability?.can(action, subject)),
+    cannot: (action: AppAction, subject: AppSubject) => Boolean(ability?.cannot(action, subject)),
     roles: roles ?? [],
     isSuperAdmin: Boolean(ability?.can("manage", "all")),
     isLoading: isAuthLoading || isRolesLoading,

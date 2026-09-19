@@ -3,8 +3,8 @@ import { LoginForm } from "@/features/auth/components/LoginForm";
 
 export function AuthCard() {
   return (
-    <div className="w-full max-w-lg md:max-w-xl rounded-2xl border border-border/70 bg-card p-6 sm:p-8 md:p-9 shadow-xs">
-      <div className="flex flex-col items-center text-center mb-6">
+    <div className="border-border/70 bg-card w-full max-w-lg rounded-2xl border p-6 shadow-xs sm:p-8 md:max-w-xl md:p-9">
+      <div className="mb-6 flex flex-col items-center text-center">
         <div className="mb-5">
           <Image
             src="/logo/atmta-logo.png"
@@ -16,10 +16,8 @@ export function AuthCard() {
             priority
           />
         </div>
-        <h1 className="text-xl font-bold tracking-tight text-foreground">
-          تسجيل الدخول
-        </h1>
-        <p className="text-xs sm:text-sm font-normal text-muted-foreground mt-1.5">
+        <h1 className="text-foreground text-xl font-bold tracking-tight">تسجيل الدخول</h1>
+        <p className="text-muted-foreground mt-1.5 text-xs font-normal sm:text-sm">
           أدخل بيانات حسابك للوصول إلى لوحة تحكم منصة أتمتة
         </p>
       </div>

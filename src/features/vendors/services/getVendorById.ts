@@ -1,11 +1,9 @@
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
 import { VendorWithRelations } from "@/features/vendors/@types/vendor";
 import { getCategoryBreadcrumb } from "@/features/vendors/services/getVendors";
+import { useMockStore } from "@/mock/store";
 
-export async function getVendorById(
-  id: string
-): Promise<VendorWithRelations | null> {
+export async function getVendorById(id: string): Promise<VendorWithRelations | null> {
   await delay(150);
 
   const { vendors, categories, users } = useMockStore.getState();

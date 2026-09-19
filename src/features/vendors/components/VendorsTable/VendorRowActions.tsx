@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { EyeIcon, MoreHorizontalIcon, PencilIcon, Trash2Icon } from "lucide-react";
-import { VendorWithRelations } from "@/features/vendors/@types/vendor";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PermissionGate } from "@/features/permissions/components/PermissionGate";
+import { VendorWithRelations } from "@/features/vendors/@types/vendor";
 
 interface VendorRowActionsProps {
   vendor: VendorWithRelations;
@@ -19,11 +19,7 @@ interface VendorRowActionsProps {
   onDelete: (vendor: VendorWithRelations) => void;
 }
 
-export function VendorRowActions({
-  vendor,
-  onEdit,
-  onDelete,
-}: VendorRowActionsProps) {
+export function VendorRowActions({ vendor, onEdit, onDelete }: VendorRowActionsProps) {
   const router = useRouter();
 
   return (
@@ -33,7 +29,7 @@ export function VendorRowActions({
           <Button
             variant="ghost"
             size="icon"
-            className="size-8 text-muted-foreground hover:text-foreground cursor-pointer"
+            className="text-muted-foreground hover:text-foreground size-8 cursor-pointer"
             aria-label="قائمة الإجراءات"
           >
             <MoreHorizontalIcon className="size-4" />
@@ -45,16 +41,13 @@ export function VendorRowActions({
           onClick={() => router.push(`/vendors/${vendor.id}`)}
           className="cursor-pointer"
         >
-          <EyeIcon className="size-3.5 text-muted-foreground" />
+          <EyeIcon className="text-muted-foreground size-3.5" />
           <span>عرض التفاصيل</span>
         </DropdownMenuItem>
 
         <PermissionGate action="update" subject="vendors">
-          <DropdownMenuItem
-            onClick={() => onEdit(vendor)}
-            className="cursor-pointer"
-          >
-            <PencilIcon className="size-3.5 text-muted-foreground" />
+          <DropdownMenuItem onClick={() => onEdit(vendor)} className="cursor-pointer">
+            <PencilIcon className="text-muted-foreground size-3.5" />
             <span>تعديل المورد</span>
           </DropdownMenuItem>
         </PermissionGate>

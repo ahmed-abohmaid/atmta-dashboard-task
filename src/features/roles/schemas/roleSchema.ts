@@ -9,9 +9,7 @@ export const permissionItemSchema = z.object({
 export const roleSchema = z.object({
   name: z.string().min(2, "اسم الدور مطلوب (حرفان على الأقل)"),
   description: z.string().optional(),
-  permissions: z
-    .array(permissionItemSchema)
-    .min(1, "يجب تحديد صلاحية واحدة على الأقل لهذا الدور"),
+  permissions: z.array(permissionItemSchema).min(1, "يجب تحديد صلاحية واحدة على الأقل لهذا الدور"),
 });
 
 export type RoleFormValues = z.infer<typeof roleSchema>;

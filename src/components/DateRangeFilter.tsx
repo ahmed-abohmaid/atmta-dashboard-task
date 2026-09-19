@@ -1,10 +1,7 @@
 "use client";
 
-import { useQueryState, parseAsString, parseAsInteger } from "nuqs";
-import {
-  DateRangePicker,
-  DateRangeValue,
-} from "@/components/fields/DateRangePicker";
+import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
+import { DateRangePicker, DateRangeValue } from "@/components/fields/DateRangePicker";
 
 export interface DateRangeFilterProps {
   fromParamKey?: string;
@@ -46,8 +43,7 @@ export function DateRangeFilter({
     parseAsInteger.withDefault(1).withOptions({ shallow: true })
   );
 
-  const isControlled =
-    typeof controlledFrom !== "undefined" || typeof controlledTo !== "undefined";
+  const isControlled = typeof controlledFrom !== "undefined" || typeof controlledTo !== "undefined";
 
   const currentFrom = isControlled ? controlledFrom : urlFrom || undefined;
   const currentTo = isControlled ? controlledTo : urlTo || undefined;

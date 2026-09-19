@@ -5,7 +5,8 @@ export const SEED_VENDORS: Vendor[] = [
     id: "vendor_1",
     name_ar: "شركة الفنار للصناعات الكهربائية والمقاولات",
     name_en: "Alfanar Electrical & Contracting Co.",
-    about: "توريد وتركيب المحولات ولوحات التوزيع الكهربائية وتمديدات الجهد المنخفض للمشاريع المعمارية.",
+    about:
+      "توريد وتركيب المحولات ولوحات التوزيع الكهربائية وتمديدات الجهد المنخفض للمشاريع المعمارية.",
     logo: "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?w=150&auto=format&fit=crop&q=80",
     cr_number: "1010789456",
     mobile: "+966501112233",
@@ -21,7 +22,8 @@ export const SEED_VENDORS: Vendor[] = [
     id: "vendor_2",
     name_ar: "مؤسسة الزامل لأنظمة التكييف والتهوية",
     name_en: "Zamil Central HVAC Systems Est.",
-    about: "حلول التكييف المركزي والمبردات الصناعية (Chillers) ومجاري الهواء للمشاريع والأبراج المعمارية.",
+    about:
+      "حلول التكييف المركزي والمبردات الصناعية (Chillers) ومجاري الهواء للمشاريع والأبراج المعمارية.",
     logo: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=150&auto=format&fit=crop&q=80",
     cr_number: "1010345678",
     mobile: "+966552223344",
@@ -37,7 +39,8 @@ export const SEED_VENDORS: Vendor[] = [
     id: "vendor_3",
     name_ar: "شركة دار العمران للاستشارات والتصميم المعماري",
     name_en: "Dar Al-Omran Architecture & Design Co.",
-    about: "استشارات معمارية متخصصة، تصميم داخلي وديكور (Fit-out)، إعداد المخططات التنفيذية وإدارة المشاريع.",
+    about:
+      "استشارات معمارية متخصصة، تصميم داخلي وديكور (Fit-out)، إعداد المخططات التنفيذية وإدارة المشاريع.",
     logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=150&auto=format&fit=crop&q=80",
     cr_number: "1010987654",
     mobile: "+966543334455",
@@ -53,7 +56,8 @@ export const SEED_VENDORS: Vendor[] = [
     id: "vendor_4",
     name_ar: "شركة الجزيرة للواجهات المعمارية والألمنيوم",
     name_en: "Al-Jazeera Architectural Facades & Glass",
-    about: "هندسة وتصنيع وتركيب الواجهات الزجاجية الذكية (Curtain Wall Systems) والألمنيوم الإنشائي للأبراج.",
+    about:
+      "هندسة وتصنيع وتركيب الواجهات الزجاجية الذكية (Curtain Wall Systems) والألمنيوم الإنشائي للأبراج.",
     logo: "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=150&auto=format&fit=crop&q=80",
     cr_number: "1010567890",
     mobile: "+966564445566",
@@ -69,7 +73,8 @@ export const SEED_VENDORS: Vendor[] = [
     id: "vendor_5",
     name_ar: "مؤسسة الشبكات الهندسية لمكافحة الحريق والسباكة",
     name_en: "Engineering Networks for Fire & Plumbing",
-    about: "توريد وتركيب شبكات الرشاشات الآلية ومضخات الحريق وشبكات التغذية والصرف الصحي الهندسية للمباني.",
+    about:
+      "توريد وتركيب شبكات الرشاشات الآلية ومضخات الحريق وشبكات التغذية والصرف الصحي الهندسية للمباني.",
     logo: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=150&auto=format&fit=crop&q=80",
     cr_number: "1010678901",
     mobile: "+966505556677",

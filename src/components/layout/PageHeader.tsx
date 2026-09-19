@@ -9,39 +9,25 @@ export interface PageHeaderProps {
   className?: string;
 }
 
-export function PageHeader({
-  title,
-  description,
-  badge,
-  actions,
-  className,
-}: PageHeaderProps) {
+export function PageHeader({ title, description, badge, actions, className }: PageHeaderProps) {
   return (
     <div
       className={cn(
-        "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/50 pb-5",
+        "border-border/50 flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-center sm:justify-between",
         className
       )}
     >
-      <div className="flex flex-col min-w-0">
+      <div className="flex min-w-0 flex-col">
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-semibold tracking-tight text-foreground truncate">
-            {title}
-          </h1>
+          <h1 className="text-foreground truncate text-lg font-semibold tracking-tight">{title}</h1>
           {badge}
         </div>
         {description && (
-          <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
-            {description}
-          </p>
+          <p className="text-muted-foreground mt-0.5 text-xs leading-relaxed">{description}</p>
         )}
       </div>
 
-      {actions && (
-        <div className="flex items-center gap-2.5 shrink-0">
-          {actions}
-        </div>
-      )}
+      {actions && <div className="flex shrink-0 items-center gap-2.5">{actions}</div>}
     </div>
   );
 }

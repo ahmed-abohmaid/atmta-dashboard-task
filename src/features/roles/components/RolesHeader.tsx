@@ -4,8 +4,8 @@ import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { RoleFormDialog } from "@/features/roles/components/dialogs/RoleFormDialog";
 import { PermissionGate } from "@/features/permissions/components/PermissionGate";
+import { RoleFormDialog } from "@/features/roles/components/dialogs/RoleFormDialog";
 
 export function RolesHeader() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -25,7 +25,7 @@ export function RolesHeader() {
             <Button
               size="sm"
               onClick={() => setIsCreateOpen(true)}
-              className="gap-2 text-xs cursor-pointer"
+              className="cursor-pointer gap-2 text-xs"
             >
               <PlusIcon className="size-4" />
               <span>إضافة دور</span>
@@ -35,11 +35,7 @@ export function RolesHeader() {
       />
 
       {isCreateOpen && (
-        <RoleFormDialog
-          mode="create"
-          open={isCreateOpen}
-          onOpenChange={setIsCreateOpen}
-        />
+        <RoleFormDialog mode="create" open={isCreateOpen} onOpenChange={setIsCreateOpen} />
       )}
     </>
   );

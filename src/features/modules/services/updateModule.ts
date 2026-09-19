@@ -1,6 +1,6 @@
 import { Module, ModuleAction, UpdateModuleInput } from "@/@types/module";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export async function updateModule(input: UpdateModuleInput): Promise<Module> {
   await delay(250);

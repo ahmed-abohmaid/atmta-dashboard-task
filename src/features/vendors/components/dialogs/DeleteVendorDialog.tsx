@@ -40,60 +40,56 @@ export function DeleteVendorDialog({
         onSuccess?.();
       },
       onError: (err) => {
-        setErrorMessage(
-          err instanceof Error ? err.message : "حدث خطأ أثناء حذف المورد."
-        );
+        setErrorMessage(err instanceof Error ? err.message : "حدث خطأ أثناء حذف المورد.");
       },
     });
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden border-border/70 bg-card shadow-2xl">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border/50">
+      <DialogContent className="border-border/70 bg-card overflow-hidden p-0 shadow-2xl sm:max-w-md">
+        <DialogHeader className="border-border/50 border-b px-6 pt-6 pb-4">
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-destructive/10 text-destructive shrink-0">
+            <div className="bg-destructive/10 text-destructive flex size-10 shrink-0 items-center justify-center rounded-xl">
               <AlertTriangleIcon className="size-5" />
             </div>
             <div>
-              <DialogTitle className="text-base font-bold text-foreground">
+              <DialogTitle className="text-foreground text-base font-bold">
                 تأكيد حذف المورد
               </DialogTitle>
-              <DialogDescription className="text-xs text-muted-foreground mt-0.5">
+              <DialogDescription className="text-muted-foreground mt-0.5 text-xs">
                 إجراء حذف ناعم من قاعدة البيانات
               </DialogDescription>
             </div>
           </div>
         </DialogHeader>
 
-        <div className="flex flex-col gap-3 p-6 text-xs text-muted-foreground">
+        <div className="text-muted-foreground flex flex-col gap-3 p-6 text-xs">
           <p>
             هل أنت متأكد من رغبتك في حذف المورد{" "}
-            <span className="font-semibold text-foreground">
-              &quot;{vendor.name_ar}&quot;
-            </span>
-            ؟
+            <span className="text-foreground font-semibold">&quot;{vendor.name_ar}&quot;</span>؟
           </p>
 
-          <div className="rounded-lg border border-border/70 bg-muted/20 p-3 text-[11px] leading-relaxed">
-            سيتم استبعاد هذا المورد من قوائم الموردين النشطة وتقارير التصدير مع الاحتفاظ ببياناته في السجل التاريخي (Soft Delete).
+          <div className="border-border/70 bg-muted/20 rounded-lg border p-3 text-[11px] leading-relaxed">
+            سيتم استبعاد هذا المورد من قوائم الموردين النشطة وتقارير التصدير مع الاحتفاظ ببياناته في
+            السجل التاريخي (Soft Delete).
           </div>
 
           {errorMessage && (
-            <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs text-destructive">
+            <div className="border-destructive/30 bg-destructive/10 text-destructive rounded-lg border p-3 text-xs">
               {errorMessage}
             </div>
           )}
         </div>
 
-        <DialogFooter className="px-6 py-4 border-t border-border/50 bg-muted/10">
+        <DialogFooter className="border-border/50 bg-muted/10 border-t px-6 py-4">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => onOpenChange(false)}
             disabled={isPending}
-            className="text-xs cursor-pointer"
+            className="cursor-pointer text-xs"
           >
             إلغاء
           </Button>
@@ -104,7 +100,7 @@ export function DeleteVendorDialog({
             isLoading={isPending}
             disabled={isPending}
             onClick={handleConfirmDelete}
-            className="text-xs cursor-pointer font-medium"
+            className="cursor-pointer text-xs font-medium"
           >
             تأكيد الحذف
           </Button>

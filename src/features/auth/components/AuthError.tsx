@@ -10,10 +10,10 @@ export function AuthError({ message }: AuthErrorProps) {
   return (
     <div
       role="alert"
-      className="flex items-center gap-2.5 rounded-lg border border-destructive/30 bg-destructive/10 px-3.5 py-2.5 text-xs text-destructive"
+      className="border-destructive/30 bg-destructive/10 text-destructive flex items-center gap-2.5 rounded-lg border px-3.5 py-2.5 text-xs"
     >
       <CircleAlertIcon className="size-4 shrink-0" />
-      <span className="font-normal leading-relaxed">{message}</span>
+      <span className="leading-relaxed font-normal">{message}</span>
     </div>
   );
 }

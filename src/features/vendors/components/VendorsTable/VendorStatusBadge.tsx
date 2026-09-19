@@ -10,7 +10,7 @@ export function VendorStatusBadge({ status }: VendorStatusBadgeProps) {
     return (
       <Badge
         variant="outline"
-        className="text-[11px] font-medium border-primary/30 text-primary bg-primary/10 rounded-full px-2.5 py-0.5"
+        className="border-primary/30 text-primary bg-primary/10 rounded-full px-2.5 py-0.5 text-[11px] font-medium"
       >
         نشط
       </Badge>
@@ -20,7 +20,7 @@ export function VendorStatusBadge({ status }: VendorStatusBadgeProps) {
   return (
     <Badge
       variant="outline"
-      className="text-[11px] font-medium border-border/80 text-muted-foreground bg-muted/30 rounded-full px-2.5 py-0.5"
+      className="border-border/80 text-muted-foreground bg-muted/30 rounded-full px-2.5 py-0.5 text-[11px] font-medium"
     >
       غير نشط
     </Badge>

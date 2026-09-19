@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { cn } from "cn";
 import {
   MoreHorizontalIcon,
   PencilIcon,
@@ -18,17 +19,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "cn";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useModules } from "@/features/modules/hooks/useModules";
 import { usePermission } from "@/features/permissions/hooks/usePermission";
-import { RoleFormDialog } from "@/features/roles/components/dialogs/RoleFormDialog";
 import { DeleteRoleDialog } from "@/features/roles/components/dialogs/DeleteRoleDialog";
+import { RoleFormDialog } from "@/features/roles/components/dialogs/RoleFormDialog";
 
 const STANDARD_ACTIONS = new Set(["read", "create", "update", "delete"]);
 
@@ -100,17 +96,17 @@ export function RoleCard({ role }: RoleCardProps) {
 
   return (
     <>
-      <div className="group relative flex flex-col justify-between rounded-xl border border-border/70 bg-card p-5 transition-colors duration-150 hover:bg-secondary/15">
+      <div className="group border-border/70 bg-card hover:bg-secondary/15 relative flex flex-col justify-between rounded-xl border p-5 transition-colors duration-150">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between gap-3">
-            <h3 className="text-sm sm:text-base font-semibold text-foreground truncate">
+            <h3 className="text-foreground truncate text-sm font-semibold sm:text-base">
               {role.name}
             </h3>
 
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex shrink-0 items-center gap-1.5">
               <Badge
                 variant={role.isSystem ? "default" : "secondary"}
-                className="text-xs font-medium px-2 py-0.5"
+                className="px-2 py-0.5 text-xs font-medium"
               >
                 {role.isSystem ? "نظامي" : "مخصص"}
               </Badge>
@@ -122,7 +118,7 @@ export function RoleCard({ role }: RoleCardProps) {
                       <Button
                         variant="ghost"
                         size="icon-xs"
-                        className="size-7 text-muted-foreground hover:text-foreground"
+                        className="text-muted-foreground hover:text-foreground size-7"
                         aria-label="قائمة الإجراءات"
                       />
                     }
@@ -133,9 +129,9 @@ export function RoleCard({ role }: RoleCardProps) {
                     {canUpdate && (
                       <DropdownMenuItem
                         onClick={() => setIsEditOpen(true)}
-                        className="gap-2 cursor-pointer"
+                        className="cursor-pointer gap-2"
                       >
-                        <PencilIcon className="size-3.5 text-muted-foreground" />
+                        <PencilIcon className="text-muted-foreground size-3.5" />
                         <span>تعديل الدور</span>
                       </DropdownMenuItem>
                     )}
@@ -144,7 +140,7 @@ export function RoleCard({ role }: RoleCardProps) {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                           onClick={() => setIsDeleteOpen(true)}
-                          className="gap-2 text-destructive focus:text-destructive cursor-pointer"
+                          className="text-destructive focus:text-destructive cursor-pointer gap-2"
                         >
                           <Trash2Icon className="size-3.5" />
                           <span>حذف الدور</span>
@@ -157,37 +153,33 @@ export function RoleCard({ role }: RoleCardProps) {
             </div>
           </div>
 
-          <p className="text-xs text-muted-foreground/90 leading-relaxed line-clamp-2 min-h-[2.25rem]">
+          <p className="text-muted-foreground/90 line-clamp-2 min-h-[2.25rem] text-xs leading-relaxed">
             {role.description || "بدون وصف."}
           </p>
 
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground pt-0.5">
-            <UsersIcon className="size-3.5 text-primary shrink-0" />
+          <div className="text-muted-foreground flex items-center gap-1.5 pt-0.5 text-xs">
+            <UsersIcon className="text-primary size-3.5 shrink-0" />
             <span>{formatUserCount(role.userCount)}</span>
           </div>
         </div>
 
-        <div className="mt-4 pt-3.5 border-t border-border/50 flex flex-col gap-2">
+        <div className="border-border/50 mt-4 flex flex-col gap-2 border-t pt-3.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-medium text-muted-foreground">
-              الوحدات المصرحة
-            </span>
+            <span className="text-muted-foreground font-medium">الوحدات المصرحة</span>
             {!isSuperAdmin && (
-              <span className="text-[11px] font-mono text-muted-foreground/70">
+              <span className="text-muted-foreground/70 font-mono text-[11px]">
                 {moduleBreakdown.length} وحدات
               </span>
             )}
           </div>
 
           {isSuperAdmin ? (
-            <div className="flex items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-xs text-primary font-medium">
+            <div className="border-primary/25 bg-primary/10 text-primary flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium">
               <ShieldCheckIcon className="size-4 shrink-0" />
               <span>صلاحية كاملة على كافة وحدات وإجراءات النظام</span>
             </div>
           ) : moduleBreakdown.length === 0 ? (
-            <span className="text-xs text-muted-foreground/60 italic">
-              لا توجد صلاحيات
-            </span>
+            <span className="text-muted-foreground/60 text-xs italic">لا توجد صلاحيات</span>
           ) : (
             <div className="flex flex-wrap items-center gap-1.5">
               {visibleModules.map((item) => (
@@ -196,31 +188,24 @@ export function RoleCard({ role }: RoleCardProps) {
                     render={
                       <button
                         type="button"
-                        className="inline-flex items-center h-6.5 px-2.5 rounded-md border border-border/70 bg-secondary/40 text-xs text-foreground transition-colors hover:bg-secondary cursor-pointer"
+                        className="border-border/70 bg-secondary/40 text-foreground hover:bg-secondary inline-flex h-6.5 cursor-pointer items-center rounded-md border px-2.5 text-xs transition-colors"
                       >
                         <span>{item.moduleLabel}</span>
-                        <span className="text-muted-foreground text-[11px] ms-1.5">
+                        <span className="text-muted-foreground ms-1.5 text-[11px]">
                           {item.isFull ? "(شامل)" : `(${item.actions.length})`}
                         </span>
                       </button>
                     }
                   />
-                  <PopoverContent
-                    side="top"
-                    align="start"
-                    className="w-56 p-3 text-xs"
-                  >
-                    <div className="flex items-center justify-between pb-2 border-b border-border/60 mb-2 font-medium">
+                  <PopoverContent side="top" align="start" className="w-56 p-3 text-xs">
+                    <div className="border-border/60 mb-2 flex items-center justify-between border-b pb-2 font-medium">
                       <span className="text-foreground">{item.moduleLabel}</span>
                       {item.isFull ? (
-                        <Badge
-                          variant="secondary"
-                          className="text-[9px] px-1 py-0 h-4"
-                        >
+                        <Badge variant="secondary" className="h-4 px-1 py-0 text-[9px]">
                           شامل
                         </Badge>
                       ) : (
-                        <span className="text-[10px] text-muted-foreground">
+                        <span className="text-muted-foreground text-[10px]">
                           {item.actions.length} إجراءات
                         </span>
                       )}
@@ -234,7 +219,7 @@ export function RoleCard({ role }: RoleCardProps) {
                             className={cn(
                               "rounded px-2 py-0.5 text-xs",
                               isCustom
-                                ? "border border-primary/30 bg-primary/10 text-primary font-medium"
+                                ? "border-primary/30 bg-primary/10 text-primary border font-medium"
                                 : "bg-secondary/80 text-muted-foreground"
                             )}
                           >
@@ -253,19 +238,15 @@ export function RoleCard({ role }: RoleCardProps) {
                     render={
                       <button
                         type="button"
-                        className="inline-flex items-center h-6.5 px-2.5 rounded-md border border-border/70 bg-secondary/60 text-xs font-medium text-foreground transition-colors hover:bg-secondary cursor-pointer"
+                        className="border-border/70 bg-secondary/60 text-foreground hover:bg-secondary inline-flex h-6.5 cursor-pointer items-center rounded-md border px-2.5 text-xs font-medium transition-colors"
                       >
                         <span>+{overflowModules.length} أخرى</span>
                       </button>
                     }
                   />
-                  <PopoverContent
-                    align="start"
-                    side="top"
-                    className="w-72 p-3 text-xs"
-                  >
-                    <div className="flex items-center justify-between pb-2 border-b border-border/60 mb-2">
-                      <span className="font-semibold text-foreground">
+                  <PopoverContent align="start" side="top" className="w-72 p-3 text-xs">
+                    <div className="border-border/60 mb-2 flex items-center justify-between border-b pb-2">
+                      <span className="text-foreground font-semibold">
                         الوحدات الإضافية ({overflowModules.length})
                       </span>
                     </div>
@@ -274,20 +255,20 @@ export function RoleCard({ role }: RoleCardProps) {
                         {overflowModules.map((m) => (
                           <div
                             key={m.moduleId}
-                            className="flex flex-col gap-1 rounded-md border border-border/50 bg-card/40 p-2"
+                            className="border-border/50 bg-card/40 flex flex-col gap-1 rounded-md border p-2"
                           >
-                            <div className="flex items-center font-medium text-foreground">
+                            <div className="text-foreground flex items-center font-medium">
                               <span>{m.moduleLabel}</span>
                               {m.isFull && (
                                 <Badge
                                   variant="secondary"
-                                  className="text-[9px] px-1 py-0 h-4 ms-1.5"
+                                  className="ms-1.5 h-4 px-1 py-0 text-[9px]"
                                 >
                                   شامل
                                 </Badge>
                               )}
                             </div>
-                            <div className="flex flex-wrap gap-1 mt-0.5">
+                            <div className="mt-0.5 flex flex-wrap gap-1">
                               {m.actions.map((act) => {
                                 const isCustom = !STANDARD_ACTIONS.has(act);
                                 return (
@@ -296,7 +277,7 @@ export function RoleCard({ role }: RoleCardProps) {
                                     className={cn(
                                       "rounded px-2 py-0.5 text-xs",
                                       isCustom
-                                        ? "border border-primary/30 bg-primary/10 text-primary font-medium"
+                                        ? "border-primary/30 bg-primary/10 text-primary border font-medium"
                                         : "bg-secondary/80 text-muted-foreground"
                                     )}
                                   >
@@ -318,20 +299,11 @@ export function RoleCard({ role }: RoleCardProps) {
       </div>
 
       {isEditOpen && (
-        <RoleFormDialog
-          mode="edit"
-          role={role}
-          open={isEditOpen}
-          onOpenChange={setIsEditOpen}
-        />
+        <RoleFormDialog mode="edit" role={role} open={isEditOpen} onOpenChange={setIsEditOpen} />
       )}
 
       {isDeleteOpen && (
-        <DeleteRoleDialog
-          role={role}
-          open={isDeleteOpen}
-          onOpenChange={setIsDeleteOpen}
-        />
+        <DeleteRoleDialog role={role} open={isDeleteOpen} onOpenChange={setIsDeleteOpen} />
       )}
     </>
   );

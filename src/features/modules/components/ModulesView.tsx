@@ -1,11 +1,11 @@
 "use client";
 
-import { useModules } from "@/features/modules/hooks/useModules";
+import { ModulesEmptyState } from "@/features/modules/components/feedback/ModulesEmptyState";
+import { ModulesError } from "@/features/modules/components/feedback/ModulesError";
+import { ModulesSkeleton } from "@/features/modules/components/feedback/ModulesSkeleton";
 import { ModulesHeader } from "@/features/modules/components/ModulesHeader";
 import { ModulesList } from "@/features/modules/components/ModulesList";
-import { ModulesSkeleton } from "@/features/modules/components/feedback/ModulesSkeleton";
-import { ModulesError } from "@/features/modules/components/feedback/ModulesError";
-import { ModulesEmptyState } from "@/features/modules/components/feedback/ModulesEmptyState";
+import { useModules } from "@/features/modules/hooks/useModules";
 
 export function ModulesView() {
   const { modules, isLoading, error, refetch } = useModules();

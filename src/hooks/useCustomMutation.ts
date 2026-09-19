@@ -1,15 +1,11 @@
 import {
+  useMutation,
   type UseMutationOptions,
   type UseMutationResult,
-  useMutation,
 } from "@tanstack/react-query";
 import { sileo } from "sileo";
 
-export type CustomMutationOptions<
-  TData,
-  TVariables,
-  TContext = unknown
-> = Omit<
+export type CustomMutationOptions<TData, TVariables, TContext = unknown> = Omit<
   UseMutationOptions<TData, Error, TVariables, TContext>,
   "mutationFn"
 > & {
@@ -23,11 +19,7 @@ export type CustomMutationOptions<
   disableDefaultErrorToast?: boolean;
 };
 
-export function useCustomMutation<
-  TData = unknown,
-  TVariables = unknown,
-  TContext = unknown
->({
+export function useCustomMutation<TData = unknown, TVariables = unknown, TContext = unknown>({
   mutationFn,
   disableDefaultErrorToast = false,
   onError,
@@ -43,8 +35,7 @@ export function useCustomMutation<
     mutationFn,
     onError: (error, variables, onMutateResult, context) => {
       if (!disableDefaultErrorToast) {
-        const message =
-          error instanceof Error ? error.message : "حدث خطأ غير متوقع";
+        const message = error instanceof Error ? error.message : "حدث خطأ غير متوقع";
         sileo.error({
           title: "خطأ في العملية",
           description: message,

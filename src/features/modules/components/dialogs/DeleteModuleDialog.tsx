@@ -18,11 +18,7 @@ interface DeleteModuleDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function DeleteModuleDialog({
-  module,
-  open,
-  onOpenChange,
-}: DeleteModuleDialogProps) {
+export function DeleteModuleDialog({ module, open, onOpenChange }: DeleteModuleDialogProps) {
   const { mutate: deleteMutate, isPending } = useDeleteModule();
 
   const handleDelete = () => {
@@ -37,12 +33,12 @@ export function DeleteModuleDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader className="gap-1.5">
-          <DialogTitle className="text-base font-bold text-foreground">
+          <DialogTitle className="text-foreground text-base font-bold">
             تأكيد حذف الوحدة
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground leading-relaxed pt-1">
-            هل أنت متأكد من رغبتك في حذف وحدة &quot;{module.label.ar}&quot;؟
-            سيتم إزالتها نهائياً من القائمة الجانبية ومصفوفة الصلاحيات.
+          <DialogDescription className="text-muted-foreground pt-1 text-xs leading-relaxed">
+            هل أنت متأكد من رغبتك في حذف وحدة &quot;{module.label.ar}&quot;؟ سيتم إزالتها نهائياً من
+            القائمة الجانبية ومصفوفة الصلاحيات.
           </DialogDescription>
         </DialogHeader>
 

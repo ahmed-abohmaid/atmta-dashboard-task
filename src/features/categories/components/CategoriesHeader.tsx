@@ -21,11 +21,7 @@ export function CategoriesHeader({ onAddCategory }: CategoriesHeaderProps) {
           renderDisabled
           disabledTooltip="لا تملك صلاحية إنشاء تصنيفات جديدة"
         >
-          <Button
-            size="sm"
-            onClick={onAddCategory}
-            className="gap-2 text-xs cursor-pointer"
-          >
+          <Button size="sm" onClick={onAddCategory} className="cursor-pointer gap-2 text-xs">
             <PlusIcon className="size-4" />
             <span>إضافة تصنيف رئيسي</span>
           </Button>

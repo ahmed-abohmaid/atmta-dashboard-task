@@ -19,11 +19,7 @@ interface DeleteRoleDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function DeleteRoleDialog({
-  role,
-  open,
-  onOpenChange,
-}: DeleteRoleDialogProps) {
+export function DeleteRoleDialog({ role, open, onOpenChange }: DeleteRoleDialogProps) {
   const { mutate: deleteMutate, isPending } = useDeleteRole();
 
   const isBlocked = role.isSystem || role.userCount > 0;
@@ -42,17 +38,17 @@ export function DeleteRoleDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader className="gap-1.5">
-          <DialogTitle className="text-base font-bold text-foreground">
+          <DialogTitle className="text-foreground text-base font-bold">
             تأكيد حذف الدور الوظيفي
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground leading-relaxed pt-1">
+          <DialogDescription className="text-muted-foreground pt-1 text-xs leading-relaxed">
             هل أنت متأكد من رغبتك في حذف الدور &quot;{role.name}&quot;؟
           </DialogDescription>
         </DialogHeader>
 
         {role.isSystem && (
-          <div className="flex items-start gap-2.5 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs text-destructive">
-            <ShieldAlertIcon className="size-4.5 shrink-0 mt-0.5" />
+          <div className="border-destructive/30 bg-destructive/10 text-destructive flex items-start gap-2.5 rounded-lg border p-3 text-xs">
+            <ShieldAlertIcon className="mt-0.5 size-4.5 shrink-0" />
             <div className="flex flex-col gap-0.5">
               <span className="font-semibold">دور نظام محمي</span>
               <span className="text-muted-foreground leading-relaxed">
@@ -64,18 +60,19 @@ export function DeleteRoleDialog({
 
         {!role.isSystem && role.userCount > 0 && (
           <div className="flex items-start gap-2.5 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-300">
-            <UsersIcon className="size-4.5 shrink-0 mt-0.5" />
+            <UsersIcon className="mt-0.5 size-4.5 shrink-0" />
             <div className="flex flex-col gap-0.5">
               <span className="font-semibold">مرتبط بمستخدمين مسجلين</span>
               <span className="text-muted-foreground leading-relaxed">
-                لا يمكن حذف هذا الدور لأنه مخصص حالياً لـ {role.userCount} من المستخدمين. يرجى نقل المستخدمين إلى أدوار أخرى أولاً.
+                لا يمكن حذف هذا الدور لأنه مخصص حالياً لـ {role.userCount} من المستخدمين. يرجى نقل
+                المستخدمين إلى أدوار أخرى أولاً.
               </span>
             </div>
           </div>
         )}
 
         {!isBlocked && (
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             سيتم حذف الدور نهائياً من قائمة الأدوار المتاحة ولن يمكن استعادته.
           </p>
         )}

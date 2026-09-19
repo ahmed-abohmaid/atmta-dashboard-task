@@ -3,9 +3,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { sileo } from "sileo";
 import { Module } from "@/@types/module";
+import { useCustomMutation } from "@/hooks/useCustomMutation";
 import { MODULES_QUERY_KEYS } from "@/features/modules/consts/queryKeys";
 import { deleteModule } from "@/features/modules/services/deleteModule";
-import { useCustomMutation } from "@/hooks/useCustomMutation";
 
 export function useDeleteModule() {
   const queryClient = useQueryClient();
@@ -13,9 +13,8 @@ export function useDeleteModule() {
   const mutation = useCustomMutation<void, string>({
     mutationFn: (id: string) => deleteModule(id),
     onSuccess: (_, id) => {
-      queryClient.setQueryData<Module[]>(
-        MODULES_QUERY_KEYS.list(),
-        (old) => (old ? old.filter((m) => m.id !== id) : [])
+      queryClient.setQueryData<Module[]>(MODULES_QUERY_KEYS.list(), (old) =>
+        old ? old.filter((m) => m.id !== id) : []
       );
 
       sileo.success({

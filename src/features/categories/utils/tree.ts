@@ -1,11 +1,6 @@
-import {
-  CategoryNode,
-  CategoryWithRelations,
-} from "@/@types/category";
+import { CategoryNode, CategoryWithRelations } from "@/@types/category";
 
-export function buildCategoryTree(
-  categories: CategoryWithRelations[]
-): CategoryNode[] {
+export function buildCategoryTree(categories: CategoryWithRelations[]): CategoryNode[] {
   const childrenByParent: Record<string, CategoryWithRelations[]> = {};
 
   for (const cat of categories) {
@@ -43,8 +38,7 @@ export function filterCategoryTree(
 
   function filterBranch(node: CategoryNode): CategoryNode | null {
     const isSelfMatch =
-      node.name_ar.toLowerCase().includes(trimmed) ||
-      node.name_en.toLowerCase().includes(trimmed);
+      node.name_ar.toLowerCase().includes(trimmed) || node.name_en.toLowerCase().includes(trimmed);
 
     if (isSelfMatch) {
       matchIds.add(node.id);

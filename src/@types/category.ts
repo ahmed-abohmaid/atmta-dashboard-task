@@ -7,7 +7,6 @@ export interface Category {
   updatedAt: string;
 }
 
-
 export interface CategoryVendorSummary {
   id: string;
   name_ar: string;

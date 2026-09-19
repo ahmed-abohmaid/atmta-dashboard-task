@@ -2,12 +2,8 @@
 
 import { type ReactNode } from "react";
 import { AppAction, AppSubject } from "@/@types/permission";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { usePermission } from "@/features/permissions/hooks/usePermission";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 interface PermissionGateProps {
   action: AppAction;
@@ -31,9 +27,7 @@ export function PermissionGate({
   if (isLoading) {
     if (renderDisabled) {
       return (
-        <span className="inline-flex pointer-events-none opacity-40 select-none">
-          {children}
-        </span>
+        <span className="pointer-events-none inline-flex opacity-40 select-none">{children}</span>
       );
     }
     return null;
@@ -51,9 +45,7 @@ export function PermissionGate({
         <TooltipTrigger
           render={
             <span className="inline-flex cursor-not-allowed">
-              <span className="pointer-events-none opacity-50 select-none">
-                {children}
-              </span>
+              <span className="pointer-events-none opacity-50 select-none">{children}</span>
             </span>
           }
         />

@@ -2,13 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { CategoryNode } from "@/@types/category";
-import { CategoryTreeNode } from "@/features/categories/components/CategoryTreeNode/CategoryTreeNode";
 import { CategoriesToolbar } from "@/features/categories/components/CategoriesToolbar";
+import { CategoryTreeNode } from "@/features/categories/components/CategoryTreeNode/CategoryTreeNode";
 import { CategoriesEmptyState } from "@/features/categories/components/feedback/CategoriesEmptyState";
-import {
-  filterCategoryTree,
-  collectExpandableIds,
-} from "@/features/categories/utils/tree";
+import { collectExpandableIds, filterCategoryTree } from "@/features/categories/utils/tree";
 
 interface CategoriesTreeTableProps {
   tree: CategoryNode[];
@@ -83,12 +80,9 @@ export function CategoriesTreeTable({
       />
 
       {filteredTree.length === 0 ? (
-        <CategoriesEmptyState
-          isFiltered={isSearchActive}
-          onAddCategory={onAddCategory}
-        />
+        <CategoriesEmptyState isFiltered={isSearchActive} onAddCategory={onAddCategory} />
       ) : (
-        <div className="flex flex-col gap-2 rounded-xl border border-border/70 bg-card/60 p-2 sm:p-3.5 shadow-xs">
+        <div className="border-border/70 bg-card/60 flex flex-col gap-2 rounded-xl border p-2 shadow-xs sm:p-3.5">
           {filteredTree.map((node) => (
             <CategoryTreeNode
               key={node.id}

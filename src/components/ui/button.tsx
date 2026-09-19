@@ -2,7 +2,6 @@ import type { ComponentPropsWithoutRef } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
-
 import { Spinner } from "./spinner";
 
 const buttonVariants = cva(
@@ -74,12 +73,7 @@ function Button({
       aria-disabled={isLoading || props.disabled}
       {...props}
     >
-      <div
-        className={cn(
-          "flex items-center justify-center gap-2",
-          containerClassName,
-        )}
-      >
+      <div className={cn("flex items-center justify-center gap-2", containerClassName)}>
         {children}
         {isLoading && (
           <Spinner
@@ -88,7 +82,7 @@ function Button({
               variant === "outline" || variant === "ghost"
                 ? "text-foreground"
                 : "text-primary-foreground",
-              spinnerClassName,
+              spinnerClassName
             )}
           />
         )}

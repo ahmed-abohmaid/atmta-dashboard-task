@@ -7,16 +7,14 @@ interface RolesEmptyStateProps {
 
 export function RolesEmptyState({ onAddRole }: RolesEmptyStateProps) {
   return (
-    <div className="flex min-h-80 flex-col items-center justify-center rounded-xl border border-dashed border-border/80 bg-card/50 p-8 text-center shadow-xs">
-      <div className="flex size-12 items-center justify-center rounded-full bg-secondary text-primary border border-border/40 mb-3">
+    <div className="border-border/80 bg-card/50 flex min-h-80 flex-col items-center justify-center rounded-xl border border-dashed p-8 text-center shadow-xs">
+      <div className="bg-secondary text-primary border-border/40 mb-3 flex size-12 items-center justify-center rounded-full border">
         <ShieldAlertIcon className="size-6" />
       </div>
 
-      <h3 className="text-base font-semibold text-foreground mb-1">
-        لا توجد أدوار مسجلة
-      </h3>
+      <h3 className="text-foreground mb-1 text-base font-semibold">لا توجد أدوار مسجلة</h3>
 
-      <p className="text-xs text-muted-foreground max-w-sm leading-relaxed mb-5">
+      <p className="text-muted-foreground mb-5 max-w-sm text-xs leading-relaxed">
         لم يتم العثور على أي أدوار في النظام. يمكنك إضافة دور جديد وتعيين الصلاحيات له.
       </p>
 

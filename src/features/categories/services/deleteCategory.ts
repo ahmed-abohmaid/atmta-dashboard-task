@@ -1,5 +1,5 @@
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export async function deleteCategory(id: string): Promise<void> {
   await delay(250);
@@ -18,9 +18,7 @@ export async function deleteCategory(id: string): Promise<void> {
     );
   }
 
-  const assignedVendorsCount = vendors.filter(
-    (v) => v.categoryId === id && !v.deletedAt
-  ).length;
+  const assignedVendorsCount = vendors.filter((v) => v.categoryId === id && !v.deletedAt).length;
   if (assignedVendorsCount > 0) {
     throw new Error(
       `لا يمكن حذف هذا التصنيف لأنه مرتبط بـ ${assignedVendorsCount} من الموردين النشطين. يرجى إعادة تعيين تصنيف الموردين أولاً.`

@@ -1,7 +1,7 @@
+import { User } from "@/@types/user";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { AUTH_QUERY_KEYS } from "@/features/auth/consts/queryKeys";
 import { getCurrentSessionUser } from "@/features/auth/services/getCurrentSessionUser";
-import { User } from "@/@types/user";
 
 export function useMe() {
   const queryResult = useCustomQuery<User | null>({

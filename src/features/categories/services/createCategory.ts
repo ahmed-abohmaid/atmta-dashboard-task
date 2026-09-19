@@ -1,6 +1,6 @@
 import { Category, CreateCategoryInput } from "@/@types/category";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export function generateCategorySlug(nameEn: string): string {
   const normalized = nameEn

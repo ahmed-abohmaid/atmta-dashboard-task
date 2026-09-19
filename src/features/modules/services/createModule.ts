@@ -1,6 +1,6 @@
 import { CreateModuleInput, Module, ModuleAction } from "@/@types/module";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export function generateModuleSlug(labelEn: string): string {
   return labelEn
@@ -19,9 +19,7 @@ export async function createModule(input: CreateModuleInput): Promise<Module> {
   }
 
   const existingModules = useMockStore.getState().modules;
-  const isDuplicate = existingModules.some(
-    (m) => m.id.toLowerCase() === slug
-  );
+  const isDuplicate = existingModules.some((m) => m.id.toLowerCase() === slug);
 
   if (isDuplicate) {
     throw new Error(`الوحدة بالمعرف "${slug}" موجودة بالفعل.`);

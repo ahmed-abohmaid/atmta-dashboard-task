@@ -1,6 +1,6 @@
 import { CategoryVendorSummary, CategoryWithRelations } from "@/@types/category";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export type GetCategoriesResult = CategoryWithRelations[];
 

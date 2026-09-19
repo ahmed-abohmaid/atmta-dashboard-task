@@ -1,6 +1,6 @@
 import { RoleWithUserCount, UpdateRoleInput } from "@/@types/role";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export async function updateRole(input: UpdateRoleInput): Promise<RoleWithUserCount> {
   await delay(300);
@@ -26,9 +26,7 @@ export async function updateRole(input: UpdateRoleInput): Promise<RoleWithUserCo
 
   // Preserve Super Admin invariants if editing super admin
   const isSuperAdmin = existingRole.id === "role_super_admin";
-  const permissions = isSuperAdmin
-    ? [{ action: "manage", subject: "all" }]
-    : input.permissions;
+  const permissions = isSuperAdmin ? [{ action: "manage", subject: "all" }] : input.permissions;
 
   const now = new Date().toISOString();
   const updatedRole = {

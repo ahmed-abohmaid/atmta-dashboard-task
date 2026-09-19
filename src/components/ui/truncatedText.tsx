@@ -1,11 +1,7 @@
 "use client";
 
-import { useState, useRef, type ComponentPropsWithoutRef } from "react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { useRef, useState, type ComponentPropsWithoutRef } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 interface TruncatedTextProps extends ComponentPropsWithoutRef<"span"> {
@@ -13,12 +9,7 @@ interface TruncatedTextProps extends ComponentPropsWithoutRef<"span"> {
   side?: "top" | "bottom" | "left" | "right";
 }
 
-export function TruncatedText({
-  text,
-  className,
-  side = "top",
-  ...props
-}: TruncatedTextProps) {
+export function TruncatedText({ text, className, side = "top", ...props }: TruncatedTextProps) {
   const [isTruncated, setIsTruncated] = useState(false);
   const textRef = useRef<HTMLSpanElement>(null);
 
@@ -33,7 +24,7 @@ export function TruncatedText({
     <span
       ref={textRef}
       onMouseEnter={checkTruncation}
-      className={cn("truncate block", className)}
+      className={cn("block truncate", className)}
       {...props}
     >
       {text}

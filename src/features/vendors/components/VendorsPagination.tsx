@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Pagination,
   PaginationContent,
   PaginationItem,
@@ -15,6 +8,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface VendorsPaginationProps {
   page: number;
@@ -41,22 +41,20 @@ export function VendorsPagination({
   const end = Math.min(page * pageSize, total);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-1 py-2">
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+    <div className="flex flex-col items-center justify-between gap-4 px-1 py-2 sm:flex-row">
+      <div className="text-muted-foreground flex items-center gap-2 text-xs">
         <span>عرض</span>
-        <span className="font-semibold text-foreground">{start}</span>
+        <span className="text-foreground font-semibold">{start}</span>
         <span>إلى</span>
-        <span className="font-semibold text-foreground">{end}</span>
+        <span className="text-foreground font-semibold">{end}</span>
         <span>من</span>
-        <span className="font-semibold text-foreground">{total}</span>
+        <span className="text-foreground font-semibold">{total}</span>
         <span>مورد</span>
       </div>
 
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground hidden sm:inline">
-            لكل صفحة:
-          </span>
+          <span className="text-muted-foreground hidden text-xs sm:inline">لكل صفحة:</span>
           <Select
             value={String(pageSize)}
             onValueChange={(val) => onPageSizeChange(Number(val))}
@@ -88,12 +86,14 @@ export function VendorsPagination({
               <PaginationPrevious
                 onClick={() => onPageChange(page - 1)}
                 disabled={disabled || page <= 1}
-                className={page <= 1 || disabled ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                className={
+                  page <= 1 || disabled ? "pointer-events-none opacity-50" : "cursor-pointer"
+                }
               />
             </PaginationItem>
 
             <PaginationItem>
-              <PaginationLink isActive size="sm" className="font-mono text-xs cursor-default">
+              <PaginationLink isActive size="sm" className="cursor-default font-mono text-xs">
                 {page} / {totalPages}
               </PaginationLink>
             </PaginationItem>
@@ -102,7 +102,11 @@ export function VendorsPagination({
               <PaginationNext
                 onClick={() => onPageChange(page + 1)}
                 disabled={disabled || page >= totalPages}
-                className={page >= totalPages || disabled ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                className={
+                  page >= totalPages || disabled
+                    ? "pointer-events-none opacity-50"
+                    : "cursor-pointer"
+                }
               />
             </PaginationItem>
           </PaginationContent>

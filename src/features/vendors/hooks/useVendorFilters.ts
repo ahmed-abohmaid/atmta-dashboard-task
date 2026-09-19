@@ -1,8 +1,8 @@
 "use client";
 
-import { useQueryState, parseAsString, parseAsInteger } from "nuqs";
-import { VendorFilterParams } from "@/features/vendors/@types/vendor";
+import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import { VendorStatus } from "@/@types/vendor";
+import { VendorFilterParams } from "@/features/vendors/@types/vendor";
 
 export function useVendorFilters() {
   const [search, setSearchState] = useQueryState(
@@ -80,11 +80,7 @@ export function useVendorFilters() {
   };
 
   const hasActiveFilters = Boolean(
-    search.trim() ||
-      categoryId.trim() ||
-      (status && status !== "all") ||
-      from ||
-      to
+    search.trim() || categoryId.trim() || (status && status !== "all") || from || to
   );
 
   const filterParams: VendorFilterParams = {

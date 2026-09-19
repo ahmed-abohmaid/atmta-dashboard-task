@@ -1,6 +1,6 @@
 import { RoleWithUserCount } from "@/@types/role";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export async function getRoles(): Promise<RoleWithUserCount[]> {
   await delay(200);

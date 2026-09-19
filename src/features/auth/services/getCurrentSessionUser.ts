@@ -1,7 +1,7 @@
 import { User } from "@/@types/user";
+import { delay } from "@/utils/delay";
 import { getSessionCookie, removeSessionCookie } from "@/features/auth/utils/sessionCookie";
 import { useMockStore } from "@/mock/store";
-import { delay } from "@/utils/delay";
 
 export async function getCurrentSessionUser(): Promise<User | null> {
   await delay(150);

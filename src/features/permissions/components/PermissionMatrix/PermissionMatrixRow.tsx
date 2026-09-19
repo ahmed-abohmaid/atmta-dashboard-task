@@ -1,16 +1,12 @@
 "use client";
 
+import { cn } from "cn";
 import { DynamicIcon, type IconName } from "lucide-react/dynamic";
 import { Module } from "@/@types/module";
 import { Checkbox } from "@/components/ui/checkbox";
-import { TableRow, TableCell } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TableCell, TableRow } from "@/components/ui/table";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { STANDARD_ACTIONS } from "@/features/permissions/consts/standardActions";
-import { cn } from "cn";
 
 interface PermissionMatrixRowProps {
   module: Module;
@@ -43,35 +39,35 @@ export function PermissionMatrixRow({
     moduleAllActions.some((actId) => grantedSet.has(`${module.id}:${actId}`));
 
   return (
-    <TableRow className="hover:bg-secondary/15 transition-colors border-border/50">
+    <TableRow className="hover:bg-secondary/15 border-border/50 transition-colors">
       <TableCell className="py-2.5 ps-4 pe-3">
         <div className="flex items-center gap-2.5">
-          <div className={cn("flex items-center", isRowDisabled ? "cursor-not-allowed" : "cursor-pointer")}>
+          <div
+            className={cn(
+              "flex items-center",
+              isRowDisabled ? "cursor-not-allowed" : "cursor-pointer"
+            )}
+          >
             <Checkbox
               id={`module-toggle-${module.id}`}
               checked={isModuleFullySelected || isModulePartiallySelected}
               disabled={isRowDisabled}
-              onCheckedChange={(checked) =>
-                onToggleModule(module, checked === true)
-              }
+              onCheckedChange={(checked) => onToggleModule(module, checked === true)}
               aria-label={`تحديد كافة صلاحيات وحدة ${module.label.ar}`}
               className={cn(isRowDisabled ? "cursor-not-allowed" : "cursor-pointer")}
             />
           </div>
-          <div className="flex items-center gap-2 min-w-0">
-            <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-secondary/70 text-primary border border-border/40">
-              <DynamicIcon
-                name={(module.icon as IconName) ?? "layout-grid"}
-                className="size-3.5"
-              />
+          <div className="flex min-w-0 items-center gap-2">
+            <div className="bg-secondary/70 text-primary border-border/40 flex size-6 shrink-0 items-center justify-center rounded-md border">
+              <DynamicIcon name={(module.icon as IconName) ?? "layout-grid"} className="size-3.5" />
             </div>
             <label
               htmlFor={`module-toggle-${module.id}`}
               className={cn(
-                "font-medium truncate select-none",
+                "truncate font-medium select-none",
                 isRowDisabled
-                  ? "cursor-not-allowed text-foreground/70"
-                  : "cursor-pointer text-foreground"
+                  ? "text-foreground/70 cursor-not-allowed"
+                  : "text-foreground cursor-pointer"
               )}
             >
               {module.label.ar}
@@ -104,14 +100,10 @@ export function PermissionMatrixRow({
 
         if (!isGrantable && !isSuperAdminRole) {
           return (
-            <TableCell key={stdAct.id} className="py-2.5 px-2 text-center">
+            <TableCell key={stdAct.id} className="px-2 py-2.5 text-center">
               <Tooltip>
                 <TooltipTrigger
-                  render={
-                    <div className="cursor-not-allowed inline-flex">
-                      {checkboxElement}
-                    </div>
-                  }
+                  render={<div className="inline-flex cursor-not-allowed">{checkboxElement}</div>}
                 />
                 <TooltipContent side="top" className="text-xs">
                   لا يمكنك منح صلاحية لا تمتلكها
@@ -122,13 +114,13 @@ export function PermissionMatrixRow({
         }
 
         return (
-          <TableCell key={stdAct.id} className="py-2.5 px-2 text-center">
+          <TableCell key={stdAct.id} className="px-2 py-2.5 text-center">
             {checkboxElement}
           </TableCell>
         );
       })}
 
-      <TableCell className="py-2.5 px-3 text-center">
+      <TableCell className="px-3 py-2.5 text-center">
         {customActions.length === 0 ? (
           <span className="text-muted-foreground/40">—</span>
         ) : (
@@ -146,21 +138,14 @@ export function PermissionMatrixRow({
                     isChecked
                       ? "border-primary/50 bg-primary/10 text-primary font-medium"
                       : "border-border/60 bg-secondary/30 text-muted-foreground hover:text-foreground",
-                    isInputDisabled
-                      ? "opacity-60 cursor-not-allowed"
-                      : "cursor-pointer"
+                    isInputDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"
                   )}
                 >
                   <Checkbox
                     checked={isChecked}
                     disabled={isInputDisabled}
-                    onCheckedChange={() =>
-                      onToggleAction(module.id, custAct.id)
-                    }
-                    className={cn(
-                      "size-3.5",
-                      isInputDisabled && "cursor-not-allowed"
-                    )}
+                    onCheckedChange={() => onToggleAction(module.id, custAct.id)}
+                    className={cn("size-3.5", isInputDisabled && "cursor-not-allowed")}
                   />
                   <span>{custAct.label.ar}</span>
                 </label>
@@ -170,11 +155,7 @@ export function PermissionMatrixRow({
                 return (
                   <Tooltip key={custAct.id}>
                     <TooltipTrigger
-                      render={
-                        <div className="inline-flex cursor-not-allowed">
-                          {chip}
-                        </div>
-                      }
+                      render={<div className="inline-flex cursor-not-allowed">{chip}</div>}
                     />
                     <TooltipContent side="top" className="text-xs">
                       لا يمكنك منح صلاحية لا تمتلكها

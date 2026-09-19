@@ -1,6 +1,6 @@
 import { Module } from "@/@types/module";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export async function getModules(): Promise<Module[]> {
   await delay(200);

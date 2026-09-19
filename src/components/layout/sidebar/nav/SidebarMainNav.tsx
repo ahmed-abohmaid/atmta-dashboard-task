@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  HomeIcon,
-  LayoutGridIcon,
-  UsersIcon,
-  ShieldCheckIcon,
-  FolderTreeIcon,
-  Building2Icon,
-  type LucideIcon,
-} from "lucide-react";
+import { HomeIcon, LayoutGridIcon, type LucideIcon } from "lucide-react";
 import type { AppAction, AppSubject } from "@/@types/permission";
 import {
   SidebarGroup,
@@ -40,7 +32,7 @@ interface SidebarMainNavProps {
 export function SidebarMainNav({ can, isLoading }: SidebarMainNavProps) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className="text-[11px] font-normal text-muted-foreground/60 mb-2 px-3">
+      <SidebarGroupLabel className="text-muted-foreground/60 mb-2 px-3 text-[11px] font-normal">
         القائمة الرئيسية
       </SidebarGroupLabel>
       <SidebarGroupContent>

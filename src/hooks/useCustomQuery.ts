@@ -1,14 +1,11 @@
 import {
+  useQuery,
   type QueryFunction,
   type QueryKey,
   type UseQueryOptions,
-  useQuery,
 } from "@tanstack/react-query";
 
-type CustomQueryOptions<TData> = Omit<
-  UseQueryOptions<TData>,
-  "queryKey" | "queryFn"
-> & {
+type CustomQueryOptions<TData> = Omit<UseQueryOptions<TData>, "queryKey" | "queryFn"> & {
   queryKey: QueryKey;
   queryFn: QueryFunction<TData, QueryKey>;
 };

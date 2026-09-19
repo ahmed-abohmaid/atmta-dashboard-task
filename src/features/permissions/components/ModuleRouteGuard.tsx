@@ -12,11 +12,7 @@ interface ModuleRouteGuardProps {
   children: ReactNode;
 }
 
-export function ModuleRouteGuard({
-  module,
-  action = "read",
-  children,
-}: ModuleRouteGuardProps) {
+export function ModuleRouteGuard({ module, action = "read", children }: ModuleRouteGuardProps) {
   const { can, isLoading } = usePermission();
 
   if (isLoading) {

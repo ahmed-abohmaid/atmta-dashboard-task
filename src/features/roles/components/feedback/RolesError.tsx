@@ -8,27 +8,21 @@ interface RolesErrorProps {
 
 export function RolesError({ error, onRetry }: RolesErrorProps) {
   return (
-    <div className="flex min-h-80 flex-col items-center justify-center rounded-xl border border-destructive/30 bg-destructive/5 p-8 text-center shadow-xs">
-      <div className="flex size-12 items-center justify-center rounded-full bg-destructive/10 text-destructive border border-destructive/20 mb-3">
+    <div className="border-destructive/30 bg-destructive/5 flex min-h-80 flex-col items-center justify-center rounded-xl border p-8 text-center shadow-xs">
+      <div className="bg-destructive/10 text-destructive border-destructive/20 mb-3 flex size-12 items-center justify-center rounded-full border">
         <AlertCircleIcon className="size-6" />
       </div>
 
-      <h3 className="text-base font-semibold text-foreground mb-1">
+      <h3 className="text-foreground mb-1 text-base font-semibold">
         تعذر تحميل الأدوار والصلاحيات
       </h3>
 
-      <p className="text-xs text-muted-foreground max-w-sm leading-relaxed mb-5">
-        {error?.message ||
-          "حدث خطأ أثناء الاتصال بالخادم الافتراضي. يرجى المحاولة مرة أخرى."}
+      <p className="text-muted-foreground mb-5 max-w-sm text-xs leading-relaxed">
+        {error?.message || "حدث خطأ أثناء الاتصال بالخادم الافتراضي. يرجى المحاولة مرة أخرى."}
       </p>
 
       {onRetry && (
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={onRetry}
-          className="gap-2 text-xs"
-        >
+        <Button variant="outline" size="sm" onClick={onRetry} className="gap-2 text-xs">
           <RotateCcwIcon className="size-3.5" />
           <span>إعادة المحاولة</span>
         </Button>

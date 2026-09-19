@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { EyeIcon, EyeOffIcon, LogInIcon } from "lucide-react";
-
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { InputField } from "@/components/fields/InputField";
+import { LoginCredentials } from "@/features/auth/@types/auth";
 import { AuthError } from "@/features/auth/components/AuthError";
 import { TestAccountsPicker } from "@/features/auth/components/TestAccountsPicker";
 import { useLogin } from "@/features/auth/hooks/useLogin";
-import { LoginCredentials } from "@/features/auth/@types/auth";
 
 const loginSchema = z.object({
   email: z.email("البريد الإلكتروني غير صالح"),
@@ -48,9 +47,7 @@ export function LoginForm() {
 
   return (
     <div className="flex flex-col gap-5">
-      {loginMutation.error && (
-        <AuthError message={loginMutation.error.message} />
-      )}
+      {loginMutation.error && <AuthError message={loginMutation.error.message} />}
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <InputField
@@ -77,14 +74,10 @@ export function LoginForm() {
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
               disabled={loginMutation.isPending}
-              className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
               title={showPassword ? "إخفاء كلمة المرور" : "عرض كلمة المرور"}
             >
-              {showPassword ? (
-                <EyeOffIcon className="size-4" />
-              ) : (
-                <EyeIcon className="size-4" />
-              )}
+              {showPassword ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
             </button>
           }
           {...register("password")}
@@ -94,7 +87,7 @@ export function LoginForm() {
           type="submit"
           size="lg"
           isLoading={loginMutation.isPending}
-          className="mt-2 w-full h-10 text-sm font-medium"
+          className="mt-2 h-10 w-full text-sm font-medium"
         >
           <LogInIcon className="size-4" />
           <span>تسجيل الدخول</span>

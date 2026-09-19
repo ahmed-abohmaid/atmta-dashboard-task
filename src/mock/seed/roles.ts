@@ -6,16 +6,15 @@ export const SEED_ROLES: Role[] = [
     name: "Super Admin",
     description: "صلاحية كاملة لإدارة كافة وحدات وإجراءات النظام",
     isSystem: true,
-    permissions: [
-      { action: "manage", subject: "all" },
-    ],
+    permissions: [{ action: "manage", subject: "all" }],
     createdAt: "2026-01-01T00:00:00.000Z",
     updatedAt: "2026-01-01T00:00:00.000Z",
   },
   {
     id: "role_manager",
     name: "Manager",
-    description: "إدارة الموردين والتصنيفات وتصدير البيانات مع إنشاء وتعديل الأدوار وفق الصلاحيات الممنوحة",
+    description:
+      "إدارة الموردين والتصنيفات وتصدير البيانات مع إنشاء وتعديل الأدوار وفق الصلاحيات الممنوحة",
     isSystem: false,
     permissions: [
       { action: "read", subject: "users" },

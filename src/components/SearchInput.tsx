@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useQueryState, parseAsString, parseAsInteger } from "nuqs";
-import { SearchIcon, XIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { useDebounce } from "@/hooks/useDebounce";
 import { cn } from "cn";
+import { SearchIcon, XIcon } from "lucide-react";
+import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
+import { useDebounce } from "@/hooks/useDebounce";
+import { Input } from "@/components/ui/input";
 
 export interface SearchInputProps {
   onSearch?: (value: string) => void;
@@ -32,12 +32,12 @@ export function SearchInput({
 }: SearchInputProps) {
   const [urlQuery, setUrlQuery] = useQueryState(
     paramKey,
-    parseAsString.withDefault("").withOptions({ shallow: true }),
+    parseAsString.withDefault("").withOptions({ shallow: true })
   );
 
   const [, setPage] = useQueryState(
     pageParamKey,
-    parseAsInteger.withDefault(1).withOptions({ shallow: true }),
+    parseAsInteger.withDefault(1).withOptions({ shallow: true })
   );
 
   const [prevUrlQuery, setPrevUrlQuery] = useState(urlQuery);
@@ -72,7 +72,7 @@ export function SearchInput({
 
   return (
     <div className={cn("relative w-full", containerClassName)}>
-      <SearchIcon className="absolute inset-y-0 inset-s-0 my-auto ms-2.5 size-3.5 text-muted-foreground pointer-events-none" />
+      <SearchIcon className="text-muted-foreground pointer-events-none absolute inset-y-0 inset-s-0 my-auto ms-2.5 size-3.5" />
 
       <Input
         value={inputValue}
@@ -81,8 +81,8 @@ export function SearchInput({
         disabled={disabled}
         autoFocus={autoFocus}
         className={cn(
-          "h-8 ps-8 pe-7 text-xs bg-card/70 border-border/80 text-foreground placeholder:text-xs placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-primary/30 transition-colors",
-          className,
+          "bg-card/70 border-border/80 text-foreground placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:ring-primary/30 h-8 ps-8 pe-7 text-xs transition-colors placeholder:text-xs focus-visible:ring-1",
+          className
         )}
       />
 
@@ -91,7 +91,7 @@ export function SearchInput({
           type="button"
           onClick={handleClear}
           aria-label="مسح البحث"
-          className="absolute inset-y-0 inset-e-0 my-auto me-1.5 flex size-5 items-center justify-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors cursor-pointer"
+          className="text-muted-foreground hover:bg-secondary hover:text-foreground absolute inset-y-0 inset-e-0 my-auto me-1.5 flex size-5 cursor-pointer items-center justify-center rounded-md transition-colors"
         >
           <XIcon className="size-3" />
         </button>

@@ -46,4 +46,3 @@ export type ModulePayload = CreateModuleInput;
 export interface UpdateModuleInput extends CreateModuleInput {
   id: string;
 }
-

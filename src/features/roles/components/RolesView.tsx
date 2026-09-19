@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRoles } from "@/features/roles/hooks/useRoles";
+import { RoleFormDialog } from "@/features/roles/components/dialogs/RoleFormDialog";
+import { RolesEmptyState } from "@/features/roles/components/feedback/RolesEmptyState";
+import { RolesError } from "@/features/roles/components/feedback/RolesError";
+import { RolesSkeleton } from "@/features/roles/components/feedback/RolesSkeleton";
 import { RolesHeader } from "@/features/roles/components/RolesHeader";
 import { RolesList } from "@/features/roles/components/RolesList";
-import { RolesSkeleton } from "@/features/roles/components/feedback/RolesSkeleton";
-import { RolesError } from "@/features/roles/components/feedback/RolesError";
-import { RolesEmptyState } from "@/features/roles/components/feedback/RolesEmptyState";
-import { RoleFormDialog } from "@/features/roles/components/dialogs/RoleFormDialog";
+import { useRoles } from "@/features/roles/hooks/useRoles";
 
 export function RolesView() {
   const { roles, isLoading, error, refetch } = useRoles();
@@ -27,13 +27,7 @@ export function RolesView() {
         <RolesList roles={roles} />
       )}
 
-      {isAddOpen && (
-        <RoleFormDialog
-          mode="create"
-          open={isAddOpen}
-          onOpenChange={setIsAddOpen}
-        />
-      )}
+      {isAddOpen && <RoleFormDialog mode="create" open={isAddOpen} onOpenChange={setIsAddOpen} />}
     </div>
   );
 }

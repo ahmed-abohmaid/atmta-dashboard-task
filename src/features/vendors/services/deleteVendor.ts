@@ -1,6 +1,6 @@
+import { delay } from "@/utils/delay";
 import { getSessionCookie } from "@/features/auth/utils/sessionCookie";
 import { useMockStore } from "@/mock/store";
-import { delay } from "@/utils/delay";
 
 export async function deleteVendor(id: string): Promise<void> {
   await delay(200);

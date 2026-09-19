@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo } from "react";
+import { CategoryWithRelations } from "@/@types/category";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { CATEGORIES_QUERY_KEYS } from "@/features/categories/consts/queryKeys";
 import { getCategories } from "@/features/categories/services/getCategories";
 import { buildCategoryTree } from "@/features/categories/utils/tree";
-import { CategoryWithRelations } from "@/@types/category";
 
 export function useCategories() {
   const queryResult = useCustomQuery<CategoryWithRelations[]>({
@@ -13,10 +13,7 @@ export function useCategories() {
     queryFn: () => getCategories(),
   });
 
-  const categories = useMemo(
-    () => queryResult.data ?? [],
-    [queryResult.data]
-  );
+  const categories = useMemo(() => queryResult.data ?? [], [queryResult.data]);
 
   const tree = useMemo(() => {
     return buildCategoryTree(categories);

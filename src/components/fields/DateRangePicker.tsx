@@ -1,23 +1,12 @@
 "use client";
 
 import type { MouseEvent } from "react";
-import {
-  format,
-  parseISO,
-  isValid,
-  startOfDay,
-  isAfter,
-  isBefore,
-} from "date-fns";
-import { CalendarIcon, XIcon, AlertCircleIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
 import { cn } from "cn";
+import { format, isAfter, isBefore, isValid, parseISO, startOfDay } from "date-fns";
+import { AlertCircleIcon, CalendarIcon, XIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 export interface DateRangeValue {
   from?: string;
@@ -98,9 +87,7 @@ export function DateRangePicker({
   };
 
   const hasValue = Boolean(from || to);
-  const label = hasValue
-    ? `${from || "البداية"} - ${to || "الآن"}`
-    : placeholder;
+  const label = hasValue ? `${from || "البداية"} - ${to || "الآن"}` : placeholder;
 
   return (
     <div className={cn("relative w-full", className)}>
@@ -112,26 +99,24 @@ export function DateRangePicker({
               size="sm"
               disabled={disabled}
               className={cn(
-                "w-full h-9 text-xs justify-start text-start font-normal gap-2 pe-8",
+                "h-9 w-full justify-start gap-2 pe-8 text-start text-xs font-normal",
                 isInvalid && "border-destructive text-destructive",
                 error && "border-destructive"
               )}
             >
-              <CalendarIcon className="size-3.5 text-muted-foreground shrink-0" />
+              <CalendarIcon className="text-muted-foreground size-3.5 shrink-0" />
               <span className="truncate">{label}</span>
             </Button>
           }
         />
-        <PopoverContent className="w-auto p-4 flex flex-col gap-3" align="end">
-          <div className="flex items-center justify-between border-b border-border/50 pb-2">
-            <span className="text-xs font-semibold text-foreground">
-              {title}
-            </span>
+        <PopoverContent className="flex w-auto flex-col gap-3 p-4" align="end">
+          <div className="border-border/50 flex items-center justify-between border-b pb-2">
+            <span className="text-foreground text-xs font-semibold">{title}</span>
             {hasValue && (
               <button
                 type="button"
                 onClick={() => onChange({ from: undefined, to: undefined })}
-                className="text-[11px] text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                className="text-muted-foreground hover:text-primary cursor-pointer text-[11px] transition-colors"
               >
                 مسح الفترة
               </button>
@@ -139,18 +124,16 @@ export function DateRangePicker({
           </div>
 
           {isInvalid && (
-            <div className="flex items-center gap-1.5 text-[11px] text-destructive bg-destructive/10 border border-destructive/20 p-2 rounded-lg">
+            <div className="text-destructive bg-destructive/10 border-destructive/20 flex items-center gap-1.5 rounded-lg border p-2 text-[11px]">
               <AlertCircleIcon className="size-3.5 shrink-0" />
               <span>تاريخ النهاية يجب ألا يكون قبل تاريخ البداية.</span>
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <div className="flex flex-col gap-1.5">
-              <span className="text-[11px] font-medium text-muted-foreground">
-                من تاريخ
-              </span>
-              <div className="border border-border/60 rounded-lg p-1 bg-background/50">
+              <span className="text-muted-foreground text-[11px] font-medium">من تاريخ</span>
+              <div className="border-border/60 bg-background/50 rounded-lg border p-1">
                 <Calendar
                   mode="single"
                   selected={fromDate}
@@ -162,10 +145,8 @@ export function DateRangePicker({
               </div>
             </div>
             <div className="flex flex-col gap-1.5">
-              <span className="text-[11px] font-medium text-muted-foreground">
-                إلى تاريخ
-              </span>
-              <div className="border border-border/60 rounded-lg p-1 bg-background/50">
+              <span className="text-muted-foreground text-[11px] font-medium">إلى تاريخ</span>
+              <div className="border-border/60 bg-background/50 rounded-lg border p-1">
                 <Calendar
                   mode="single"
                   selected={toDate}
@@ -185,17 +166,13 @@ export function DateRangePicker({
           type="button"
           onClick={handleClear}
           aria-label="مسح التاريخ"
-          className="absolute inset-y-0 inset-e-0 my-auto me-1.5 flex size-5 items-center justify-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors cursor-pointer z-10"
+          className="text-muted-foreground hover:bg-secondary hover:text-foreground absolute inset-y-0 inset-e-0 z-10 my-auto me-1.5 flex size-5 cursor-pointer items-center justify-center rounded-md transition-colors"
         >
           <XIcon className="size-3" />
         </button>
       )}
 
-      {error && (
-        <span className="text-[11px] text-destructive mt-1 block">
-          {error}
-        </span>
-      )}
+      {error && <span className="text-destructive mt-1 block text-[11px]">{error}</span>}
     </div>
   );
 }

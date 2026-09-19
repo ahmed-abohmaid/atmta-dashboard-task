@@ -9,11 +9,7 @@ declare module "js-cookie" {
 
   interface CookiesStatic {
     get(name: string): string | undefined;
-    set(
-      name: string,
-      value: string,
-      options?: CookieAttributes
-    ): string | undefined;
+    set(name: string, value: string, options?: CookieAttributes): string | undefined;
     remove(name: string, options?: CookieAttributes): void;
   }
 

@@ -2,8 +2,8 @@
 
 import { useState, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "sileo";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Toaster } from "sileo";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 interface AppProvidersProps {

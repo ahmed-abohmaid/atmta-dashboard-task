@@ -1,13 +1,13 @@
 "use client";
 
-import { ShieldCheckIcon, AlertCircleIcon } from "lucide-react";
+import { AlertCircleIcon, ShieldCheckIcon } from "lucide-react";
 import { Permission } from "@/@types/permission";
-import { Table, TableBody } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { usePermissionMatrix } from "@/features/permissions/hooks/usePermissionMatrix";
-import { PermissionMatrixToolbar } from "@/features/permissions/components/PermissionMatrix/PermissionMatrixToolbar";
+import { Table, TableBody } from "@/components/ui/table";
 import { PermissionMatrixHeader } from "@/features/permissions/components/PermissionMatrix/PermissionMatrixHeader";
 import { PermissionMatrixRow } from "@/features/permissions/components/PermissionMatrix/PermissionMatrixRow";
+import { PermissionMatrixToolbar } from "@/features/permissions/components/PermissionMatrix/PermissionMatrixToolbar";
+import { usePermissionMatrix } from "@/features/permissions/hooks/usePermissionMatrix";
 
 export interface PermissionMatrixProps {
   value: Permission[];
@@ -47,7 +47,7 @@ export function PermissionMatrix({
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-2 rounded-xl border border-border/70 p-4">
+      <div className="border-border/70 flex flex-col gap-2 rounded-xl border p-4">
         <Skeleton className="h-8 w-full" />
         <Skeleton className="h-10 w-full" />
         <Skeleton className="h-10 w-full" />
@@ -59,10 +59,11 @@ export function PermissionMatrix({
   return (
     <div className="flex flex-col gap-3">
       {isSuperAdminRole && (
-        <div className="flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-3.5 py-2.5 text-xs text-primary">
+        <div className="border-primary/40 bg-primary/10 text-primary flex items-center gap-2 rounded-lg border px-3.5 py-2.5 text-xs">
           <ShieldCheckIcon className="size-4 shrink-0" />
           <span>
-            دور مدير النظام (Super Admin) يمتلك صلاحية شاملة للنظام تلقائياً (صلاحية كاملة لجميع الوحدات والإجراءات).
+            دور مدير النظام (Super Admin) يمتلك صلاحية شاملة للنظام تلقائياً (صلاحية كاملة لجميع
+            الوحدات والإجراءات).
           </span>
         </div>
       )}
@@ -83,10 +84,10 @@ export function PermissionMatrix({
         onClearAll={clearAll}
       />
 
-      <div className="rounded-xl border border-border/70 bg-card/40 overflow-hidden">
+      <div className="border-border/70 bg-card/40 overflow-hidden rounded-xl border">
         <Table className="text-xs">
           <PermissionMatrixHeader />
-          <TableBody className="divide-y divide-border/50">
+          <TableBody className="divide-border/50 divide-y">
             {modules.map((mod) => (
               <PermissionMatrixRow
                 key={mod.id}

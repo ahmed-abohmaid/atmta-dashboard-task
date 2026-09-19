@@ -1,8 +1,8 @@
 "use client";
 
 import { DownloadIcon, PlusIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { PermissionGate } from "@/features/permissions/components/PermissionGate";
 
 interface VendorsHeaderProps {
@@ -21,13 +21,11 @@ export function VendorsHeader({
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
-        <h1 className="text-xl font-bold tracking-tight text-foreground">
-          الموردون
-        </h1>
+        <h1 className="text-foreground text-xl font-bold tracking-tight">الموردون</h1>
         {totalCount !== undefined && (
           <Badge
             variant="secondary"
-            className="text-xs font-mono font-medium rounded-md px-2 py-0.5 bg-secondary text-secondary-foreground"
+            className="bg-secondary text-secondary-foreground rounded-md px-2 py-0.5 font-mono text-xs font-medium"
           >
             {totalCount}
           </Badge>
@@ -48,7 +46,7 @@ export function VendorsHeader({
             onClick={onExportCsv}
             isLoading={isExporting}
             disabled={isExporting}
-            className="text-xs cursor-pointer gap-2 h-9"
+            className="h-9 cursor-pointer gap-2 text-xs"
           >
             <DownloadIcon className="size-3.5" />
             تصدير CSV
@@ -65,7 +63,7 @@ export function VendorsHeader({
             type="button"
             size="sm"
             onClick={onAddVendor}
-            className="text-xs cursor-pointer gap-2 h-9 font-medium"
+            className="h-9 cursor-pointer gap-2 text-xs font-medium"
           >
             <PlusIcon className="size-3.5" />
             إضافة مورد

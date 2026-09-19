@@ -1,12 +1,12 @@
-import { useMockStore } from "@/mock/store";
-import { delay } from "@/utils/delay";
 import { Category } from "@/@types/category";
+import { delay } from "@/utils/delay";
 import {
   CategoryBreadcrumbItem,
   PaginatedVendorsResult,
   VendorFilterParams,
   VendorWithRelations,
 } from "@/features/vendors/@types/vendor";
+import { useMockStore } from "@/mock/store";
 
 export function getCategoryBreadcrumb(
   categories: Category[],
@@ -38,10 +38,7 @@ export function getCategoryBreadcrumb(
   return breadcrumbs;
 }
 
-function getCategorySubtreeIds(
-  categories: Category[],
-  targetId: string
-): string[] {
+function getCategorySubtreeIds(categories: Category[], targetId: string): string[] {
   const result: string[] = [targetId];
 
   const childrenByParent: Record<string, Category[]> = {};
@@ -63,9 +60,7 @@ function getCategorySubtreeIds(
   return result;
 }
 
-export async function getVendors(
-  params?: VendorFilterParams
-): Promise<PaginatedVendorsResult> {
+export async function getVendors(params?: VendorFilterParams): Promise<PaginatedVendorsResult> {
   await delay(200);
 
   const { vendors, categories, users } = useMockStore.getState();
@@ -73,10 +68,7 @@ export async function getVendors(
   // Create fast lookups
   const categoryMap = new Map(categories.map((c) => [c.id, c]));
   const userMap = new Map(
-    users.map((u) => [
-      u.id,
-      { id: u.id, name: u.name, email: u.email, photo: u.photo },
-    ])
+    users.map((u) => [u.id, { id: u.id, name: u.name, email: u.email, photo: u.photo }])
   );
 
   // 1. Exclude soft-deleted
@@ -118,10 +110,7 @@ export async function getVendors(
   }
 
   // 6. Sort newest first
-  filtered.sort(
-    (a, b) =>
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   const total = filtered.length;
   const page = Math.max(1, params?.page || 1);

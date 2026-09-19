@@ -1,6 +1,6 @@
 import { CreateRoleInput, RoleWithUserCount } from "@/@types/role";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
+import { useMockStore } from "@/mock/store";
 
 export function generateRoleSlug(name: string): string {
   const normalized = name

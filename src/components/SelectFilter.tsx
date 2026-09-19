@@ -1,8 +1,9 @@
 "use client";
 
 import type { MouseEvent } from "react";
-import { useQueryState, parseAsString, parseAsInteger } from "nuqs";
+import { cn } from "cn";
 import { XIcon } from "lucide-react";
+import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import {
   Select,
   SelectContent,
@@ -11,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "cn";
 
 export interface SelectFilterOption {
   value: string;
@@ -59,9 +59,7 @@ export function SelectFilter({
   );
 
   const isControlled = typeof controlledValue !== "undefined";
-  const activeValue = isControlled
-    ? controlledValue || allValue
-    : urlQuery || allValue;
+  const activeValue = isControlled ? controlledValue || allValue : urlQuery || allValue;
 
   const handleChange = (newVal: string | null) => {
     const nextVal = newVal === allValue || !newVal ? null : newVal;
@@ -81,22 +79,16 @@ export function SelectFilter({
     handleChange(allValue);
   };
 
-  const hasActiveValue = Boolean(
-    activeValue && activeValue !== allValue && activeValue !== ""
-  );
+  const hasActiveValue = Boolean(activeValue && activeValue !== allValue && activeValue !== "");
 
   const activeLabel = options.find((o) => o.value === activeValue)?.label;
 
   return (
     <div className={cn("relative w-full", className)}>
-      <Select
-        value={activeValue}
-        onValueChange={handleChange}
-        disabled={disabled}
-      >
+      <Select value={activeValue} onValueChange={handleChange} disabled={disabled}>
         <SelectTrigger
           className={cn(
-            "w-full h-9 text-xs transition-colors",
+            "h-9 w-full text-xs transition-colors",
             hasActiveValue && "pe-8",
             triggerClassName
           )}
@@ -108,7 +100,7 @@ export function SelectFilter({
         <SelectContent align="start">
           {allLabel && (
             <>
-              <SelectItem value={allValue} className="text-xs py-2">
+              <SelectItem value={allValue} className="py-2 text-xs">
                 {allLabel}
               </SelectItem>
               <SelectSeparator />
@@ -118,7 +110,7 @@ export function SelectFilter({
             <SelectItem
               key={opt.value}
               value={opt.value}
-              className="text-xs py-2"
+              className="py-2 text-xs"
               style={
                 typeof opt.depth === "number"
                   ? { paddingInlineStart: `${14 + opt.depth * 14}px` }
@@ -136,7 +128,7 @@ export function SelectFilter({
           type="button"
           onClick={handleClear}
           aria-label="مسح التصفية"
-          className="absolute inset-y-0 inset-e-0 my-auto me-7 flex size-4 items-center justify-center rounded-sm text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors cursor-pointer z-10"
+          className="text-muted-foreground hover:bg-secondary hover:text-foreground absolute inset-y-0 inset-e-0 z-10 my-auto me-7 flex size-4 cursor-pointer items-center justify-center rounded-sm transition-colors"
         >
           <XIcon className="size-3" />
         </button>

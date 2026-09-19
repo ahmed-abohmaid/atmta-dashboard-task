@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { VendorWithRelations } from "@/features/vendors/@types/vendor";
 import { VendorTableRow } from "@/features/vendors/components/VendorsTable/VendorTableRow";
 
@@ -16,48 +10,39 @@ interface VendorsTableProps {
   onDelete: (vendor: VendorWithRelations) => void;
 }
 
-export function VendorsTable({
-  vendors,
-  onEdit,
-  onDelete,
-}: VendorsTableProps) {
+export function VendorsTable({ vendors, onEdit, onDelete }: VendorsTableProps) {
   return (
-    <div className="rounded-xl border border-border/80 bg-card shadow-xs overflow-hidden">
+    <div className="border-border/80 bg-card overflow-hidden rounded-xl border shadow-xs">
       <div className="overflow-x-auto">
         <Table>
-          <TableHeader className="bg-muted/30 border-b border-border/60">
+          <TableHeader className="bg-muted/30 border-border/60 border-b">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="py-3 ps-4 text-xs font-semibold text-foreground min-w-55">
+              <TableHead className="text-foreground min-w-55 py-3 ps-4 text-xs font-semibold">
                 المورد
               </TableHead>
-              <TableHead className="py-3 text-xs font-semibold text-foreground min-w-40">
+              <TableHead className="text-foreground min-w-40 py-3 text-xs font-semibold">
                 التصنيف
               </TableHead>
-              <TableHead className="py-3 text-xs font-semibold text-foreground min-w-30">
+              <TableHead className="text-foreground min-w-30 py-3 text-xs font-semibold">
                 السجل التجاري
               </TableHead>
-              <TableHead className="py-3 text-xs font-semibold text-foreground min-w-32.5">
+              <TableHead className="text-foreground min-w-32.5 py-3 text-xs font-semibold">
                 رقم الجوال
               </TableHead>
-              <TableHead className="py-3 text-xs font-semibold text-foreground min-w-22.5">
+              <TableHead className="text-foreground min-w-22.5 py-3 text-xs font-semibold">
                 الحالة
               </TableHead>
-              <TableHead className="py-3 text-xs font-semibold text-foreground min-w-25">
+              <TableHead className="text-foreground min-w-25 py-3 text-xs font-semibold">
                 تاريخ الإضافة
               </TableHead>
-              <TableHead className="py-3 pe-4 text-end text-xs font-semibold text-foreground w-12">
+              <TableHead className="text-foreground w-12 py-3 pe-4 text-end text-xs font-semibold">
                 <span className="sr-only">الإجراءات</span>
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody className="divide-y divide-border/40">
+          <TableBody className="divide-border/40 divide-y">
             {vendors.map((vendor) => (
-              <VendorTableRow
-                key={vendor.id}
-                vendor={vendor}
-                onEdit={onEdit}
-                onDelete={onDelete}
-              />
+              <VendorTableRow key={vendor.id} vendor={vendor} onEdit={onEdit} onDelete={onDelete} />
             ))}
           </TableBody>
         </Table>

@@ -5,6 +5,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 0 — Project Setup & Conventions ✅
+
 - Scaffold Next.js (TypeScript) + React project.
 - **Fixed Dark Theme**: ATMTA Ventures palette (mint `#6abfa1`, gunmetal `#18282c`, night `#0b1113`) using Cairo font. No theme toggler; dark theme is permanent and uniform.
 - **Arabic-Only & Native RTL**: Root `dir="rtl"` and `lang="ar"`. All layouts and components strictly use logical Tailwind properties (`ms-`, `me-`, `ps-`, `pe-`). Pure Arabic interface with no translation overhead or language switchers.
@@ -14,6 +15,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 1 — Domain Model & Mock Data Layer ✅
+
 - TypeScript interfaces: `User`, `Role`, `Module`, `Permission`, `Category`, `Vendor`.
 - Mock persistence: `useMockStore` (Zustand + `localStorage`) with in-header `resetToSeed()` action.
 - Async service layer with artificial `delay()` simulating a real backend.
@@ -27,6 +29,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 2 — Authentication & Session (PDF §2.1) ✅
+
 - Login / logout flow against mock data (no real backend, no real hashing).
 - Persisted session across page refreshes via client storage.
 - Protected route redirection when unauthenticated.
@@ -35,6 +38,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 3 — Core Permissions Engine (PDF §2.3) ✅
+
 - Reusable CASL ability resolution: `user.roles ∪ user.extraGrants − user.extraRevokes`.
 - Single source of truth: `usePermission` hook and `defineAbility` utility.
 - UI enforcement primitives:
@@ -48,6 +52,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 4 — Dynamic Modules System & Directory (PDF §2.2) ✅
+
 - **Data-Driven Architecture ✅**: Modules stored strictly as data in mock store (`SEED_MODULES`), never hardcoded in navigation or permission checks.
 - **Dynamic Navigation ✅**: Sidebar and route guards strictly resolve from `getModules()` query.
 - **Declared Actions ✅**: CRUD minimum (`create`, `read`, `update`, `delete`) + custom module actions (`vendors.export`, etc.).
@@ -59,6 +64,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 5 — Roles Module & Role CRUD (PDF §2.3) ✅
+
 - **Roles List Page (`/roles`) ✅**:
   - List of system and custom roles with description, user count, and assigned permissions.
   - Responsive search with `nuqs` synced to URL query parameters.
@@ -74,6 +80,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 6 — Categories Module (PDF §2.4)
+
 - Entity: `Category` (`name_ar`, `name_en`, `parent`).
 - Infinite nesting depth hierarchy (`category → subcategory → sub-subcategory → ...`).
 - Full CRUD operations.
@@ -83,6 +90,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 7 — Vendors Module & Vendor Details (PDF §2.5)
+
 - Entity: `Vendor` (`name_ar`, `name_en`, `about`, `logo`, `cr_number`, `mobile`, `category`, `status`, `createdBy`, `updatedBy`, `createdAt`, `updatedAt`, `deletedAt`).
 - Belongs to one category, assignable from UI.
 - Full CRUD operations with soft delete (remains in store, disappears from active lists).
@@ -98,6 +106,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 8 — Vendors List Page & Advanced Filters (PDF §2.6)
+
 - Paginated vendors table: name (Arabic/English), category, CR number, status.
 - Composite filters synced to URL search parameters (shareable/refreshable):
   1. Text search by name or CR number.
@@ -109,6 +118,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 9 — Users Module: List & Profile Pages (PDF §2.7 & §2.8)
+
 - **Users List Page (`/users`)**:
   - Table: name, email, phone, roles, status.
   - Search by name or email.
@@ -127,6 +137,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 10 — Cross-Cutting States & Polish
+
 - Sweep every screen for loading (`Skeleton`), empty (`EmptyState`), error (`ErrorState`), and forbidden (`ForbiddenState`) states.
 - Verify consistent Arabic typography and RTL alignment across all modules.
 - Ensure strict compliance with non-functional rules (no console errors, zero ESLint warnings, responsive design).
@@ -134,6 +145,7 @@ Companion to `FRD.md`. The phases below follow the **exact sequence of the task 
 ---
 
 ### Phase 11 — Delivery & Documentation
+
 - Comprehensive `README.md` with:
   - Reproduction and run steps.
   - Seed credentials for all 4 test accounts.

@@ -1,7 +1,7 @@
 import { type ComponentProps, type ReactNode } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { cn } from "cn";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export interface InputFieldProps extends Omit<ComponentProps<"input">, "prefix"> {
   label?: string;
@@ -27,13 +27,13 @@ export function InputField({
   return (
     <div className={cn("flex flex-col gap-1.5", containerClassName)}>
       {label && (
-        <Label htmlFor={id} className="text-xs font-medium text-foreground">
+        <Label htmlFor={id} className="text-foreground text-xs font-medium">
           {label}
         </Label>
       )}
       <div className="relative">
         {prefix && (
-          <div className="absolute inset-y-0 inset-s-0 flex items-center ps-2.5 pointer-events-none text-muted-foreground">
+          <div className="text-muted-foreground pointer-events-none absolute inset-y-0 inset-s-0 flex items-center ps-2.5">
             {prefix}
           </div>
         )}
@@ -42,7 +42,7 @@ export function InputField({
           disabled={disabled}
           aria-invalid={!!error}
           className={cn(
-            "text-xs sm:text-sm placeholder:text-xs placeholder:text-muted-foreground/50",
+            "placeholder:text-muted-foreground/50 text-xs placeholder:text-xs sm:text-sm",
             prefix && "ps-9",
             suffix && "pe-9",
             className
@@ -50,20 +50,12 @@ export function InputField({
           {...props}
         />
         {suffix && (
-          <div className="absolute inset-y-0 inset-e-0 flex items-center pe-2.5">
-            {suffix}
-          </div>
+          <div className="absolute inset-y-0 inset-e-0 flex items-center pe-2.5">{suffix}</div>
         )}
       </div>
-      {error && (
-        <span className="text-[11px] font-normal text-destructive">
-          {error}
-        </span>
-      )}
+      {error && <span className="text-destructive text-[11px] font-normal">{error}</span>}
       {!error && helperText && (
-        <span className="text-[11px] font-normal text-muted-foreground">
-          {helperText}
-        </span>
+        <span className="text-muted-foreground text-[11px] font-normal">{helperText}</span>
       )}
     </div>
   );

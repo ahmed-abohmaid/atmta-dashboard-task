@@ -1,7 +1,7 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 import { CategoryNode } from "@/@types/category";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,15 +12,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { InputField } from "@/components/fields/InputField";
 import { CategorySelect } from "@/components/fields/CategorySelect";
-import {
-  categorySchema,
-  CategoryFormValues,
-} from "@/features/categories/schemas/categorySchema";
+import { InputField } from "@/components/fields/InputField";
+import { useCategoryLookup } from "@/features/categories/hooks/useCategoryLookup";
 import { useCreateCategory } from "@/features/categories/hooks/useCreateCategory";
 import { useUpdateCategory } from "@/features/categories/hooks/useUpdateCategory";
-import { useCategoryLookup } from "@/features/categories/hooks/useCategoryLookup";
+import { CategoryFormValues, categorySchema } from "@/features/categories/schemas/categorySchema";
 
 interface CategoryFormDialogProps {
   mode: "create" | "edit";
@@ -41,13 +38,12 @@ export function CategoryFormDialog({
 }: CategoryFormDialogProps) {
   const isEdit = mode === "edit";
 
-  const { data: parentOptions = [], isLoading: isLookupLoading } =
-    useCategoryLookup(isEdit ? category?.id : undefined);
+  const { data: parentOptions = [], isLoading: isLookupLoading } = useCategoryLookup(
+    isEdit ? category?.id : undefined
+  );
 
-  const { mutate: createMutate, isPending: isCreatePending } =
-    useCreateCategory();
-  const { mutate: updateMutate, isPending: isUpdatePending } =
-    useUpdateCategory();
+  const { mutate: createMutate, isPending: isCreatePending } = useCreateCategory();
+  const { mutate: updateMutate, isPending: isUpdatePending } = useUpdateCategory();
   const isPending = isCreatePending || isUpdatePending || isLookupLoading;
 
   const {
@@ -65,8 +61,7 @@ export function CategoryFormDialog({
   });
 
   const onSubmit = (values: CategoryFormValues) => {
-    const parentIdValue =
-      values.parentId && values.parentId !== "root" ? values.parentId : null;
+    const parentIdValue = values.parentId && values.parentId !== "root" ? values.parentId : null;
 
     if (isEdit && category) {
       updateMutate(
@@ -78,7 +73,7 @@ export function CategoryFormDialog({
         },
         {
           onSuccess: () => onOpenChange(false),
-        },
+        }
       );
     } else {
       createMutate(
@@ -89,7 +84,7 @@ export function CategoryFormDialog({
         },
         {
           onSuccess: () => onOpenChange(false),
-        },
+        }
       );
     }
   };
@@ -98,16 +93,16 @@ export function CategoryFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg p-0 overflow-hidden border-border/70 bg-card shadow-2xl">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border/50">
-          <DialogTitle className="text-lg font-bold tracking-tight text-foreground">
+      <DialogContent className="border-border/70 bg-card overflow-hidden p-0 shadow-2xl sm:max-w-lg">
+        <DialogHeader className="border-border/50 border-b px-6 pt-6 pb-4">
+          <DialogTitle className="text-foreground text-lg font-bold tracking-tight">
             {isEdit
               ? "تعديل بيانات التصنيف"
               : isAddSubcategory
                 ? "إضافة تصنيف فرعي"
                 : "إضافة تصنيف رئيسي"}
           </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground mt-1">
+          <DialogDescription className="text-muted-foreground mt-1 text-xs">
             {isEdit
               ? "قم بتحديث المسميات أو نقل التصنيف تحت فرع أب آخر في الشجرة."
               : isAddSubcategory && defaultParentName
@@ -116,10 +111,7 @@ export function CategoryFormDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-4 p-6"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-6">
           <InputField
             id="name_ar"
             label="اسم التصنيف بالعربية *"
@@ -139,13 +131,9 @@ export function CategoryFormDialog({
           />
 
           {isAddSubcategory && defaultParentName ? (
-            <div className="flex items-center justify-between rounded-xl border border-primary/25 bg-primary/5 px-3.5 py-2.5 text-xs">
-              <span className="text-muted-foreground">
-                التصنيف الأب التابع له:
-              </span>
-              <span className="font-semibold text-primary">
-                {defaultParentName}
-              </span>
+            <div className="border-primary/25 bg-primary/5 flex items-center justify-between rounded-xl border px-3.5 py-2.5 text-xs">
+              <span className="text-muted-foreground">التصنيف الأب التابع له:</span>
+              <span className="text-primary font-semibold">{defaultParentName}</span>
             </div>
           ) : (
             <Controller
@@ -167,14 +155,14 @@ export function CategoryFormDialog({
             />
           )}
 
-          <DialogFooter className="mt-4 pt-4 border-t border-border/50">
+          <DialogFooter className="border-border/50 mt-4 border-t pt-4">
             <Button
               type="button"
               variant="ghost"
               size="sm"
               onClick={() => onOpenChange(false)}
               disabled={isPending}
-              className="text-xs cursor-pointer"
+              className="cursor-pointer text-xs"
             >
               إلغاء
             </Button>
@@ -183,7 +171,7 @@ export function CategoryFormDialog({
               size="sm"
               isLoading={isPending}
               disabled={isPending}
-              className="text-xs cursor-pointer font-medium"
+              className="cursor-pointer text-xs font-medium"
             >
               {isEdit ? "حفظ التعديلات" : "إضافة التصنيف"}
             </Button>

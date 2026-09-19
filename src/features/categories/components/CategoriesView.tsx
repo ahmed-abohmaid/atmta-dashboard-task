@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { CategoryNode } from "@/@types/category";
-import { useCategories } from "@/features/categories/hooks/useCategories";
 import { CategoriesHeader } from "@/features/categories/components/CategoriesHeader";
 import { CategoriesTreeTable } from "@/features/categories/components/CategoriesTreeTable";
-import { CategoriesSkeleton } from "@/features/categories/components/feedback/CategoriesSkeleton";
-import { CategoriesError } from "@/features/categories/components/feedback/CategoriesError";
-import { CategoriesEmptyState } from "@/features/categories/components/feedback/CategoriesEmptyState";
 import { CategoryFormDialog } from "@/features/categories/components/dialogs/CategoryFormDialog";
 import { DeleteCategoryDialog } from "@/features/categories/components/dialogs/DeleteCategoryDialog";
+import { CategoriesEmptyState } from "@/features/categories/components/feedback/CategoriesEmptyState";
+import { CategoriesError } from "@/features/categories/components/feedback/CategoriesError";
+import { CategoriesSkeleton } from "@/features/categories/components/feedback/CategoriesSkeleton";
+import { useCategories } from "@/features/categories/hooks/useCategories";
 
 interface FormDialogState {
   open: boolean;
@@ -20,17 +20,14 @@ interface FormDialogState {
 }
 
 export function CategoriesView() {
-  const { tree, stats, isLoading, error, refetch } =
-    useCategories();
+  const { tree, stats, isLoading, error, refetch } = useCategories();
 
   const [formDialog, setFormDialog] = useState<FormDialogState>({
     open: false,
     mode: "create",
   });
 
-  const [categoryToDelete, setCategoryToDelete] = useState<CategoryNode | null>(
-    null
-  );
+  const [categoryToDelete, setCategoryToDelete] = useState<CategoryNode | null>(null);
 
   const handleAddRoot = () => {
     setFormDialog({
@@ -91,9 +88,7 @@ export function CategoriesView() {
           defaultParentId={formDialog.defaultParentId}
           defaultParentName={formDialog.defaultParentName}
           open={formDialog.open}
-          onOpenChange={(open) =>
-            setFormDialog((prev) => ({ ...prev, open }))
-          }
+          onOpenChange={(open) => setFormDialog((prev) => ({ ...prev, open }))}
         />
       )}
 

@@ -1,12 +1,9 @@
 import { Vendor } from "@/@types/vendor";
-import { UpdateVendorInput } from "@/features/vendors/@types/vendor";
-import { getSessionCookie } from "@/features/auth/utils/sessionCookie";
-import { useMockStore } from "@/mock/store";
 import { delay } from "@/utils/delay";
-import {
-  isValidSaudiPhone,
-  normalizeSaudiPhone,
-} from "@/features/vendors/utils/phone";
+import { getSessionCookie } from "@/features/auth/utils/sessionCookie";
+import { UpdateVendorInput } from "@/features/vendors/@types/vendor";
+import { isValidSaudiPhone, normalizeSaudiPhone } from "@/features/vendors/utils/phone";
+import { useMockStore } from "@/mock/store";
 
 export async function updateVendor(input: UpdateVendorInput): Promise<Vendor> {
   await delay(250);

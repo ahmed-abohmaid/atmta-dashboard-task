@@ -3,9 +3,7 @@ import { VendorFilterParams } from "@/features/vendors/@types/vendor";
 import { getVendors } from "@/features/vendors/services/getVendors";
 import { formatSaudiPhoneDisplay } from "@/features/vendors/utils/phone";
 
-export async function exportVendorsCsv(
-  filters?: VendorFilterParams
-): Promise<Blob> {
+export async function exportVendorsCsv(filters?: VendorFilterParams): Promise<Blob> {
   // Simulate backend report generation and query delay
   await delay(600);
 
@@ -46,8 +44,7 @@ export async function exportVendorsCsv(
 
   // Prepend UTF-8 BOM (\uFEFF) for Excel Arabic compatibility
   const csvContent =
-    "\uFEFF" +
-    [headers.join(","), ...rows.map((row) => row.join(","))].join("\r\n");
+    "\uFEFF" + [headers.join(","), ...rows.map((row) => row.join(","))].join("\r\n");
 
   return new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
 }
