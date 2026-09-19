@@ -1,7 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
-import { useQueryState, parseAsString } from "nuqs";
+import { useMemo, useState } from "react";
 import { Module } from "@/@types/module";
 import { ModuleCard } from "@/features/modules/components/ModuleCard";
 import { SearchInput } from "@/components/SearchInput";
@@ -11,7 +10,7 @@ interface ModulesListProps {
 }
 
 export function ModulesList({ modules }: ModulesListProps) {
-  const [search] = useQueryState("search", parseAsString.withDefault(""));
+  const [search, setSearch] = useState("");
 
   const filteredModules = useMemo(() => {
     const trimmed = search.trim().toLowerCase();
@@ -28,10 +27,8 @@ export function ModulesList({ modules }: ModulesListProps) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <SearchInput
+          onSearch={setSearch}
           placeholder="البحث في الوحدات..."
-          syncUrl={true}
-          paramKey="search"
-          debounceMs={300}
           containerClassName="max-w-xs"
         />
         <span className="text-xs text-foreground/80 shrink-0 font-medium">

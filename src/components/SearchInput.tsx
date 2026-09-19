@@ -1,41 +1,28 @@
 "use client";
 
+import { useEffect } from "react";
 import { useQueryState, parseAsString, debounce } from "nuqs";
 import { SearchIcon, XIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useDebounce } from "@/hooks/useDebounce";
 import { cn } from "cn";
 
-export type SearchQueryOptions = Parameters<
-  typeof parseAsString.withOptions
->[0];
-
 export interface SearchInputProps {
-  value?: string;
-  onChange?: (value: string) => void;
+  onSearch?: (value: string) => void;
   placeholder?: string;
-  syncUrl?: boolean;
   paramKey?: string;
   debounceMs?: number;
-  options?: SearchQueryOptions;
   className?: string;
   containerClassName?: string;
   disabled?: boolean;
   autoFocus?: boolean;
 }
 
-const DEFAULT_OPTIONS: SearchQueryOptions = {
-  shallow: true,
-  limitUrlUpdates: debounce(300),
-};
-
 export function SearchInput({
-  value,
-  onChange,
+  onSearch,
   placeholder = "البحث...",
-  syncUrl = true,
   paramKey = "search",
-  debounceMs,
-  options,
+  debounceMs = 300,
   className,
   containerClassName,
   disabled,
@@ -44,30 +31,26 @@ export function SearchInput({
   const [urlQuery, setUrlQuery] = useQueryState(
     paramKey,
     parseAsString.withDefault("").withOptions({
-      ...DEFAULT_OPTIONS,
-      ...(debounceMs !== undefined && {
-        limitUrlUpdates: debounce(debounceMs),
-      }),
-      ...options,
+      shallow: true,
+      limitUrlUpdates: debounce(debounceMs),
     }),
   );
 
-  const query = syncUrl ? urlQuery : (value ?? "");
+  const debouncedValue = useDebounce(urlQuery, debounceMs);
 
-  const handleChange = (val: string) => {
-    if (syncUrl) {
-      setUrlQuery(val.trim() ? val : null);
-    }
-    onChange?.(val);
-  };
+  useEffect(() => {
+    onSearch?.(debouncedValue);
+  }, [debouncedValue, onSearch]);
 
   return (
     <div className={cn("relative w-full", containerClassName)}>
       <SearchIcon className="absolute inset-y-0 inset-s-0 my-auto ms-2.5 size-3.5 text-muted-foreground pointer-events-none" />
 
       <Input
-        value={query}
-        onChange={(e) => handleChange(e.target.value)}
+        value={urlQuery}
+        onChange={(e) =>
+          setUrlQuery(e.target.value.trim() ? e.target.value : null)
+        }
         placeholder={placeholder}
         disabled={disabled}
         autoFocus={autoFocus}
@@ -77,10 +60,10 @@ export function SearchInput({
         )}
       />
 
-      {query.length > 0 && !disabled && (
+      {urlQuery.length > 0 && !disabled && (
         <button
           type="button"
-          onClick={() => handleChange("")}
+          onClick={() => setUrlQuery(null)}
           aria-label="مسح البحث"
           className="absolute inset-y-0 inset-e-0 my-auto me-1.5 flex size-5 items-center justify-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors cursor-pointer"
         >

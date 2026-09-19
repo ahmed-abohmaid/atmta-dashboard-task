@@ -56,6 +56,8 @@ export const VENDORS_QUERY_KEYS = {
 - **Icons: always use `lucide-react` first.** Never use inline SVGs or other icon libraries unless a specific icon doesn't exist in Lucide.
 - UI style: clean, modern dashboard. Follow `frontend-design` and `taste` skill principles — restraint, hierarchy, good spacing.
 
+- **Search Inputs**: Always use the reusable `SearchInput` component (`src/components/SearchInput.tsx`) with debouncing and URL sync (`nuqs`) across all list, table, and tree filtering screens. Never create ad hoc search inputs or raw text fields for filtering.
+
 ## Loading & Error States
 - Loading: use `Skeleton` (Shadcn) in a **separate** `<FeatureSkeleton />` component.
 - Error: use a **separate** `<FeatureError />` component.

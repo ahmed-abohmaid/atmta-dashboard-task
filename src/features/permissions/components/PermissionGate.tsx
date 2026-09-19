@@ -1,8 +1,13 @@
 "use client";
 
-import { cloneElement, isValidElement, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { AppAction, AppSubject } from "@/@types/permission";
 import { usePermission } from "@/features/permissions/hooks/usePermission";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface PermissionGateProps {
   action: AppAction;
@@ -24,6 +29,13 @@ export function PermissionGate({
   const { can, isLoading } = usePermission();
 
   if (isLoading) {
+    if (renderDisabled) {
+      return (
+        <span className="inline-flex pointer-events-none opacity-40 select-none">
+          {children}
+        </span>
+      );
+    }
     return null;
   }
 
@@ -33,19 +45,23 @@ export function PermissionGate({
     return <>{children}</>;
   }
 
-  if (
-    renderDisabled &&
-    isValidElement<{
-      disabled?: boolean;
-      title?: string;
-      "aria-disabled"?: boolean | "true" | "false";
-    }>(children)
-  ) {
-    return cloneElement(children, {
-      disabled: true,
-      title: disabledTooltip,
-      "aria-disabled": true,
-    });
+  if (renderDisabled) {
+    return (
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <span className="inline-flex cursor-not-allowed">
+              <span className="pointer-events-none opacity-50 select-none">
+                {children}
+              </span>
+            </span>
+          }
+        />
+        <TooltipContent side="top" className="text-xs">
+          {disabledTooltip}
+        </TooltipContent>
+      </Tooltip>
+    );
   }
 
   return <>{fallback}</>;

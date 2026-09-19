@@ -15,11 +15,13 @@ export const SEED_ROLES: Role[] = [
   {
     id: "role_manager",
     name: "Manager",
-    description: "إدارة الموردين والتصنيفات وتصدير البيانات مع صلاحية عرض المستخدمين والأدوار",
+    description: "إدارة الموردين والتصنيفات وتصدير البيانات مع إنشاء وتعديل الأدوار وفق الصلاحيات الممنوحة",
     isSystem: false,
     permissions: [
       { action: "read", subject: "users" },
       { action: "read", subject: "roles" },
+      { action: "create", subject: "roles" },
+      { action: "update", subject: "roles" },
       { action: "read", subject: "modules" },
       { action: "create", subject: "categories" },
       { action: "read", subject: "categories" },

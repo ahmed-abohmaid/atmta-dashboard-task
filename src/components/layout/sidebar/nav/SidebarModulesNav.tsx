@@ -32,7 +32,9 @@ export function SidebarModulesNav({ can, isPermLoading }: SidebarModulesNavProps
   const { modules, isLoading: isModulesLoading } = useModules();
 
   const isLoading = isModulesLoading || isPermLoading;
-  const accessibleModules = modules.filter((mod) => can("read", mod.id));
+  const accessibleModules = modules.filter(
+    (mod) => can("read", mod.id) && mod.id !== "categories" && mod.id !== "roles"
+  );
 
   return (
     <SidebarGroup className="mt-1">
