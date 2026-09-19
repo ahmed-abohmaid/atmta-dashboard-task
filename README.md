@@ -6,7 +6,7 @@ Frontend technical task for ATMTA Ventures.
 
 ## Deliverables
 
-- **Demo Link**: [https://atmta-dashboard-task.abohmaid.workers.dev/ ](https://atmta-dashboard-task.vercel.app/)
+- **Demo Link**: https://atmta-dashboard-task.vercel.app/
 - **Video Demo (Task Output)**: 
 - **Video Walkthrough (Source Code)**: 
 
