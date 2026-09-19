@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isValidSaudiPhone } from "@/features/vendors/utils/phone";
+import { isValidSaudiPhone } from "@/utils/phone";
 
 export const vendorSchema = z.object({
   name_ar: z.string().trim().min(2, "اسم المورد بالعربية مطلوب (حرفان على الأقل)"),

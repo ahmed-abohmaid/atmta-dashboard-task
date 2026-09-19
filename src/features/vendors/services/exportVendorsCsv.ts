@@ -1,7 +1,7 @@
 import { delay } from "@/utils/delay";
 import { VendorFilterParams } from "@/features/vendors/@types/vendor";
 import { getVendors } from "@/features/vendors/services/getVendors";
-import { formatSaudiPhoneDisplay } from "@/features/vendors/utils/phone";
+import { formatSaudiPhoneDisplay } from "@/utils/phone";
 
 export async function exportVendorsCsv(filters?: VendorFilterParams): Promise<Blob> {
   // Simulate backend report generation and query delay

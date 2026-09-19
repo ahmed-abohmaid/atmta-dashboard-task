@@ -6,10 +6,10 @@ import {
   PhoneIcon,
 } from "lucide-react";
 import { getInitials } from "@/utils/getInitials";
+import { formatSaudiPhoneDisplay } from "@/utils/phone";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { VendorWithRelations } from "@/features/vendors/@types/vendor";
-import { formatSaudiPhoneDisplay } from "@/features/vendors/utils/phone";
 
 interface VendorDetailInfoProps {
   vendor: VendorWithRelations;
