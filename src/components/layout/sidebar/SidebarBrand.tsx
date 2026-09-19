@@ -23,6 +23,7 @@ export function SidebarBrand() {
               width={24}
               height={24}
               className="size-6 object-contain"
+              style={{ width: "auto", height: "auto" }}
               priority
             />
           </div>
@@ -34,6 +35,7 @@ export function SidebarBrand() {
               width={130}
               height={32}
               className="h-7 w-auto object-contain"
+              style={{ width: "auto", height: "auto" }}
               priority
             />
           </div>
