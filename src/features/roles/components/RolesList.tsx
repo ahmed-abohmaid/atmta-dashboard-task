@@ -1,7 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
-import { useQueryState, parseAsString } from "nuqs";
+import { useMemo, useState } from "react";
 import { RoleWithUserCount } from "@/@types/role";
 import { RoleCard } from "@/features/roles/components/RoleCard";
 import { SearchInput } from "@/components/SearchInput";
@@ -11,7 +10,7 @@ interface RolesListProps {
 }
 
 export function RolesList({ roles }: RolesListProps) {
-  const [search] = useQueryState("search", parseAsString.withDefault(""));
+  const [search, setSearch] = useState("");
 
   const filteredRoles = useMemo(() => {
     const trimmed = search.trim().toLowerCase();
@@ -23,10 +22,8 @@ export function RolesList({ roles }: RolesListProps) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <SearchInput
+          onSearch={setSearch}
           placeholder="البحث في الأدوار..."
-          syncUrl={true}
-          paramKey="search"
-          debounceMs={300}
           containerClassName="max-w-xs"
         />
         <span className="text-xs text-foreground/80 shrink-0 font-medium">
