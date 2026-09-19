@@ -21,9 +21,9 @@ export function AppShell({
   return (
     <SidebarProvider defaultOpen={true}>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="min-w-0 overflow-x-hidden">
         <AppHeader title={headerTitle} subtitle={headerSubtitle} isLoading={isLoading} />
-        <main className="flex flex-1 flex-col p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="flex min-w-0 flex-1 flex-col p-4 sm:p-6 lg:p-8">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
