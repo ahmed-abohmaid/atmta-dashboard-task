@@ -1,16 +1,23 @@
 "use client";
 
-import { MailIcon, PhoneIcon, UserIcon } from "lucide-react";
+import { MailIcon, PhoneIcon, ShieldCheckIcon, UserIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { HomeSkeleton } from "@/components/dashboard/HomeSkeleton";
 import { useMe } from "@/features/auth/hooks/useMe";
+import { ModuleCard } from "@/features/modules/components/ModuleCard";
+import { useModules } from "@/features/modules/hooks/useModules";
+import { usePermission } from "@/features/permissions/hooks/usePermission";
 
 export default function HomePage() {
-  const { user, isLoading } = useMe();
+  const { user, isLoading: isUserLoading } = useMe();
+  const { modules, isLoading: isModulesLoading } = useModules();
+  const { can, isLoading: isPermLoading } = usePermission();
 
-  if (isLoading) {
+  if (isUserLoading || isModulesLoading || isPermLoading) {
     return <HomeSkeleton />;
   }
+
+  const accessibleModules = modules.filter((mod) => can("read", mod.id));
 
   return (
     <div className="flex flex-col gap-6">
@@ -22,7 +29,7 @@ export default function HomePage() {
 
           <p className="text-muted-foreground max-w-xl text-xs leading-relaxed sm:text-sm">
             مرحباً بك في لوحة تحكم منصة أتمتة. يمكنك الوصول إلى الأقسام والعمليات المتاحة لحسابك عبر
-            القائمة الجانبية وفق الصلاحيات الممنوحة لك.
+            القائمة الجانبية أو من خلال بطاقات الوحدات أدناه وفق الصلاحيات الممنوحة لك.
           </p>
         </div>
       </section>
@@ -67,6 +74,26 @@ export default function HomePage() {
               {user?.phone}
             </span>
           </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="border-border/60 flex items-center justify-between border-b pb-3">
+          <div className="flex items-center gap-2">
+            <ShieldCheckIcon className="text-primary size-4" />
+            <h2 className="text-foreground text-sm font-semibold sm:text-base">
+              وحدات النظام المتاحة
+            </h2>
+          </div>
+          <span className="text-muted-foreground font-mono text-xs">
+            {accessibleModules.length} من {modules.length} وحدة متاحة
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {accessibleModules.map((mod) => (
+            <ModuleCard key={mod.id} module={mod} />
+          ))}
         </div>
       </section>
     </div>

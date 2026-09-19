@@ -15,7 +15,7 @@ interface ModuleCardProps {
 export function ModuleCard({ module }: ModuleCardProps) {
   const { can } = usePermission();
   const canRead = can("read", module.id);
-  const targetHref = module.path ?? `/modules/${module.id}`;
+  const targetHref = module.path ?? "/";
 
   const customActions = module.actions.filter((a) => a.isCustom);
   const standardActions = module.actions.filter((a) => !a.isCustom);
@@ -24,22 +24,36 @@ export function ModuleCard({ module }: ModuleCardProps) {
     <div className="group border-border/70 bg-card hover:bg-secondary/15 relative flex flex-col justify-between rounded-xl border p-5 transition-colors duration-150">
       <div className="flex flex-col gap-3">
         <div className="flex items-start justify-between gap-3">
-          <Link
-            href={targetHref}
-            className="group/title flex min-w-0 cursor-pointer items-center gap-3"
-          >
-            <div className="border-border/40 bg-secondary/80 text-primary group-hover/title:bg-primary/15 flex size-9.5 shrink-0 items-center justify-center rounded-lg border transition-colors duration-150">
-              <DynamicIcon name={(module.icon as IconName) ?? "layout-grid"} className="size-5" />
-            </div>
+          {canRead && module.path ? (
+            <Link
+              href={targetHref}
+              className="group/title flex min-w-0 cursor-pointer items-center gap-3"
+            >
+              <div className="border-border/40 bg-secondary/80 text-primary group-hover/title:bg-primary/15 flex size-9.5 shrink-0 items-center justify-center rounded-lg border transition-colors duration-150">
+                <DynamicIcon name={(module.icon as IconName) ?? "layout-grid"} className="size-5" />
+              </div>
 
-            <div className="flex min-w-0 flex-col text-start">
-              <h3 className="text-foreground group-hover/title:text-primary truncate text-sm font-semibold transition-colors duration-150 sm:text-base">
-                {module.label.ar}
-              </h3>
-            </div>
-          </Link>
+              <div className="flex min-w-0 flex-col text-start">
+                <h3 className="text-foreground group-hover/title:text-primary truncate text-sm font-semibold transition-colors duration-150 sm:text-base">
+                  {module.label.ar}
+                </h3>
+              </div>
+            </Link>
+          ) : (
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="border-border/40 bg-secondary/80 text-primary flex size-9.5 shrink-0 items-center justify-center rounded-lg border">
+                <DynamicIcon name={(module.icon as IconName) ?? "layout-grid"} className="size-5" />
+              </div>
 
-          {canRead ? (
+              <div className="flex min-w-0 flex-col text-start">
+                <h3 className="text-foreground truncate text-sm font-semibold sm:text-base">
+                  {module.label.ar}
+                </h3>
+              </div>
+            </div>
+          )}
+
+          {canRead && module.path ? (
             <Link
               href={targetHref}
               className="text-muted-foreground hover:text-primary inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-colors"
@@ -47,9 +61,9 @@ export function ModuleCard({ module }: ModuleCardProps) {
               <span>فتح الوحدة</span>
               <ArrowUpLeftIcon className="size-3.5 rtl:rotate-0" />
             </Link>
-          ) : (
+          ) : !canRead ? (
             <span className="text-muted-foreground/60 text-[11px]">محجوب</span>
-          )}
+          ) : null}
         </div>
 
         {module.description?.ar && (

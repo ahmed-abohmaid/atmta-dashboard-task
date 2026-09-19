@@ -10,7 +10,7 @@ export function SidebarNav() {
 
   return (
     <SidebarContent>
-      <SidebarMainNav can={can} isLoading={isPermLoading} />
+      <SidebarMainNav />
       <SidebarModulesNav can={can} isPermLoading={isPermLoading} />
     </SidebarContent>
   );
